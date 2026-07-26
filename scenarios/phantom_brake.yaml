@@ -1,0 +1,20 @@
+name: "Phantom camera brake near the junction, two vehicles, camera-priority fusion"
+duration: 26
+timestep: 0.1
+
+vehicles:
+  - vehicle_id: "follower"
+    start_distance: 0
+    start_speed: 20
+    fusion_policy: "camera_priority"
+  - vehicle_id: "lead"
+    start_distance: 40
+    start_speed: 20
+    fusion_policy: "camera_priority"
+
+attacks:
+  - type: "camera_phantom"
+    target_vehicle: "follower"
+    trigger_before_junction: 50
+    duration: 0.5
+    phantom_distance: 3.0
