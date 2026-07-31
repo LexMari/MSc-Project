@@ -1,10 +1,7 @@
-"""Traffic light state machine for the track's junction. This exists so
-the junction is functional, not just decorative (see Discussion of
-Approaches, Section 4) - vehicles will use this to decide whether to
-stop (see engine.py TODO)
-"""
+"""Traffic light state machine for the track's junction"""
 from dataclasses import dataclass
 
+STOP_LINE_OFFSET = 3.0   # metres before a junction's marked position where a vehicle should actually stop
 
 @dataclass
 class TrafficLight:

@@ -1,0 +1,29 @@
+# A natural hazard: a pedestrian crossing the road.
+# Unlike phantom_brake.yaml, there is no attack here at all - every
+# sensor correctly perceives the pedestrian while present. This is the
+# "control" case: a real hazard should be handled correctly regardless
+# of which fusion policy is in use, in contrast to an attack, whose
+# success depends on the policy.
+name: "Pedestrian crossing - natural hazard, no attack"
+duration: 20
+timestep: 0.1
+
+track:
+  straight_length: 200
+  radius: 60
+  features:
+    - feature_id: "crossing_1"
+      feature_type: "pedestrian_crossing"
+      position: 150
+
+vehicles:
+  - vehicle_id: "solo"
+    start_distance: 0
+    start_speed_mph: 30
+    fusion_policy: "majority_vote"
+
+hazards:
+  - type: "pedestrian_crossing"
+    feature_id: "crossing_1"
+    start_time: 8.0
+    duration: 10.0

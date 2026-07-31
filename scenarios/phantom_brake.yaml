@@ -5,16 +5,17 @@ timestep: 0.1
 vehicles:
   - vehicle_id: "follower"
     start_distance: 0
-    start_speed: 20
+    start_speed_mph: 45
     fusion_policy: "camera_priority"
   - vehicle_id: "lead"
-    start_distance: 40
-    start_speed: 20
+    start_distance: 100
+    start_speed_mph: 45
     fusion_policy: "camera_priority"
 
 attacks:
   - type: "camera_phantom"
     target_vehicle: "follower"
-    trigger_before_junction: 50
+    trigger_before_feature: "junction_1"
+    trigger_distance: 50
     duration: 0.5
     phantom_distance: 3.0

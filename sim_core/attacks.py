@@ -1,18 +1,33 @@
-"""attack models
+"""Attack models.
 
-each attack takes a clean SensorReading (ground truth - as the sensor would
+Each attack takes a clean SensorReading (ground truth, as the sensor would
 report with no interference) and returns a manipulated SensorReading -
 what the victim vehicle's sensor actually reports once attacked.
 
-an attack needs a trigger - two kinds are supported:
-  - start_time: fires at a fixed point on the simulation clock
-  - trigger_before_junction / trigger_before_roundabout: fires once the
-    target vehicle comes within that many metres of given track
-    feature, regardless of what time that happens to be.
+An attack needs a trigger - Three kinds are supported:
+  - start_time: fires at a fixed point on the simulation clock.
+  - trigger_before_feature + trigger_distance: fires once the target
+    vehicle comes within trigger_distance metres of the named track
+    feature (e.g. "junction_1" -- see Track in track.py).
+  - trigger_after_feature + trigger_distance: fires once the target
+    vehicle has travelled trigger_distance metres *past* the named
+    feature -- e.g. "attack the lead car 50m after it clears the
+    junction," to catch a vehicle just as it's pulling away.
 
-once a trigger condition is met, attack "arms" (records time it
-fired) and then runs for 'duration' seconds from that point.
-it only arms once per attack instance
+trigger_after_feature does NOT use Track.distance_ahead
+(the same helper trigger_before_feature uses), even
+though it looks like the natural choice. distance_ahead wraps around
+the whole loop, which means a vehicle that *hasn't reached the feature yet*
+would appear to be some large distance "past" it (the remainder of the lap),
+incorrectly arming the attack before the vehicle ever gets there.
+Since VehicleState.s accumulates monotonically and is never itself wrapped
+(only Track wraps it, for geometry purposes), subtraction is both simpler and
+correct for a single-lap scenario: negative before the feature, growing
+positive only after it's genuinely been passed.
+
+Once a trigger condition is met, the attack "arms" (records the time it
+fired) and then runs for 'duration' seconds from that point. It only
+arms once per attack instance.
 """
 from dataclasses import replace
 from .sensors import SensorReading, SensorType
@@ -23,17 +38,24 @@ class Attack:
     target_sensor: SensorType
 
     def __init__(self, duration: float, start_time: float | None = None,
-                 trigger_before_junction: float | None = None,
-                 trigger_before_roundabout: float | None = None):
-        if start_time is None and trigger_before_junction is None and trigger_before_roundabout is None:
+                 trigger_before_feature: str | None = None,
+                 trigger_after_feature: str | None = None,
+                 trigger_distance: float | None = None):
+        trigger_count = sum(x is not None for x in (start_time, trigger_before_feature, trigger_after_feature))
+        if trigger_count == 0:
             raise ValueError(
-                "an attack needs a trigger: start_time, trigger_before_junction, "
-                "or trigger_before_roundabout"
+                "an attack needs a trigger: start_time, trigger_before_feature, or trigger_after_feature"
             )
+        if trigger_count > 1:
+            raise ValueError("an attack should have one trigger, not several")
+        if (trigger_before_feature is not None or trigger_after_feature is not None) and trigger_distance is None:
+            raise ValueError("trigger_before_feature/trigger_after_feature requires trigger_distance to also be set")
+
         self.duration = duration
         self.start_time = start_time
-        self.trigger_before_junction = trigger_before_junction
-        self.trigger_before_roundabout = trigger_before_roundabout
+        self.trigger_before_feature = trigger_before_feature
+        self.trigger_after_feature = trigger_after_feature
+        self.trigger_distance = trigger_distance
         self._armed_time: float | None = None
 
     def check_trigger(self, t: float, vehicle_s: float | None, track) -> None:
@@ -51,13 +73,15 @@ class Attack:
         if vehicle_s is None or track is None:
             return
 
-        if self.trigger_before_junction is not None:
-            distance_to_feature = track.distance_ahead(vehicle_s, track.junction_at)
-            if distance_to_feature <= self.trigger_before_junction:
+        if self.trigger_before_feature is not None:
+            feature = track.feature(self.trigger_before_feature)
+            distance_to_feature = track.distance_ahead(vehicle_s, feature.position)
+            if distance_to_feature <= self.trigger_distance:
                 self._armed_time = t
-        elif self.trigger_before_roundabout is not None:
-            distance_to_feature = track.distance_ahead(vehicle_s, track.roundabout_at)
-            if distance_to_feature <= self.trigger_before_roundabout:
+        elif self.trigger_after_feature is not None:
+            feature = track.feature(self.trigger_after_feature)
+            distance_since_feature = vehicle_s - feature.position  # deliberately unwrapped -- see module docstring
+            if distance_since_feature >= self.trigger_distance:
                 self._armed_time = t
 
     def is_active(self, t: float) -> bool:

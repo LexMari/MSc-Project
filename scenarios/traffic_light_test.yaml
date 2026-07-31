@@ -1,0 +1,18 @@
+# A single vehicle approaching a red light, stopping, then resuming once it turns green.
+name: "Traffic light Test"
+duration: 25
+timestep: 0.1
+
+track:
+  straight_length: 150
+  radius: 60
+  features:
+    - feature_id: "junction_1"
+      feature_type: "junction"
+      position: 60
+
+vehicles:
+  - vehicle_id: "car"
+    start_distance: 0
+    start_speed_mph: 20
+    fusion_policy: "camera_priority"

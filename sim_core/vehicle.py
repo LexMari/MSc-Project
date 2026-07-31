@@ -16,9 +16,10 @@ class VehicleState:
     """ground-truth physical state of a vehicle at a point in time"""
 
     vehicle_id: str
-    s: float  # distance travelled along the track, metres
-    speed: float  # m/s, always >= 0
-    acceleration: float = 0.0  # m/s^2, set by vehicle's controller
+    s: float                    # distance travelled along the track, metres
+    speed: float                # m/s, always >= 0
+    cruise_speed: float         # m/s - the speed the vehicle resumes toward once no obstacle is believed present
+    acceleration: float = 0.0   # m/s^2, set by the vehicle's controller each tick
 
     def step(self, dt: float) -> None:
         """Advance vehicle ground-truth state forward by dt seconds"""
