@@ -1,0 +1,27 @@
+# Minimal, deliberately isolated scenario - no track features, no
+# second vehicle, no traffic light - so nothing but the phantom object
+# is present. Tests whether a fusion policy is fooled by camera_phantom
+# itself, without a real hazard elsewhere confounding the result (see
+# phantom_brake.yaml, which has a second vehicle and a real junction
+# light and can't answer this question in isolation).
+name: "Isolated camera phantom - nothing else in the scenario to react to"
+duration: 5
+timestep: 0.1
+
+track:
+  straight_length: 200
+  radius: 60
+  features: []
+
+vehicles:
+  - vehicle_id: "solo"
+    start_distance: 0
+    start_speed_mph: 45
+    fusion_policy: "camera_priority"
+
+attacks:
+  - type: "camera_phantom"
+    target_vehicle: "solo"
+    start_time: 1.0
+    duration: 1.0
+    phantom_distance: 3.0

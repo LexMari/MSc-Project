@@ -10,9 +10,18 @@ layout (multiple junctions, a differently-placed roundabout, etc.)
 instead of being stuck with one hardcoded arrangement. If no features are
 configured, a default single junction and roundabout are used,
 matching the concept art.
+
+Lanes: the centreline from position_at() is a single line, but the track
+supports two-way traffic via lane_position_at(), which offsets sideways
+from the centreline by half a lane width. Lane 0 is the near/correct-side
+lane (the direction of increasing s, i.e. normal traffic), lane 1 is the
+opposite lane, used for oncoming traffic and for vehicles that have
+swerved to avoid an obstacle in lane 0.
 """
 from dataclasses import dataclass, field
 import math
+
+LANE_WIDTH = 3.5   # metres, approx UK carriageway lane width
 
 @dataclass
 class TrackFeature:
@@ -21,6 +30,9 @@ class TrackFeature:
     feature_id: str
     feature_type: str   # "junction" | "roundabout" | ...
     position: float      # distance along the track
+    radius: float | None = None  # for roundabout-type features: the physical radius of the roundabout island, used to compute the extra distance a confused vehicle travels taking an extra lap (see Track.feature_circumference)
+
+DEFAULT_ROUNDABOUT_RADIUS = 25.0  # metres - a plausible real-world mini-roundabout size
 
 @dataclass
 class Track:
@@ -35,18 +47,30 @@ class Track:
             # of the bottom straight.
             self.features = [
                 TrackFeature("junction_1", "junction", 1.5 * self.straight_length + math.pi * self.radius),
-                TrackFeature("roundabout_1", "roundabout", 0.75 * self.straight_length),
+                TrackFeature("roundabout_1", "roundabout", 0.75 * self.straight_length, radius=DEFAULT_ROUNDABOUT_RADIUS),
             ]
 
     def feature(self, feature_id: str) -> TrackFeature:
         for f in self.features:
             if f.feature_id == feature_id:
                 return f
-        raise KeyError(f"no track feature named {feature_id!r} -- available: "
+        raise KeyError(f"no track feature named {feature_id!r} - available: "
                         f"{[f.feature_id for f in self.features]}")
 
     def features_of_type(self, feature_type: str) -> list[TrackFeature]:
         return [f for f in self.features if f.feature_type == feature_type]
+
+    def feature_circumference(self, feature_id: str) -> float:
+        """The physical distance travelled taking one full lap of a
+        roundabout-type feature, used to model a missed exit - a
+        confused vehicle's true position advances by this much
+        extra before it continues on the main loop. Raises if the
+        feature has no radius set (e.g. it isn't a roundabout)."""
+        f = self.feature(feature_id)
+        if f.radius is None:
+            raise ValueError(f"feature {feature_id!r} has no radius set - feature_circumference "
+                              f"only applies to roundabout-type features")
+        return 2 * math.pi * f.radius
 
     @property
     def total_length(self) -> float:
@@ -59,6 +83,7 @@ class Track:
 
     def position_at(self, s: float) -> tuple[float, float, float]:
         """return (x, y, heading_radians) for distance s along loop
+        (centreline - see lane_position_at() for a lane-offset version)
 
         travel direction: bottom straight (left to right, from spawn
         point at s=0) -> right-hand semicircle -> top straight (right to
@@ -91,7 +116,41 @@ class Track:
         y = r + r * math.cos(angle)
         return x, y, math.pi + angle
 
+    def lane_position_at(self, s: float, lane: int = 0) -> tuple[float, float, float]:
+        """Like position_at, but offset sideways from the centreline by
+        half a lane width, to the correct side for two-way traffic.
+
+        lane=0 -> near/correct-side lane (right of the direction of
+        travel, i.e. normal traffic increasing s)
+        lane=1 -> opposite/oncoming lane (left of the direction of
+        travel)
+
+        The offset is perpendicular to the heading at that point, so this
+        works correctly on the curved sections as well as the straights.
+        Heading is unchanged by the lane offset - only (x, y) shifts.
+        """
+        x, y, heading = self.position_at(s)
+        side = 1 if lane == 0 else -1
+        offset = side * (LANE_WIDTH / 2)
+        lane_x = x + offset * math.sin(heading)
+        lane_y = y - offset * math.cos(heading)
+        return lane_x, lane_y, heading
+
     def distance_ahead(self, s_from: float, s_to: float) -> float:
         """Forward distance travelling from s_from to reach s_to, wrapping
         around the loop if needed (always >= 0)."""
         return self.normalise(s_to - s_from)
+
+    def signed_gap(self, s_from: float, s_to: float) -> float:
+        """Shortest signed distance from s_from to s_to around the loop,
+        in (-total_length/2, total_length/2]. Positive means s_to is the
+        shorter way round in the direction of increasing s, negative
+        means it's the shorter way round in the direction of decreasing
+        s. Unlike distance_ahead (always a forward-only, one-directional
+        wrap), this is the right tool for judging ahead/behind between
+        two vehicles travelling in *opposite* directions on the same
+        lane - see engine.py's _ahead_distance_to_vehicle for why."""
+        raw = self.normalise(s_to - s_from)
+        if raw > self.total_length / 2:
+            raw -= self.total_length
+        return raw

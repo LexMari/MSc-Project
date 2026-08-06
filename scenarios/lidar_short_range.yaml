@@ -1,0 +1,29 @@
+# No attack - demonstrates LiDAR's shorter effective range
+# (LIDAR_MAX_SENSOR_RANGE, engine.py) compared to radar/camera. As Solo
+# approaches the pedestrian crossing, radar and camera detect it from
+# 150m out, but LiDAR reports nothing until the vehicle closes to within
+# its own, shorter range. See test_engine.py for the exact crossover
+# point.
+name: "LiDAR's shorter range than radar/camera"
+duration: 15
+timestep: 0.1
+
+track:
+  straight_length: 200
+  radius: 60
+  features:
+    - feature_id: "crossing_1"
+      feature_type: "pedestrian_crossing"
+      position: 150
+
+vehicles:
+  - vehicle_id: "solo"
+    start_distance: 0
+    start_speed_mph: 44.74
+    fusion_policy: "camera_priority"
+
+hazards:
+  - type: "pedestrian_crossing"
+    feature_id: "crossing_1"
+    start_time: 0.0
+    duration: 15.0

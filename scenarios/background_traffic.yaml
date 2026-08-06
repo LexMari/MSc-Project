@@ -1,0 +1,28 @@
+# A long-running scenario demonstrating the background traffic spawner:
+# every time the junction's traffic light completes a full cycle (16s),
+# a new vehicle enters the track there, with a randomly chosen lane and
+# direction - lane 0 joins normal traffic flow, lane 1 joins as
+# oncoming traffic, both from the same physical junction position. Each
+# spawned vehicle despawns once it has completed exactly one full lap.
+# There is no other despawn condition, and a maximum of 5 can exist at
+# once (further spawns are skipped until one clears).
+#
+# Spawned traffic is deliberately slower (20mph) than Solo (30mph): with
+# no closing speed, same-speed traffic never actually converges into
+# sensor range within a typical run
+name: "Background traffic spawning from the junction"
+duration: 120
+timestep: 0.1
+random_seed: 42
+
+vehicles:
+  - vehicle_id: "solo"
+    start_distance: 0
+    start_speed_mph: 30
+    fusion_policy: "camera_priority"
+
+spawner:
+  feature_id: "junction_1"
+  max_concurrent: 5
+  speed_mph: 20.0
+  fusion_policy: "camera_priority"

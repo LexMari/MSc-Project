@@ -1,0 +1,19 @@
+# First starts already on the roundabout, at a modest speed, so it takes
+# several seconds to clear. Second, approaching from further back at a
+# higher speed, should slow as it nears the roundabout while First is
+# still on it, then resume once First has cleared - the give-way
+# behaviour the roundabout's TODO in engine.py used to leave
+# unimplemented.
+name: "Roundabout give-way: Second yields while First is still on it"
+duration: 20
+timestep: 0.1
+
+vehicles:
+  - vehicle_id: "first"
+    start_distance: 140
+    start_speed_mph: 22.37
+    fusion_policy: "camera_priority"
+  - vehicle_id: "second"
+    start_distance: 0
+    start_speed_mph: 44.74
+    fusion_policy: "camera_priority"

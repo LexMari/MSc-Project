@@ -8,10 +8,10 @@ An attack needs a trigger - Three kinds are supported:
   - start_time: fires at a fixed point on the simulation clock.
   - trigger_before_feature + trigger_distance: fires once the target
     vehicle comes within trigger_distance metres of the named track
-    feature (e.g. "junction_1" -- see Track in track.py).
+    feature (e.g. "junction_1" - see Track in track.py).
   - trigger_after_feature + trigger_distance: fires once the target
     vehicle has travelled trigger_distance metres *past* the named
-    feature -- e.g. "attack the lead car 50m after it clears the
+    feature - e.g. "attack the lead car 50m after it clears the
     junction," to catch a vehicle just as it's pulling away.
 
 trigger_after_feature does NOT use Track.distance_ahead
@@ -23,7 +23,7 @@ incorrectly arming the attack before the vehicle ever gets there.
 Since VehicleState.s accumulates monotonically and is never itself wrapped
 (only Track wraps it, for geometry purposes), subtraction is both simpler and
 correct for a single-lap scenario: negative before the feature, growing
-positive only after it's genuinely been passed.
+positive only after it's been passed.
 
 Once a trigger condition is met, the attack "arms" (records the time it
 fired) and then runs for 'duration' seconds from that point. It only
@@ -80,7 +80,7 @@ class Attack:
                 self._armed_time = t
         elif self.trigger_after_feature is not None:
             feature = track.feature(self.trigger_after_feature)
-            distance_since_feature = vehicle_s - feature.position  # deliberately unwrapped -- see module docstring
+            distance_since_feature = vehicle_s - feature.position  # deliberately unwrapped - see module docstring
             if distance_since_feature >= self.trigger_distance:
                 self._armed_time = t
 
@@ -96,6 +96,34 @@ class RadarSpoof(Attack):
     """radar spoof: fabricates a phantom distance/velocity pair"""
 
     target_sensor = SensorType.RADAR
+
+    def __init__(self, spoofed_distance: float, spoofed_velocity: float, **kwargs):
+        super().__init__(**kwargs)
+        self.spoofed_distance = spoofed_distance
+        self.spoofed_velocity = spoofed_velocity
+
+    def apply(self, reading: SensorReading, t: float) -> SensorReading:
+        if not self.is_active(t):
+            return reading
+        return replace(
+            reading,
+            detected_distance=self.spoofed_distance,
+            detected_velocity=self.spoofed_velocity,
+            confidence=1.0,
+            is_attacked=True,
+        )
+
+class LidarSpoof(Attack):
+    """LiDAR laser relay/spoofing attack: fabricates a phantom
+    distance/velocity pair, structurally identical to RadarSpoof, but
+    grounded in the LiDAR-specific relay/spoofing literature discussed in
+    the literature review rather than the RF-domain radar spoofing of
+    Komissarov & Wool. Kept as a separate class (rather than reusing
+    RadarSpoof against a different target_sensor) so the attack's
+    identity in logs/scenarios reflects which sensor and which real-world
+    attack technique it represents."""
+
+    target_sensor = SensorType.LIDAR
 
     def __init__(self, spoofed_distance: float, spoofed_velocity: float, **kwargs):
         super().__init__(**kwargs)
@@ -155,8 +183,43 @@ class GPSSpoof(Attack):
             is_attacked=True,
         )
 
+class Jam(Attack):
+    """Base class for sensor jamming attacks: forces the target sensor to
+    report nothing detected for the attack's duration, rather than
+    fabricating a plausible-but-wrong value (see RadarSpoof/CameraPhantom/
+    LidarSpoof/GPSSpoof for that). This models the distinction drawn in
+    the literature review (Li et al.): jamming is a dropout - easy to
+    detect, since a sensor visibly stops responding - unlike spoofing,
+    whose entire danger is looking plausible. Concrete subclasses below
+    just set target_sensor. The jamming behaviour itself is identical
+    regardless of which sensor is jammed."""
+
+    def apply(self, reading: SensorReading, t: float) -> SensorReading:
+        if not self.is_active(t):
+            return reading
+        return replace(
+            reading,
+            detected_distance=None,
+            detected_velocity=None,
+            confidence=0.0,
+            is_attacked=True,
+        )
+
+class RadarJam(Jam):
+    target_sensor = SensorType.RADAR
+
+class CameraJam(Jam):
+    target_sensor = SensorType.CAMERA
+
+class LidarJam(Jam):
+    target_sensor = SensorType.LIDAR
+
 ATTACK_TYPES = {
     "radar_spoof": RadarSpoof,
+    "lidar_spoof": LidarSpoof,
     "camera_phantom": CameraPhantom,
     "gps_spoof": GPSSpoof,
+    "radar_jam": RadarJam,
+    "camera_jam": CameraJam,
+    "lidar_jam": LidarJam,
 }

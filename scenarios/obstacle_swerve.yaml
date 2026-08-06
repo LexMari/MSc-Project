@@ -1,0 +1,38 @@
+# A stationary obstacle "appears" in Solo's lane (start_time simulates
+# cargo falling off a lorry rather than something visible from far
+# away) at a distance too close to brake to a safe stop. Solo swerves
+# into the oncoming lane, where Oncoming is travelling the other way.
+# Whether this produces a collision depends on the exact timing and
+# speeds involved - see the logbook for the speed-sweep results.
+name: "Obstacle-avoidance swerve into oncoming traffic"
+duration: 20
+timestep: 0.1
+
+track:
+  straight_length: 200
+  radius: 60
+  features:
+    - feature_id: "obstacle_1"
+      feature_type: "obstacle_marker"
+      position: 150
+
+vehicles:
+  - vehicle_id: "solo"
+    start_distance: 0
+    start_speed_mph: 45
+    fusion_policy: "camera_priority"
+    lane: 0
+    direction: 1
+  - vehicle_id: "oncoming"
+    start_distance: 250
+    start_speed_mph: 35
+    fusion_policy: "camera_priority"
+    lane: 1
+    direction: -1
+
+hazards:
+  - type: "obstacle_in_road"
+    feature_id: "obstacle_1"
+    start_time: 6.0
+    duration: 10000
+    lane: 0
