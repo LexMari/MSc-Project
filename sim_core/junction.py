@@ -18,9 +18,9 @@ class TrafficLight:
     def state_at(self, t: float) -> str:
         """returns 'red', 'green', or 'amber' for a given simulation time"""
         phase = t % self.cycle_length
-        if phase < self.red_duration:
-            return "red"
-        phase -= self.red_duration
         if phase < self.green_duration:
             return "green"
-        return "amber"
+        phase -= self.green_duration
+        if phase < self.amber_duration:
+            return "amber"
+        return "red"

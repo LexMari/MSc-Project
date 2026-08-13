@@ -52,10 +52,13 @@ class PedestrianCrossing:
     duration: float
     start_time: float | None = None
     pedestrian_type: str = "adult"
+    struck: bool = False   # set True once this pedestrian has been hit by any vehicle
 
     def is_present(self, t: float) -> bool:
         if self.start_time is None:
             raise ValueError("start_time is None - it must be resolved (e.g. by Simulation.__init__) before is_present() can be called")
+        if self.struck:
+            return False
         return self.start_time <= t < self.start_time + self.duration
 
     def lane_at(self, t: float) -> int | None:

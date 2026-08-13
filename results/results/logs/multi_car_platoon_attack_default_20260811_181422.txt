@@ -1,0 +1,403 @@
+Scenario: Multi-car platoon: four simultaneous attacks across four fusion policies, plus a cascade
+Showing vehicle: 'v1_camera' (pass a second argument to choose a different one)
+    t |   vehicle | speed(mph) | lane |     radar |    camera |     lidar | belief_dist | obstacle? |    source |            reacting_to | collision | roundabout
+  0.0 | v1_camera |      28.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+  0.1 | v1_camera |      28.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+  0.2 | v1_camera |      28.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+  0.3 | v1_camera |      28.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+  0.4 | v1_camera |      28.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+  0.5 | v1_camera |      28.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+  0.6 | v1_camera |      28.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+  0.7 | v1_camera |      28.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+  0.8 | v1_camera |      28.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+  0.9 | v1_camera |      28.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+  1.0 | v1_camera |      28.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+  1.1 | v1_camera |      28.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+  1.2 | v1_camera |      28.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+  1.3 | v1_camera |      28.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+  1.4 | v1_camera |      28.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+  1.5 | v1_camera |      28.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+  1.6 | v1_camera |      28.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+  1.7 | v1_camera |      28.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+  1.8 | v1_camera |      28.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+  1.9 | v1_camera |      28.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+  2.0 | v1_camera |      28.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+  2.1 | v1_camera |      28.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+  2.2 | v1_camera |      28.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+  2.3 | v1_camera |      28.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+  2.4 | v1_camera |      28.00 |    0 |     150.0 |     150.0 |         - |       150.0 |      True |    camera | hazard:pedestrian_crossing |           | 
+  2.5 | v1_camera |      28.00 |    0 |     148.7 |     148.7 |         - |       148.7 |      True |    camera | hazard:pedestrian_crossing |           | 
+  2.6 | v1_camera |      28.00 |    0 |     147.5 |     147.5 |         - |       147.5 |      True |    camera | hazard:pedestrian_crossing |           | 
+  2.7 | v1_camera |      28.00 |    0 |     146.2 |     146.2 |         - |       146.2 |      True |    camera | hazard:pedestrian_crossing |           | 
+  2.8 | v1_camera |      28.00 |    0 |     145.0 |     145.0 |         - |       145.0 |      True |    camera | hazard:pedestrian_crossing |           | 
+  2.9 | v1_camera |      28.00 |    0 |     143.7 |     143.7 |         - |       143.7 |      True |    camera | hazard:pedestrian_crossing |           | 
+  3.0 | v1_camera |      28.00 |    0 |     142.4 |     142.4 |         - |       142.4 |      True |    camera | hazard:pedestrian_crossing |           | 
+  3.1 | v1_camera |      28.00 |    0 |     141.2 |     141.2 |         - |       141.2 |      True |    camera | hazard:pedestrian_crossing |           | 
+  3.2 | v1_camera |      28.00 |    0 |     139.9 |     139.9 |         - |       139.9 |      True |    camera | hazard:pedestrian_crossing |           | 
+  3.3 | v1_camera |      28.00 |    0 |     138.7 |     138.7 |         - |       138.7 |      True |    camera | hazard:pedestrian_crossing |           | 
+  3.4 | v1_camera |      28.00 |    0 |     137.4 |     137.4 |         - |       137.4 |      True |    camera | hazard:pedestrian_crossing |           | 
+  3.5 | v1_camera |      28.00 |    0 |     136.2 |     136.2 |         - |       136.2 |      True |    camera | hazard:pedestrian_crossing |           | 
+  3.6 | v1_camera |      28.00 |    0 |     134.9 |     134.9 |         - |       134.9 |      True |    camera | hazard:pedestrian_crossing |           | 
+  3.7 | v1_camera |      28.00 |    0 |     133.7 |     133.7 |         - |       133.7 |      True |    camera | hazard:pedestrian_crossing |           | 
+  3.8 | v1_camera |      28.00 |    0 |     132.4 |     132.4 |         - |       132.4 |      True |    camera | hazard:pedestrian_crossing |           | 
+  3.9 | v1_camera |      28.00 |    0 |     131.2 |     131.2 |         - |       131.2 |      True |    camera | hazard:pedestrian_crossing |           | 
+  4.0 | v1_camera |      28.00 |    0 |     129.9 |     129.9 |         - |       129.9 |      True |    camera | hazard:pedestrian_crossing |           | 
+  4.1 | v1_camera |      28.00 |    0 |     128.7 |     128.7 |         - |       128.7 |      True |    camera | hazard:pedestrian_crossing |           | 
+  4.2 | v1_camera |      28.00 |    0 |     127.4 |     127.4 |         - |       127.4 |      True |    camera | hazard:pedestrian_crossing |           | 
+  4.3 | v1_camera |      28.00 |    0 |     126.2 |     126.2 |         - |       126.2 |      True |    camera | hazard:pedestrian_crossing |           | 
+  4.4 | v1_camera |      28.00 |    0 |     124.9 |     124.9 |         - |       124.9 |      True |    camera | hazard:pedestrian_crossing |           | 
+  4.5 | v1_camera |      28.00 |    0 |     123.7 |     123.7 |         - |       123.7 |      True |    camera | hazard:pedestrian_crossing |           | 
+  4.6 | v1_camera |      28.00 |    0 |     122.4 |     122.4 |         - |       122.4 |      True |    camera | hazard:pedestrian_crossing |           | 
+  4.7 | v1_camera |      28.00 |    0 |     121.2 |     121.2 |         - |       121.2 |      True |    camera | hazard:pedestrian_crossing |           | 
+  4.8 | v1_camera |      28.00 |    0 |     119.9 |     119.9 |         - |       119.9 |      True |    camera | hazard:pedestrian_crossing |           | 
+  4.9 | v1_camera |      28.00 |    0 |     118.7 |     118.7 |         - |       118.7 |      True |    camera | hazard:pedestrian_crossing |           | 
+  5.0 | v1_camera |      28.00 |    0 |     117.4 |     117.4 |         - |       117.4 |      True |    camera | hazard:pedestrian_crossing |           | 
+  5.1 | v1_camera |      28.00 |    0 |     116.2 |     116.2 |         - |       116.2 |      True |    camera | hazard:pedestrian_crossing |           | 
+  5.2 | v1_camera |      28.00 |    0 |     114.9 |     114.9 |         - |       114.9 |      True |    camera | hazard:pedestrian_crossing |           | 
+  5.3 | v1_camera |      28.00 |    0 |     113.7 |     113.7 |         - |       113.7 |      True |    camera | hazard:pedestrian_crossing |           | 
+  5.4 | v1_camera |      28.00 |    0 |     112.4 |     112.4 |         - |       112.4 |      True |    camera | hazard:pedestrian_crossing |           | 
+  5.5 | v1_camera |      28.00 |    0 |     111.2 |     111.2 |         - |       111.2 |      True |    camera | hazard:pedestrian_crossing |           | 
+  5.6 | v1_camera |      28.00 |    0 |     109.9 |     109.9 |         - |       109.9 |      True |    camera | hazard:pedestrian_crossing |           | 
+  5.7 | v1_camera |      28.00 |    0 |     108.7 |     108.7 |         - |       108.7 |      True |    camera | hazard:pedestrian_crossing |           | 
+  5.8 | v1_camera |      28.00 |    0 |     107.4 |     107.4 |         - |       107.4 |      True |    camera | hazard:pedestrian_crossing |           | 
+  5.9 | v1_camera |      28.00 |    0 |     106.1 |     106.1 |         - |       106.1 |      True |    camera | hazard:pedestrian_crossing |           | 
+  6.0 | v1_camera |      28.00 |    0 |     104.9 |     104.9 |         - |       104.9 |      True |    camera | hazard:pedestrian_crossing |           | 
+  6.1 | v1_camera |      28.00 |    0 |     103.6 |     103.6 |         - |       103.6 |      True |    camera | hazard:pedestrian_crossing |           | 
+  6.2 | v1_camera |      28.00 |    0 |     102.4 |     102.4 |         - |       102.4 |      True |    camera | hazard:pedestrian_crossing |           | 
+  6.3 | v1_camera |      28.00 |    0 |     101.1 |     101.1 |         - |       101.1 |      True |    camera | hazard:pedestrian_crossing |           | 
+  6.4 | v1_camera |      28.00 |    0 |      99.9 |      99.9 |         - |        99.9 |      True |    camera | hazard:pedestrian_crossing |           | 
+  6.5 | v1_camera |      28.00 |    0 |      98.6 |      98.6 |         - |        98.6 |      True |    camera | hazard:pedestrian_crossing |           | 
+  6.6 | v1_camera |      28.00 |    0 |      97.4 |      97.4 |         - |        97.4 |      True |    camera | hazard:pedestrian_crossing |           | 
+  6.7 | v1_camera |      28.00 |    0 |      96.1 |      96.1 |         - |        96.1 |      True |    camera | hazard:pedestrian_crossing |           | 
+  6.8 | v1_camera |      28.00 |    0 |      94.9 |      94.9 |         - |        94.9 |      True |    camera | hazard:pedestrian_crossing |           | 
+  6.9 | v1_camera |      28.00 |    0 |      93.6 |      93.6 |         - |        93.6 |      True |    camera | hazard:pedestrian_crossing |           | 
+  7.0 | v1_camera |      28.00 |    0 |      92.4 |      92.4 |         - |        92.4 |      True |    camera | hazard:pedestrian_crossing |           | 
+  7.1 | v1_camera |      28.00 |    0 |      91.1 |      91.1 |         - |        91.1 |      True |    camera | hazard:pedestrian_crossing |           | 
+  7.2 | v1_camera |      28.00 |    0 |      89.9 |      89.9 |         - |        89.9 |      True |    camera | hazard:pedestrian_crossing |           | 
+  7.3 | v1_camera |      28.00 |    0 |      88.6 |      88.6 |         - |        88.6 |      True |    camera | hazard:pedestrian_crossing |           | 
+  7.4 | v1_camera |      28.00 |    0 |      87.4 |      87.4 |         - |        87.4 |      True |    camera | hazard:pedestrian_crossing |           | 
+  7.5 | v1_camera |      28.00 |    0 |      86.1 |      86.1 |         - |        86.1 |      True |    camera | hazard:pedestrian_crossing |           | 
+  7.6 | v1_camera |      28.00 |    0 |      84.9 |      84.9 |         - |        84.9 |      True |    camera | hazard:pedestrian_crossing |           | 
+  7.7 | v1_camera |      28.00 |    0 |      83.6 |      83.6 |         - |        83.6 |      True |    camera | hazard:pedestrian_crossing |           | 
+  7.8 | v1_camera |      28.00 |    0 |      82.4 |      82.4 |         - |        82.4 |      True |    camera | hazard:pedestrian_crossing |           | 
+  7.9 | v1_camera |      28.00 |    0 |      81.1 |      81.1 |         - |        81.1 |      True |    camera | hazard:pedestrian_crossing |           | 
+  8.0 | v1_camera |      28.00 |    0 |      79.9 |      79.9 |      79.9 |        79.9 |      True |    camera | hazard:pedestrian_crossing |           | 
+  8.1 | v1_camera |      28.00 |    0 |      78.6 |      78.6 |      78.6 |        78.6 |      True |    camera | hazard:pedestrian_crossing |           | 
+  8.2 | v1_camera |      28.00 |    0 |      77.4 |      77.4 |      77.4 |        77.4 |      True |    camera | hazard:pedestrian_crossing |           | 
+  8.3 | v1_camera |      28.00 |    0 |      76.1 |      76.1 |      76.1 |        76.1 |      True |    camera | hazard:pedestrian_crossing |           | 
+  8.4 | v1_camera |      28.00 |    0 |      74.9 |      74.9 |      74.9 |        74.9 |      True |    camera | hazard:pedestrian_crossing |           | 
+  8.5 | v1_camera |      28.00 |    0 |      73.6 |      73.6 |      73.6 |        73.6 |      True |    camera | hazard:pedestrian_crossing |           | 
+  8.6 | v1_camera |      28.00 |    0 |      72.4 |      72.4 |      72.4 |        72.4 |      True |    camera | hazard:pedestrian_crossing |           | 
+  8.7 | v1_camera |      28.00 |    0 |      71.1 |      71.1 |      71.1 |        71.1 |      True |    camera | hazard:pedestrian_crossing |           | 
+  8.8 | v1_camera |      28.00 |    0 |      69.8 |      69.8 |      69.8 |        69.8 |      True |    camera | hazard:pedestrian_crossing |           | 
+  8.9 | v1_camera |      28.00 |    0 |      68.6 |      68.6 |      68.6 |        68.6 |      True |    camera | hazard:pedestrian_crossing |           | 
+  9.0 | v1_camera |      28.00 |    0 |      67.3 |      67.3 |      67.3 |        67.3 |      True |    camera | hazard:pedestrian_crossing |           | 
+  9.1 | v1_camera |      28.00 |    0 |      66.1 |      66.1 |      66.1 |        66.1 |      True |    camera | hazard:pedestrian_crossing |           | 
+  9.2 | v1_camera |      28.00 |    0 |      64.8 |      64.8 |      64.8 |        64.8 |      True |    camera | hazard:pedestrian_crossing |           | 
+  9.3 | v1_camera |      28.00 |    0 |      63.6 |      63.6 |      63.6 |        63.6 |      True |    camera | hazard:pedestrian_crossing |           | 
+  9.4 | v1_camera |      28.00 |    0 |      62.3 |      62.3 |      62.3 |        62.3 |      True |    camera | hazard:pedestrian_crossing |           | 
+  9.5 | v1_camera |      28.00 |    0 |      61.1 |      61.1 |      61.1 |        61.1 |      True |    camera | hazard:pedestrian_crossing |           | 
+  9.6 | v1_camera |      28.00 |    0 |      59.8 |         - |      59.8 |           - |     False |      none | hazard:pedestrian_crossing |           | 
+  9.7 | v1_camera |      28.00 |    0 |      58.6 |         - |      58.6 |           - |     False |      none | hazard:pedestrian_crossing |           | 
+  9.8 | v1_camera |      28.00 |    0 |      57.3 |         - |      57.3 |           - |     False |      none | hazard:pedestrian_crossing |           | 
+  9.9 | v1_camera |      28.00 |    0 |      56.1 |         - |      56.1 |           - |     False |      none | hazard:pedestrian_crossing |           | 
+ 10.0 | v1_camera |      28.00 |    0 |      54.8 |         - |      54.8 |           - |     False |      none | hazard:pedestrian_crossing |           | 
+ 10.1 | v1_camera |      28.00 |    0 |      53.6 |         - |      53.6 |           - |     False |      none | hazard:pedestrian_crossing |           | 
+ 10.2 | v1_camera |      28.00 |    0 |      52.3 |         - |      52.3 |           - |     False |      none | hazard:pedestrian_crossing |           | 
+ 10.3 | v1_camera |      28.00 |    0 |      51.1 |         - |      51.1 |           - |     False |      none | hazard:pedestrian_crossing |           | 
+ 10.4 | v1_camera |      28.00 |    0 |      49.8 |         - |      49.8 |           - |     False |      none | hazard:pedestrian_crossing |           | 
+ 10.5 | v1_camera |      28.00 |    0 |      48.6 |         - |      48.6 |           - |     False |      none | hazard:pedestrian_crossing |           | 
+ 10.6 | v1_camera |      28.00 |    0 |      47.3 |         - |      47.3 |           - |     False |      none | hazard:pedestrian_crossing |           | 
+ 10.7 | v1_camera |      28.00 |    0 |      46.1 |         - |      46.1 |           - |     False |      none | hazard:pedestrian_crossing |           | 
+ 10.8 | v1_camera |      28.00 |    0 |      44.8 |         - |      44.8 |           - |     False |      none | hazard:pedestrian_crossing |           | 
+ 10.9 | v1_camera |      28.00 |    0 |      43.6 |         - |      43.6 |           - |     False |      none | hazard:pedestrian_crossing |           | 
+ 11.0 | v1_camera |      28.00 |    0 |      42.3 |         - |      42.3 |           - |     False |      none | hazard:pedestrian_crossing |           | 
+ 11.1 | v1_camera |      28.00 |    0 |      41.1 |         - |      41.1 |           - |     False |      none | hazard:pedestrian_crossing |           | 
+ 11.2 | v1_camera |      28.00 |    0 |      39.8 |         - |      39.8 |           - |     False |      none | hazard:pedestrian_crossing |           | 
+ 11.3 | v1_camera |      28.00 |    0 |      38.6 |         - |      38.6 |           - |     False |      none | hazard:pedestrian_crossing |           | 
+ 11.4 | v1_camera |      28.00 |    0 |      37.3 |         - |      37.3 |           - |     False |      none | hazard:pedestrian_crossing |           | 
+ 11.5 | v1_camera |      28.00 |    0 |      36.1 |         - |      36.1 |           - |     False |      none | hazard:pedestrian_crossing |           | 
+ 11.6 | v1_camera |      28.00 |    0 |      34.8 |         - |      34.8 |           - |     False |      none | hazard:pedestrian_crossing |           | 
+ 11.7 | v1_camera |      28.00 |    0 |      33.5 |         - |      33.5 |           - |     False |      none | hazard:pedestrian_crossing |           | 
+ 11.8 | v1_camera |      28.00 |    0 |      32.3 |         - |      32.3 |           - |     False |      none | hazard:pedestrian_crossing |           | 
+ 11.9 | v1_camera |      28.00 |    0 |      31.0 |         - |      31.0 |           - |     False |      none | hazard:pedestrian_crossing |           | 
+ 12.0 | v1_camera |      28.00 |    0 |      29.8 |         - |      29.8 |           - |     False |      none | hazard:pedestrian_crossing |           | 
+ 12.1 | v1_camera |      28.00 |    0 |      28.5 |         - |      28.5 |           - |     False |      none | hazard:pedestrian_crossing |           | 
+ 12.2 | v1_camera |      28.00 |    0 |      27.3 |         - |      27.3 |           - |     False |      none | hazard:pedestrian_crossing |           | 
+ 12.3 | v1_camera |      28.00 |    0 |      26.0 |         - |      26.0 |           - |     False |      none | hazard:pedestrian_crossing |           | 
+ 12.4 | v1_camera |      28.00 |    0 |      24.8 |         - |      24.8 |           - |     False |      none | hazard:pedestrian_crossing |           | 
+ 12.5 | v1_camera |      28.00 |    0 |      23.5 |         - |      23.5 |           - |     False |      none | hazard:pedestrian_crossing |           | 
+ 12.6 | v1_camera |      28.00 |    0 |      22.3 |         - |      22.3 |           - |     False |      none | hazard:pedestrian_crossing |           | 
+ 12.7 | v1_camera |      28.00 |    0 |      21.0 |         - |      21.0 |           - |     False |      none | hazard:pedestrian_crossing |           | 
+ 12.8 | v1_camera |      28.00 |    0 |      19.8 |         - |      19.8 |           - |     False |      none | hazard:pedestrian_crossing |           | 
+ 12.9 | v1_camera |      28.00 |    0 |      18.5 |         - |      18.5 |           - |     False |      none | hazard:pedestrian_crossing |           | 
+ 13.0 | v1_camera |      28.00 |    0 |      17.3 |         - |      17.3 |           - |     False |      none | hazard:pedestrian_crossing |           | 
+ 13.1 | v1_camera |      28.00 |    0 |      16.0 |         - |      16.0 |           - |     False |      none | hazard:pedestrian_crossing |           | 
+ 13.2 | v1_camera |      28.00 |    0 |      14.8 |         - |      14.8 |           - |     False |      none | hazard:pedestrian_crossing |           | 
+ 13.3 | v1_camera |      28.00 |    0 |      13.5 |         - |      13.5 |           - |     False |      none | hazard:pedestrian_crossing |           | 
+ 13.4 | v1_camera |      28.00 |    0 |      12.3 |         - |      12.3 |           - |     False |      none | hazard:pedestrian_crossing |           | 
+ 13.5 | v1_camera |      28.00 |    0 |      11.0 |         - |      11.0 |           - |     False |      none | hazard:pedestrian_crossing |           | 
+ 13.6 | v1_camera |      28.00 |    0 |       9.8 |         - |       9.8 |           - |     False |      none | hazard:pedestrian_crossing |           | 
+ 13.7 | v1_camera |      28.00 |    0 |       8.5 |         - |       8.5 |           - |     False |      none | hazard:pedestrian_crossing |           | 
+ 13.8 | v1_camera |      28.00 |    0 |       7.3 |         - |       7.3 |           - |     False |      none | hazard:pedestrian_crossing |           | 
+ 13.9 | v1_camera |      28.00 |    0 |       6.0 |         - |       6.0 |           - |     False |      none | hazard:pedestrian_crossing |           | 
+ 14.0 | v1_camera |      28.00 |    0 |       4.8 |         - |       4.8 |           - |     False |      none | hazard:pedestrian_crossing |           | 
+ 14.1 | v1_camera |      28.00 |    0 |       3.5 |         - |       3.5 |           - |     False |      none | hazard:pedestrian_crossing |           | 
+ 14.2 | v1_camera |      28.00 |    0 |       2.3 |         - |       2.3 |           - |     False |      none | hazard:pedestrian_crossing |           | 
+ 14.3 | v1_camera |      28.00 |    0 |       1.0 |         - |       1.0 |           - |     False |      none | hazard:pedestrian_crossing |           | 
+ 14.4 | v1_camera |      28.00 |    0 |         - |         - |         - |           - |     False |      none |                      - | COLLISION(serious) | 
+ 14.5 | v1_camera |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+ 14.6 | v1_camera |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+ 14.7 | v1_camera |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+ 14.8 | v1_camera |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+ 14.9 | v1_camera |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+ 15.0 | v1_camera |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+ 15.1 | v1_camera |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+ 15.2 | v1_camera |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+ 15.3 | v1_camera |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+ 15.4 | v1_camera |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+ 15.5 | v1_camera |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+ 15.6 | v1_camera |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+ 15.7 | v1_camera |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+ 15.8 | v1_camera |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+ 15.9 | v1_camera |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+ 16.0 | v1_camera |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+ 16.1 | v1_camera |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+ 16.2 | v1_camera |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+ 16.3 | v1_camera |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+ 16.4 | v1_camera |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+ 16.5 | v1_camera |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+ 16.6 | v1_camera |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+ 16.7 | v1_camera |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+ 16.8 | v1_camera |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+ 16.9 | v1_camera |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+ 17.0 | v1_camera |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+ 17.1 | v1_camera |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+ 17.2 | v1_camera |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+ 17.3 | v1_camera |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+ 17.4 | v1_camera |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+ 17.5 | v1_camera |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+ 17.6 | v1_camera |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+ 17.7 | v1_camera |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+ 17.8 | v1_camera |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+ 17.9 | v1_camera |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+ 18.0 | v1_camera |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+ 18.1 | v1_camera |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+ 18.2 | v1_camera |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+ 18.3 | v1_camera |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+ 18.4 | v1_camera |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+ 18.5 | v1_camera |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+ 18.6 | v1_camera |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+ 18.7 | v1_camera |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+ 18.8 | v1_camera |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+ 18.9 | v1_camera |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+ 19.0 | v1_camera |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+ 19.1 | v1_camera |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+ 19.2 | v1_camera |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+ 19.3 | v1_camera |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+ 19.4 | v1_camera |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+ 19.5 | v1_camera |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+ 19.6 | v1_camera |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+ 19.7 | v1_camera |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+ 19.8 | v1_camera |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+ 19.9 | v1_camera |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+ 20.0 | v1_camera |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+ 20.1 | v1_camera |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+ 20.2 | v1_camera |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+ 20.3 | v1_camera |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+ 20.4 | v1_camera |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+ 20.5 | v1_camera |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+ 20.6 | v1_camera |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+ 20.7 | v1_camera |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+ 20.8 | v1_camera |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+ 20.9 | v1_camera |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+ 21.0 | v1_camera |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+ 21.1 | v1_camera |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+ 21.2 | v1_camera |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+ 21.3 | v1_camera |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+ 21.4 | v1_camera |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+ 21.5 | v1_camera |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+ 21.6 | v1_camera |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+ 21.7 | v1_camera |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+ 21.8 | v1_camera |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+ 21.9 | v1_camera |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+ 22.0 | v1_camera |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+ 22.1 | v1_camera |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+ 22.2 | v1_camera |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+ 22.3 | v1_camera |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+ 22.4 | v1_camera |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+ 22.5 | v1_camera |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+ 22.6 | v1_camera |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+ 22.7 | v1_camera |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+ 22.8 | v1_camera |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+ 22.9 | v1_camera |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+ 23.0 | v1_camera |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+ 23.1 | v1_camera |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+ 23.2 | v1_camera |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+ 23.3 | v1_camera |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+ 23.4 | v1_camera |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+ 23.5 | v1_camera |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+ 23.6 | v1_camera |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+ 23.7 | v1_camera |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+ 23.8 | v1_camera |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+ 23.9 | v1_camera |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+ 24.0 | v1_camera |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+ 24.1 | v1_camera |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+ 24.2 | v1_camera |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+ 24.3 | v1_camera |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+ 24.4 | v1_camera |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+ 24.5 | v1_camera |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+ 24.6 | v1_camera |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+ 24.7 | v1_camera |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+ 24.8 | v1_camera |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+ 24.9 | v1_camera |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+ 25.0 | v1_camera |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+ 25.1 | v1_camera |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+ 25.2 | v1_camera |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+ 25.3 | v1_camera |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+ 25.4 | v1_camera |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+ 25.5 | v1_camera |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+ 25.6 | v1_camera |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+ 25.7 | v1_camera |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+ 25.8 | v1_camera |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+ 25.9 | v1_camera |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+ 26.0 | v1_camera |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+ 26.1 | v1_camera |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+ 26.2 | v1_camera |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+ 26.3 | v1_camera |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+ 26.4 | v1_camera |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+ 26.5 | v1_camera |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+ 26.6 | v1_camera |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+ 26.7 | v1_camera |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+ 26.8 | v1_camera |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+ 26.9 | v1_camera |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+ 27.0 | v1_camera |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+ 27.1 | v1_camera |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+ 27.2 | v1_camera |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+ 27.3 | v1_camera |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+ 27.4 | v1_camera |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+ 27.5 | v1_camera |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+ 27.6 | v1_camera |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+ 27.7 | v1_camera |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+ 27.8 | v1_camera |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+ 27.9 | v1_camera |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+ 28.0 | v1_camera |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+ 28.1 | v1_camera |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+ 28.2 | v1_camera |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+ 28.3 | v1_camera |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+ 28.4 | v1_camera |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+ 28.5 | v1_camera |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+ 28.6 | v1_camera |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+ 28.7 | v1_camera |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+ 28.8 | v1_camera |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+ 28.9 | v1_camera |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+ 29.0 | v1_camera |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+ 29.1 | v1_camera |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+ 29.2 | v1_camera |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+ 29.3 | v1_camera |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+ 29.4 | v1_camera |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+ 29.5 | v1_camera |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+ 29.6 | v1_camera |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+ 29.7 | v1_camera |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+ 29.8 | v1_camera |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+ 29.9 | v1_camera |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+ 30.0 | v1_camera |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+ 30.1 | v1_camera |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+ 30.2 | v1_camera |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+ 30.3 | v1_camera |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+ 30.4 | v1_camera |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+ 30.5 | v1_camera |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+ 30.6 | v1_camera |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+ 30.7 | v1_camera |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+ 30.8 | v1_camera |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+ 30.9 | v1_camera |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+ 31.0 | v1_camera |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+ 31.1 | v1_camera |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+ 31.2 | v1_camera |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+ 31.3 | v1_camera |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+ 31.4 | v1_camera |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+ 31.5 | v1_camera |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+ 31.6 | v1_camera |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+ 31.7 | v1_camera |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+ 31.8 | v1_camera |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+ 31.9 | v1_camera |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+ 32.0 | v1_camera |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+ 32.1 | v1_camera |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+ 32.2 | v1_camera |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+ 32.3 | v1_camera |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+ 32.4 | v1_camera |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+ 32.5 | v1_camera |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+ 32.6 | v1_camera |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+ 32.7 | v1_camera |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+ 32.8 | v1_camera |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+ 32.9 | v1_camera |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+ 33.0 | v1_camera |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+ 33.1 | v1_camera |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+ 33.2 | v1_camera |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+ 33.3 | v1_camera |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+ 33.4 | v1_camera |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+ 33.5 | v1_camera |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+ 33.6 | v1_camera |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+ 33.7 | v1_camera |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+ 33.8 | v1_camera |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+ 33.9 | v1_camera |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+ 34.0 | v1_camera |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+ 34.1 | v1_camera |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+ 34.2 | v1_camera |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+ 34.3 | v1_camera |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+ 34.4 | v1_camera |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+ 34.5 | v1_camera |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+ 34.6 | v1_camera |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+ 34.7 | v1_camera |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+ 34.8 | v1_camera |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+ 34.9 | v1_camera |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+ 35.0 | v1_camera |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+ 35.1 | v1_camera |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+ 35.2 | v1_camera |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+ 35.3 | v1_camera |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+ 35.4 | v1_camera |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+ 35.5 | v1_camera |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+ 35.6 | v1_camera |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+ 35.7 | v1_camera |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+ 35.8 | v1_camera |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+ 35.9 | v1_camera |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+ 36.0 | v1_camera |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+ 36.1 | v1_camera |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+ 36.2 | v1_camera |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+ 36.3 | v1_camera |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+ 36.4 | v1_camera |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+ 36.5 | v1_camera |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+ 36.6 | v1_camera |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+ 36.7 | v1_camera |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+ 36.8 | v1_camera |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+ 36.9 | v1_camera |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+ 37.0 | v1_camera |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+ 37.1 | v1_camera |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+ 37.2 | v1_camera |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+ 37.3 | v1_camera |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+ 37.4 | v1_camera |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+ 37.5 | v1_camera |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+ 37.6 | v1_camera |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+ 37.7 | v1_camera |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+ 37.8 | v1_camera |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+ 37.9 | v1_camera |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+ 38.0 | v1_camera |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+ 38.1 | v1_camera |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+ 38.2 | v1_camera |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+ 38.3 | v1_camera |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+ 38.4 | v1_camera |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+ 38.5 | v1_camera |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+ 38.6 | v1_camera |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+ 38.7 | v1_camera |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+ 38.8 | v1_camera |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+ 38.9 | v1_camera |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+ 39.0 | v1_camera |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+ 39.1 | v1_camera |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+ 39.2 | v1_camera |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+ 39.3 | v1_camera |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+ 39.4 | v1_camera |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+ 39.5 | v1_camera |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+ 39.6 | v1_camera |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+ 39.7 | v1_camera |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+ 39.8 | v1_camera |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+ 39.9 | v1_camera |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 

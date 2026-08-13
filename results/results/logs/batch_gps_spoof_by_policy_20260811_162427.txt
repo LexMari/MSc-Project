@@ -1,0 +1,4 @@
+run 1/2: {'solo.gps_policy': 'naive'}
+run 2/2: {'solo.gps_policy': 'plausibility_checked'}
+
+2 rows written

@@ -1,0 +1,10 @@
+run_id,oncoming.start_speed,vehicle_id,collided,severity,collision_time,min_speed_mph,final_speed_mph
+0,9.924,solo,False,,,21.28,45.0
+1,10.014,solo,False,,,20.57,45.0
+2,10.103,solo,False,,,17.92,45.0
+3,10.193,solo,False,,,15.15,45.0
+4,10.282,solo,True,slight,7.899999999999988,0.0,0.0
+5,10.371,solo,True,slight,7.899999999999988,0.0,0.0
+6,10.461,solo,True,slight,7.899999999999988,0.0,0.0
+7,10.55,solo,True,slight,7.899999999999988,0.0,0.0
+8,10.64,solo,True,slight,7.899999999999988,0.0,0.0

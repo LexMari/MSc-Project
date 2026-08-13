@@ -2,7 +2,7 @@
 # attack timed against the SECOND one specifically - showing attack
 # ignores junction_1 on the way past it and only fires near junction_2.
 name: "Custom track with two junctions, attack targets the second"
-duration: 20
+duration: 45
 timestep: 0.1
 
 track:
@@ -11,10 +11,10 @@ track:
   features:
     - feature_id: "junction_1"
       feature_type: "junction"
-      position: 80
+      position: 75.0
     - feature_id: "junction_2"
       feature_type: "junction"
-      position: 250
+      position: 382.0796326794897
 
 vehicles:
   - vehicle_id: "follower"
@@ -22,7 +22,7 @@ vehicles:
     start_speed_mph: 30
     fusion_policy: "camera_priority"
   - vehicle_id: "lead"
-    start_distance: 50
+    start_distance: 100
     start_speed_mph: 30
     fusion_policy: "camera_priority"
 
@@ -32,4 +32,4 @@ attacks:
     trigger_before_feature: "junction_2"
     trigger_distance: 30
     duration: 0.5
-    phantom_distance: 3.0
+    phantom_distance: 40.0

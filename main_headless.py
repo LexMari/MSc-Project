@@ -6,12 +6,38 @@ By default, prints the FIRST vehicle listed in the scenario's YAML (which
 happens to be the attacked one in every current example scenario). Pass a
 second argument to print a different vehicle by name.
 """
+
+import csv
+import os
 import sys
+from datetime import datetime
+
 from sim_core.scenario import load_scenario
 from sim_core.engine import Simulation
 from sim_core.units import ms_to_mph
 
-def main(scenario_path: str, vehicle_id: str | None = None) -> None:
+class Tee:
+    """Writes everything to both the real stdout and a file at once, so
+    existing print() calls don't need to change at all to also produce a
+    saved record"""
+
+    def __init__(self, *streams):
+        self.streams = streams
+
+    def write(self, data):
+        for stream in self.streams:
+            stream.write(data)
+
+    def flush(self):
+        for stream in self.streams:
+            stream.flush()
+
+CSV_FIELDS = ["time", "vehicle_id", "speed_mph", "lane", "radar_dist", "radar_attacked",
+              "camera_dist", "camera_attacked", "lidar_dist", "lidar_attacked",
+              "belief_dist", "obstacle_present", "belief_source", "reacting_to",
+              "collision", "severity", "roundabout_confused", "roundabout_excursion_remaining"]
+
+def main(scenario_path: str, vehicle_id: str | None = None, csv_path: str | None = None) -> None:
     config = load_scenario(scenario_path)
     sim = Simulation(config)
     log = sim.run()
@@ -20,6 +46,13 @@ def main(scenario_path: str, vehicle_id: str | None = None) -> None:
         vehicle_id = config.vehicles[0].vehicle_id  # default: first vehicle in the scenario
         if vehicle_id not in {v.vehicle_id for v in config.vehicles}:
             raise ValueError(f"no such vehicle {vehicle_id!r} in this scenario")
+
+    csv_writer = None
+    csv_file = None
+    if csv_path is not None:
+        csv_file = open(csv_path, "w", newline="")
+        csv_writer = csv.DictWriter(csv_file, fieldnames=CSV_FIELDS)
+        csv_writer.writeheader()
 
     print(f"Scenario: {config.name}")
     print(f"Showing vehicle: {vehicle_id!r} (pass a second argument to choose a different one)")
@@ -59,6 +92,26 @@ def main(scenario_path: str, vehicle_id: str | None = None) -> None:
         print(f"{entry.time:5.1f} | {entry.vehicle_id:>9} | {speed_mph:10.2f} | {entry.lane:>4} | "
               f"{radar_str:>9} | {camera_str:>9} | {lidar_str:>9} | {dist_str:>11} | {str(belief.obstacle_present):>9} | {belief.source:>9} | {reacting_to:>22} | {collision_str:>9} | {confused_str}")
 
+        if csv_writer is not None:
+            def raw_dist(reading):
+                return reading.detected_distance if reading is not None else None
+            def raw_attacked(reading):
+                return reading.is_attacked if reading is not None else False
+            csv_writer.writerow({
+                "time": entry.time, "vehicle_id": entry.vehicle_id, "speed_mph": speed_mph, "lane": entry.lane,
+                "radar_dist": raw_dist(entry.radar_reading), "radar_attacked": raw_attacked(entry.radar_reading),
+                "camera_dist": raw_dist(entry.camera_reading), "camera_attacked": raw_attacked(entry.camera_reading),
+                "lidar_dist": raw_dist(entry.lidar_reading), "lidar_attacked": raw_attacked(entry.lidar_reading),
+                "belief_dist": belief.distance_to_obstacle, "obstacle_present": belief.obstacle_present,
+                "belief_source": belief.source, "reacting_to": entry.ground_truth_kind,
+                "collision": entry.collision, "severity": entry.severity,
+                "roundabout_confused": entry.roundabout_confused,
+                "roundabout_excursion_remaining": entry.roundabout_excursion_remaining,
+            })
+
+    if csv_file is not None:
+        csv_file.close()
+
     if not printed_any:
         available = sorted({entry.vehicle_id for entry in log})
         print(f"\nNo data for {vehicle_id!r}. Vehicles actually present in this run: {available}")
@@ -66,4 +119,21 @@ def main(scenario_path: str, vehicle_id: str | None = None) -> None:
 if __name__ == "__main__":
     path = sys.argv[1] if len(sys.argv) > 1 else "scenarios/phantom_brake.yaml"
     vehicle = sys.argv[2] if len(sys.argv) > 2 else None
-    main(path, vehicle)
+
+    os.makedirs("results/logs", exist_ok=True)
+    os.makedirs("results/csv", exist_ok=True)
+    scenario_stem = os.path.splitext(os.path.basename(path))[0]
+    vehicle_stem = vehicle or "default"
+    timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+    log_path = f"results/logs/{scenario_stem}_{vehicle_stem}_{timestamp}.txt"
+    csv_path = f"results/csv/{scenario_stem}_{vehicle_stem}_{timestamp}.csv"
+
+    real_stdout = sys.stdout
+    with open(log_path, "w") as log_file:
+        sys.stdout = Tee(real_stdout, log_file)
+        try:
+            main(path, vehicle, csv_path)
+        finally:
+            sys.stdout = real_stdout
+    print(f"\n(full output also saved to {log_path})")
+    print(f"(per-tick CSV also saved to {csv_path})")

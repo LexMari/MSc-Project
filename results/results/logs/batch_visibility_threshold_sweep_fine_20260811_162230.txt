@@ -1,0 +1,8 @@
+run 1/6: {'visibility': 0.3}
+run 2/6: {'visibility': 0.31}
+run 3/6: {'visibility': 0.32}
+run 4/6: {'visibility': 0.33}
+run 5/6: {'visibility': 0.34}
+run 6/6: {'visibility': 0.35}
+
+12 rows written

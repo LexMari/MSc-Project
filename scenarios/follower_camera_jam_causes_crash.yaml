@@ -1,0 +1,49 @@
+# Same setup as follower_avoids_lead_crash.yaml (same 65m gap, Follower
+# avoids there), but Follower's own camera is independently jammed for
+# 6s, timed to cover the moment Lead crashes. This is not a coordinated
+# attack in the sense of one attacker controlling both - it models two
+# separate compromises whose timing happens to coincide, which is
+# enough on its own to test whether Follower can still avoid Lead once
+# its own sensing is also degraded.
+name: "Follower's own camera jam, timed with Lead's crash, causes Follower to also collide"
+duration: 20
+timestep: 0.1
+random_seed: 0
+
+track:
+  straight_length: 200
+  radius: 60
+  features:
+    - feature_id: "crossing_1"
+      feature_type: "pedestrian_crossing"
+      position: 150
+
+vehicles:
+  - vehicle_id: "lead"
+    start_distance: 65
+    start_speed_mph: 44.74
+    fusion_policy: "confidence_weighted"
+  - vehicle_id: "follower"
+    start_distance: 0
+    start_speed_mph: 44.74
+    fusion_policy: "camera_priority"
+
+hazards:
+  - type: "pedestrian_crossing"
+    feature_id: "crossing_1"
+    start_time: 0.0
+    duration: 20.0
+
+attacks:
+  - type: "radar_spoof"
+    target_vehicle: "lead"
+    trigger_before_feature: "crossing_1"
+    trigger_distance: 60
+    duration: 10.0
+    spoofed_distance: 200.0
+    spoofed_velocity: 0.0
+  - type: "camera_jam"
+    target_vehicle: "follower"
+    trigger_before_feature: "crossing_1"
+    trigger_distance: 90
+    duration: 6.0

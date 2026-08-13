@@ -25,7 +25,7 @@ vehicles:
     direction: 1
   - vehicle_id: "oncoming"
     start_distance: 250
-    start_speed_mph: 35
+    start_speed_mph: 20
     fusion_policy: "camera_priority"
     lane: 1
     direction: -1

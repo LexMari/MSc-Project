@@ -1,3 +1,8 @@
+# A camera phantom fires on follower near the junction, forcing an
+# unnecessary hard brake with lead only 100m ahead at the same cruise
+# speed. Both run camera_priority. Tests whether the phantom's brief,
+# fixed fabricated distance causes follower to also crash into lead,
+# not just react to a hazard that isn't there.
 name: "Phantom camera brake near the junction, two vehicles, camera-priority fusion"
 duration: 26
 timestep: 0.1
@@ -16,6 +21,6 @@ attacks:
   - type: "camera_phantom"
     target_vehicle: "follower"
     trigger_before_feature: "junction_1"
-    trigger_distance: 50
+    trigger_distance: 55
     duration: 0.5
-    phantom_distance: 3.0
+    phantom_distance: 55.0

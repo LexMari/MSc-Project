@@ -13,6 +13,7 @@ class FusedBelief:
     distance_to_obstacle: float | None
     obstacle_present: bool
     source: str  # which sensor(s)/logic the fused belief came from - useful for later analysis/plots
+    detected_velocity: float | None = None   # fused closing speed, m/s - each policy fuses this the same way it fuses distance (whichever reading(s) contributed to the distance also contribute their own detected_velocity). Added specifically so a fused belief can drive a time-to-close calculation (see engine.py's oncoming-lane swerve check) without needing ground truth.
 
 class FusionPolicy:
     """base class for fusion policies. subclasses override 'fuse'"""
@@ -30,7 +31,7 @@ class CameraPriorityFusion(FusionPolicy):
     def fuse(self, readings: dict[SensorType, SensorReading]) -> FusedBelief:
         camera = readings.get(SensorType.CAMERA)
         if camera and camera.detected_distance is not None:
-            return FusedBelief(camera.detected_distance, True, "camera")
+            return FusedBelief(camera.detected_distance, True, "camera", detected_velocity=camera.detected_velocity)
         return FusedBelief(None, False, "none")
 
 class MajorityVoteFusion(FusionPolicy):
@@ -43,16 +44,19 @@ class MajorityVoteFusion(FusionPolicy):
         self.tolerance = tolerance
 
     def fuse(self, readings: dict[SensorType, SensorReading]) -> FusedBelief:
-        distances = sorted(
-            r.detected_distance for r in readings.values()
-            if r.detected_distance is not None
+        valid = sorted(
+            (r for r in readings.values() if r.detected_distance is not None),
+            key=lambda r: r.detected_distance,
         )
-        if len(distances) < 2:
+        if len(valid) < 2:
             return FusedBelief(None, False, "insufficient_sensors")
-        for i in range(len(distances) - 1):
-            if abs(distances[i] - distances[i + 1]) <= self.tolerance:
-                agreed = (distances[i] + distances[i + 1]) / 2
-                return FusedBelief(agreed, True, "majority")
+        for a, b in zip(valid, valid[1:]):
+            if abs(a.detected_distance - b.detected_distance) <= self.tolerance:
+                agreed_distance = (a.detected_distance + b.detected_distance) / 2
+                agreed_velocity = None
+                if a.detected_velocity is not None and b.detected_velocity is not None:
+                    agreed_velocity = (a.detected_velocity + b.detected_velocity) / 2
+                return FusedBelief(agreed_distance, True, "majority", detected_velocity=agreed_velocity)
         return FusedBelief(None, False, "no_agreement")
 
 class ConfidenceWeightedFusion(FusionPolicy):
@@ -62,13 +66,18 @@ class ConfidenceWeightedFusion(FusionPolicy):
 
     def fuse(self, readings: dict[SensorType, SensorReading]) -> FusedBelief:
         weighted_sum, weight_total = 0.0, 0.0
+        velocity_weighted_sum, velocity_weight_total = 0.0, 0.0
         for r in readings.values():
             if r.detected_distance is not None:
                 weighted_sum += r.detected_distance * r.confidence
                 weight_total += r.confidence
+                if r.detected_velocity is not None:
+                    velocity_weighted_sum += r.detected_velocity * r.confidence
+                    velocity_weight_total += r.confidence
         if weight_total == 0:
             return FusedBelief(None, False, "no_data")
-        return FusedBelief(weighted_sum / weight_total, True, "weighted")
+        fused_velocity = velocity_weighted_sum / velocity_weight_total if velocity_weight_total else None
+        return FusedBelief(weighted_sum / weight_total, True, "weighted", detected_velocity=fused_velocity)
 
 class PlausibilityFilteredFusion(FusionPolicy):
     """Filters out sensor readings that jump implausibly compared with
@@ -229,14 +238,14 @@ class PlausibilityFilteredFusion(FusionPolicy):
             # ordinary majority-vote behaviour below, matching plain
             # majority_vote's own resistance to that attack.
             sole = next(iter(established_survivors.values()))
-            return FusedBelief(sole.detected_distance, True, "plausibility:single_survivor")
+            return FusedBelief(sole.detected_distance, True, "plausibility:single_survivor", detected_velocity=sole.detected_velocity)
 
         belief = self._majority.fuse(filtered)
         # relabelled with a "plausibility:" prefix so this is
         # distinguishable from genuine majority_vote output in a mixed
         # trace/log - mirrors the "hazard:" prefix convention used for
         # TickResult.ground_truth_kind in engine.py
-        return FusedBelief(belief.distance_to_obstacle, belief.obstacle_present, f"plausibility:{belief.source}")
+        return FusedBelief(belief.distance_to_obstacle, belief.obstacle_present, f"plausibility:{belief.source}", detected_velocity=belief.detected_velocity)
 
 FUSION_POLICIES = {
     "camera_priority": CameraPriorityFusion,

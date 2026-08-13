@@ -1,0 +1,104 @@
+# Randomised companion to multi_car_platoon_attack.yaml, built to test
+# whether that scenario's cascade finding (a vehicle running a fully
+# resilient fusion policy still crashes because a DIFFERENT vehicle's
+# DIFFERENT attack causes it to be rear-ended) is a robust vulnerability
+# or an artifact of one precisely hand-arranged scene.
+#
+# Everything from the original scenario is unchanged - this only adds a
+# junction with a background traffic spawner, so unpredictable extra
+# vehicles can enter the platoon's own lane or oncoming traffic and
+# potentially disrupt the established chain of events.
+# Run as a random_seed batch rather than a single
+# run, since the whole point is asking "does this hold up across many
+# random arrangements"
+name: 'Multi-car platoon: four simultaneous attacks across four fusion policies (randomised with background traffic)'
+duration: 40
+timestep: 0.1
+track:
+  straight_length: 200
+  radius: 60
+  features:
+  - feature_id: crossing_1
+    feature_type: pedestrian_crossing
+    position: 500
+  - feature_id: junction_1
+    feature_type: junction
+    position: 150
+
+vehicles:
+- vehicle_id: v1_camera
+  start_distance: 320
+  start_speed_mph: 28
+  fusion_policy: camera_priority
+  lane: 0
+  direction: 1
+- vehicle_id: v2_majority
+  start_distance: 240
+  start_speed_mph: 28
+  fusion_policy: majority_vote
+  lane: 0
+  direction: 1
+- vehicle_id: v3_confidence
+  start_distance: 160
+  start_speed_mph: 28
+  fusion_policy: confidence_weighted
+  lane: 0
+  direction: 1
+- vehicle_id: v4_plausibility
+  start_distance: 80
+  start_speed_mph: 28
+  fusion_policy: plausibility_filtered
+  lane: 0
+  direction: 1
+- vehicle_id: v5_control
+  start_distance: 0
+  start_speed_mph: 28
+  fusion_policy: camera_priority
+  lane: 0
+  direction: 1
+- vehicle_id: oncoming
+  start_distance: 550
+  start_speed_mph: 25
+  fusion_policy: camera_priority
+  lane: 1
+  direction: -1
+
+hazards:
+- type: pedestrian_crossing
+  feature_id: crossing_1
+  start_time: 0.0
+  duration: 90.0
+
+attacks:
+- type: camera_jam
+  target_vehicle: v1_camera
+  trigger_before_feature: crossing_1
+  trigger_distance: 60
+  duration: 8.0
+- type: radar_spoof
+  target_vehicle: v2_majority
+  trigger_before_feature: crossing_1
+  trigger_distance: 60
+  duration: 8.0
+  spoofed_distance: 200.0
+  spoofed_velocity: 0.0
+- type: radar_spoof
+  target_vehicle: v3_confidence
+  trigger_before_feature: crossing_1
+  trigger_distance: 60
+  duration: 8.0
+  spoofed_distance: 200.0
+  spoofed_velocity: 0.0
+- type: camera_phantom
+  target_vehicle: v4_plausibility
+  trigger_before_feature: crossing_1
+  trigger_distance: 60
+  duration: 8.0
+  phantom_distance: 5.0
+  
+spawner:
+  feature_id: junction_1
+  max_concurrent: 3
+  speed_mph: 28.0
+  fusion_policy: camera_priority
+  braking_variation: 0.15

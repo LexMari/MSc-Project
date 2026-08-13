@@ -1,0 +1,1203 @@
+Scenario: Background traffic spawning from the junction
+Showing vehicle: 'solo' (pass a second argument to choose a different one)
+    t |   vehicle | speed(mph) | lane |     radar |    camera |     lidar | belief_dist | obstacle? |    source |            reacting_to | collision | roundabout
+  0.0 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+  0.1 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+  0.2 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+  0.3 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+  0.4 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+  0.5 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+  0.6 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+  0.7 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+  0.8 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+  0.9 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+  1.0 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+  1.1 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+  1.2 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+  1.3 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+  1.4 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+  1.5 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+  1.6 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+  1.7 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+  1.8 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+  1.9 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+  2.0 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+  2.1 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+  2.2 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+  2.3 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+  2.4 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+  2.5 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+  2.6 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+  2.7 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+  2.8 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+  2.9 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+  3.0 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+  3.1 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+  3.2 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+  3.3 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+  3.4 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+  3.5 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+  3.6 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+  3.7 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+  3.8 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+  3.9 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+  4.0 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+  4.1 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+  4.2 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+  4.3 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+  4.4 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+  4.5 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+  4.6 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+  4.7 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+  4.8 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+  4.9 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+  5.0 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+  5.1 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+  5.2 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+  5.3 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+  5.4 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+  5.5 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+  5.6 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+  5.7 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+  5.8 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+  5.9 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+  6.0 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+  6.1 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+  6.2 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+  6.3 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+  6.4 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+  6.5 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+  6.6 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+  6.7 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+  6.8 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+  6.9 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+  7.0 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+  7.1 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+  7.2 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+  7.3 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+  7.4 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+  7.5 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+  7.6 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+  7.7 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+  7.8 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+  7.9 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+  8.0 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+  8.1 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+  8.2 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+  8.3 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+  8.4 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+  8.5 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+  8.6 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+  8.7 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+  8.8 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+  8.9 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+  9.0 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+  9.1 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+  9.2 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+  9.3 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+  9.4 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+  9.5 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+  9.6 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+  9.7 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+  9.8 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+  9.9 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+ 10.0 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+ 10.1 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+ 10.2 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+ 10.3 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+ 10.4 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+ 10.5 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+ 10.6 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+ 10.7 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+ 10.8 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+ 10.9 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+ 11.0 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+ 11.1 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+ 11.2 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+ 11.3 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+ 11.4 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+ 11.5 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+ 11.6 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+ 11.7 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+ 11.8 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+ 11.9 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+ 12.0 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+ 12.1 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+ 12.2 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+ 12.3 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+ 12.4 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+ 12.5 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+ 12.6 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+ 12.7 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+ 12.8 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+ 12.9 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+ 13.0 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+ 13.1 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+ 13.2 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+ 13.3 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+ 13.4 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+ 13.5 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+ 13.6 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+ 13.7 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+ 13.8 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+ 13.9 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+ 14.0 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+ 14.1 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+ 14.2 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+ 14.3 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+ 14.4 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+ 14.5 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+ 14.6 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+ 14.7 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+ 14.8 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+ 14.9 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+ 15.0 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+ 15.1 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+ 15.2 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+ 15.3 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+ 15.4 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+ 15.5 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+ 15.6 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+ 15.7 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+ 15.8 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+ 15.9 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+ 16.0 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+ 16.1 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+ 16.2 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+ 16.3 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+ 16.4 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+ 16.5 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+ 16.6 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+ 16.7 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+ 16.8 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+ 16.9 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+ 17.0 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+ 17.1 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+ 17.2 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+ 17.3 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+ 17.4 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+ 17.5 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+ 17.6 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+ 17.7 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+ 17.8 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+ 17.9 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+ 18.0 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+ 18.1 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+ 18.2 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+ 18.3 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+ 18.4 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+ 18.5 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+ 18.6 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+ 18.7 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+ 18.8 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+ 18.9 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+ 19.0 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+ 19.1 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+ 19.2 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+ 19.3 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+ 19.4 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+ 19.5 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+ 19.6 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+ 19.7 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+ 19.8 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+ 19.9 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+ 20.0 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+ 20.1 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+ 20.2 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+ 20.3 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+ 20.4 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+ 20.5 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+ 20.6 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+ 20.7 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+ 20.8 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+ 20.9 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+ 21.0 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+ 21.1 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+ 21.2 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+ 21.3 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+ 21.4 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+ 21.5 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+ 21.6 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+ 21.7 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+ 21.8 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+ 21.9 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+ 22.0 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+ 22.1 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+ 22.2 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+ 22.3 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+ 22.4 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+ 22.5 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+ 22.6 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+ 22.7 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+ 22.8 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+ 22.9 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+ 23.0 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+ 23.1 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+ 23.2 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+ 23.3 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+ 23.4 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+ 23.5 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+ 23.6 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+ 23.7 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+ 23.8 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+ 23.9 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+ 24.0 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+ 24.1 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+ 24.2 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+ 24.3 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+ 24.4 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+ 24.5 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+ 24.6 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+ 24.7 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+ 24.8 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+ 24.9 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+ 25.0 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+ 25.1 |      solo |      30.00 |    0 |     148.9 |     148.9 |         - |       148.9 |      True |    camera |          traffic_light |           | 
+ 25.2 |      solo |      30.00 |    0 |     147.5 |     147.5 |         - |       147.5 |      True |    camera |          traffic_light |           | 
+ 25.3 |      solo |      30.00 |    0 |     146.2 |     146.2 |         - |       146.2 |      True |    camera |          traffic_light |           | 
+ 25.4 |      solo |      30.00 |    0 |     144.9 |     144.9 |         - |       144.9 |      True |    camera |          traffic_light |           | 
+ 25.5 |      solo |      30.00 |    0 |     143.5 |     143.5 |         - |       143.5 |      True |    camera |          traffic_light |           | 
+ 25.6 |      solo |      30.00 |    0 |     142.2 |     142.2 |         - |       142.2 |      True |    camera |          traffic_light |           | 
+ 25.7 |      solo |      30.00 |    0 |     140.8 |     140.8 |         - |       140.8 |      True |    camera |          traffic_light |           | 
+ 25.8 |      solo |      30.00 |    0 |     139.5 |     139.5 |         - |       139.5 |      True |    camera |          traffic_light |           | 
+ 25.9 |      solo |      30.00 |    0 |     138.1 |     138.1 |         - |       138.1 |      True |    camera |          traffic_light |           | 
+ 26.0 |      solo |      30.00 |    0 |     136.8 |     136.8 |         - |       136.8 |      True |    camera |          traffic_light |           | 
+ 26.1 |      solo |      30.00 |    0 |     135.5 |     135.5 |         - |       135.5 |      True |    camera |          traffic_light |           | 
+ 26.2 |      solo |      30.00 |    0 |     134.1 |     134.1 |         - |       134.1 |      True |    camera |          traffic_light |           | 
+ 26.3 |      solo |      30.00 |    0 |     132.8 |     132.8 |         - |       132.8 |      True |    camera |          traffic_light |           | 
+ 26.4 |      solo |      30.00 |    0 |     131.4 |     131.4 |         - |       131.4 |      True |    camera |          traffic_light |           | 
+ 26.5 |      solo |      30.00 |    0 |     130.1 |     130.1 |         - |       130.1 |      True |    camera |          traffic_light |           | 
+ 26.6 |      solo |      30.00 |    0 |     128.8 |     128.8 |         - |       128.8 |      True |    camera |          traffic_light |           | 
+ 26.7 |      solo |      30.00 |    0 |     127.4 |     127.4 |         - |       127.4 |      True |    camera |          traffic_light |           | 
+ 26.8 |      solo |      30.00 |    0 |     126.1 |     126.1 |         - |       126.1 |      True |    camera |          traffic_light |           | 
+ 26.9 |      solo |      30.00 |    0 |     124.7 |     124.7 |         - |       124.7 |      True |    camera |          traffic_light |           | 
+ 27.0 |      solo |      30.00 |    0 |     123.4 |     123.4 |         - |       123.4 |      True |    camera |          traffic_light |           | 
+ 27.1 |      solo |      30.00 |    0 |     122.1 |     122.1 |         - |       122.1 |      True |    camera |          traffic_light |           | 
+ 27.2 |      solo |      30.00 |    0 |     120.7 |     120.7 |         - |       120.7 |      True |    camera |          traffic_light |           | 
+ 27.3 |      solo |      30.00 |    0 |     119.4 |     119.4 |         - |       119.4 |      True |    camera |          traffic_light |           | 
+ 27.4 |      solo |      30.00 |    0 |     118.0 |     118.0 |         - |       118.0 |      True |    camera |          traffic_light |           | 
+ 27.5 |      solo |      30.00 |    0 |     116.7 |     116.7 |         - |       116.7 |      True |    camera |          traffic_light |           | 
+ 27.6 |      solo |      30.00 |    0 |     115.3 |     115.3 |         - |       115.3 |      True |    camera |          traffic_light |           | 
+ 27.7 |      solo |      30.00 |    0 |     114.0 |     114.0 |         - |       114.0 |      True |    camera |          traffic_light |           | 
+ 27.8 |      solo |      30.00 |    0 |     112.7 |     112.7 |         - |       112.7 |      True |    camera |          traffic_light |           | 
+ 27.9 |      solo |      30.00 |    0 |     111.3 |     111.3 |         - |       111.3 |      True |    camera |          traffic_light |           | 
+ 28.0 |      solo |      30.00 |    0 |     110.0 |     110.0 |         - |       110.0 |      True |    camera |          traffic_light |           | 
+ 28.1 |      solo |      30.00 |    0 |     108.6 |     108.6 |         - |       108.6 |      True |    camera |          traffic_light |           | 
+ 28.2 |      solo |      30.00 |    0 |     107.3 |     107.3 |         - |       107.3 |      True |    camera |          traffic_light |           | 
+ 28.3 |      solo |      30.00 |    0 |     106.0 |     106.0 |         - |       106.0 |      True |    camera |          traffic_light |           | 
+ 28.4 |      solo |      30.00 |    0 |     104.6 |     104.6 |         - |       104.6 |      True |    camera |          traffic_light |           | 
+ 28.5 |      solo |      30.00 |    0 |     103.3 |     103.3 |         - |       103.3 |      True |    camera |          traffic_light |           | 
+ 28.6 |      solo |      30.00 |    0 |     101.9 |     101.9 |         - |       101.9 |      True |    camera |          traffic_light |           | 
+ 28.7 |      solo |      30.00 |    0 |     100.6 |     100.6 |         - |       100.6 |      True |    camera |          traffic_light |           | 
+ 28.8 |      solo |      30.00 |    0 |      99.3 |      99.3 |         - |        99.3 |      True |    camera |          traffic_light |           | 
+ 28.9 |      solo |      30.00 |    0 |      97.9 |      97.9 |         - |        97.9 |      True |    camera |          traffic_light |           | 
+ 29.0 |      solo |      30.00 |    0 |      96.6 |      96.6 |         - |        96.6 |      True |    camera |          traffic_light |           | 
+ 29.1 |      solo |      30.00 |    0 |      95.2 |      95.2 |         - |        95.2 |      True |    camera |          traffic_light |           | 
+ 29.2 |      solo |      30.00 |    0 |      93.9 |      93.9 |         - |        93.9 |      True |    camera |          traffic_light |           | 
+ 29.3 |      solo |      30.00 |    0 |      92.5 |      92.5 |         - |        92.5 |      True |    camera |          traffic_light |           | 
+ 29.4 |      solo |      30.00 |    0 |      91.2 |      91.2 |         - |        91.2 |      True |    camera |          traffic_light |           | 
+ 29.5 |      solo |      30.00 |    0 |      89.9 |      89.9 |         - |        89.9 |      True |    camera |          traffic_light |           | 
+ 29.6 |      solo |      30.00 |    0 |      88.5 |      88.5 |         - |        88.5 |      True |    camera |          traffic_light |           | 
+ 29.7 |      solo |      30.00 |    0 |      87.2 |      87.2 |         - |        87.2 |      True |    camera |          traffic_light |           | 
+ 29.8 |      solo |      30.00 |    0 |      85.8 |      85.8 |         - |        85.8 |      True |    camera |          traffic_light |           | 
+ 29.9 |      solo |      30.00 |    0 |      84.5 |      84.5 |         - |        84.5 |      True |    camera |          traffic_light |           | 
+ 30.0 |      solo |      30.00 |    0 |      83.2 |      83.2 |         - |        83.2 |      True |    camera |          traffic_light |           | 
+ 30.1 |      solo |      30.00 |    0 |      81.8 |      81.8 |         - |        81.8 |      True |    camera |          traffic_light |           | 
+ 30.2 |      solo |      30.00 |    0 |      80.5 |      80.5 |         - |        80.5 |      True |    camera |          traffic_light |           | 
+ 30.3 |      solo |      30.00 |    0 |      79.1 |      79.1 |      79.1 |        79.1 |      True |    camera |          traffic_light |           | 
+ 30.4 |      solo |      30.00 |    0 |      77.8 |      77.8 |      77.8 |        77.8 |      True |    camera |          traffic_light |           | 
+ 30.5 |      solo |      30.00 |    0 |      76.5 |      76.5 |      76.5 |        76.5 |      True |    camera |          traffic_light |           | 
+ 30.6 |      solo |      30.00 |    0 |      75.1 |      75.1 |      75.1 |        75.1 |      True |    camera |          traffic_light |           | 
+ 30.7 |      solo |      30.00 |    0 |      73.8 |      73.8 |      73.8 |        73.8 |      True |    camera |          traffic_light |           | 
+ 30.8 |      solo |      30.00 |    0 |      72.4 |      72.4 |      72.4 |        72.4 |      True |    camera |          traffic_light |           | 
+ 30.9 |      solo |      30.00 |    0 |      71.1 |      71.1 |      71.1 |        71.1 |      True |    camera |          traffic_light |           | 
+ 31.0 |      solo |      30.00 |    0 |      69.7 |      69.7 |      69.7 |        69.7 |      True |    camera |          traffic_light |           | 
+ 31.1 |      solo |      30.00 |    0 |      68.4 |      68.4 |      68.4 |        68.4 |      True |    camera |          traffic_light |           | 
+ 31.2 |      solo |      30.00 |    0 |      67.1 |      67.1 |      67.1 |        67.1 |      True |    camera |          traffic_light |           | 
+ 31.3 |      solo |      30.00 |    0 |      65.7 |      65.7 |      65.7 |        65.7 |      True |    camera |          traffic_light |           | 
+ 31.4 |      solo |      30.00 |    0 |      64.4 |      64.4 |      64.4 |        64.4 |      True |    camera |          traffic_light |           | 
+ 31.5 |      solo |      30.00 |    0 |      63.0 |      63.0 |      63.0 |        63.0 |      True |    camera |          traffic_light |           | 
+ 31.6 |      solo |      30.00 |    0 |      61.7 |      61.7 |      61.7 |        61.7 |      True |    camera |          traffic_light |           | 
+ 31.7 |      solo |      30.00 |    0 |      60.4 |      60.4 |      60.4 |        60.4 |      True |    camera |          traffic_light |           | 
+ 31.8 |      solo |      30.00 |    0 |      59.0 |      59.0 |      59.0 |        59.0 |      True |    camera |          traffic_light |           | 
+ 31.9 |      solo |      30.00 |    0 |      57.7 |      57.7 |      57.7 |        57.7 |      True |    camera |          traffic_light |           | 
+ 32.0 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+ 32.1 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+ 32.2 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+ 32.3 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+ 32.4 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+ 32.5 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+ 32.6 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+ 32.7 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+ 32.8 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+ 32.9 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+ 33.0 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+ 33.1 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+ 33.2 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+ 33.3 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+ 33.4 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+ 33.5 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+ 33.6 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+ 33.7 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+ 33.8 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+ 33.9 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+ 34.0 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+ 34.1 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+ 34.2 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+ 34.3 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+ 34.4 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+ 34.5 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+ 34.6 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+ 34.7 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+ 34.8 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+ 34.9 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+ 35.0 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+ 35.1 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+ 35.2 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+ 35.3 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+ 35.4 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+ 35.5 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+ 35.6 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+ 35.7 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+ 35.8 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+ 35.9 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+ 36.0 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+ 36.1 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+ 36.2 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+ 36.3 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+ 36.4 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+ 36.5 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+ 36.6 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+ 36.7 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+ 36.8 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+ 36.9 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+ 37.0 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+ 37.1 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+ 37.2 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+ 37.3 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+ 37.4 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+ 37.5 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+ 37.6 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+ 37.7 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+ 37.8 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+ 37.9 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+ 38.0 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+ 38.1 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+ 38.2 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+ 38.3 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+ 38.4 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+ 38.5 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+ 38.6 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+ 38.7 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+ 38.8 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+ 38.9 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+ 39.0 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+ 39.1 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+ 39.2 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+ 39.3 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+ 39.4 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+ 39.5 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+ 39.6 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+ 39.7 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+ 39.8 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+ 39.9 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+ 40.0 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+ 40.1 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+ 40.2 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+ 40.3 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+ 40.4 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+ 40.5 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+ 40.6 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+ 40.7 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+ 40.8 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+ 40.9 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+ 41.0 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+ 41.1 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+ 41.2 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+ 41.3 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+ 41.4 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+ 41.5 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+ 41.6 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+ 41.7 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+ 41.8 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+ 41.9 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+ 42.0 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+ 42.1 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+ 42.2 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+ 42.3 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+ 42.4 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+ 42.5 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+ 42.6 |      solo |      30.00 |    0 |     149.6 |     149.6 |         - |       149.6 |      True |    camera |                vehicle |           | 
+ 42.7 |      solo |      30.00 |    0 |     149.2 |     149.2 |         - |       149.2 |      True |    camera |                vehicle |           | 
+ 42.8 |      solo |      30.00 |    0 |     148.7 |     148.7 |         - |       148.7 |      True |    camera |                vehicle |           | 
+ 42.9 |      solo |      30.00 |    0 |     148.3 |     148.3 |         - |       148.3 |      True |    camera |                vehicle |           | 
+ 43.0 |      solo |      30.00 |    0 |     147.8 |     147.8 |         - |       147.8 |      True |    camera |                vehicle |           | 
+ 43.1 |      solo |      30.00 |    0 |     147.4 |     147.4 |         - |       147.4 |      True |    camera |                vehicle |           | 
+ 43.2 |      solo |      30.00 |    0 |     146.9 |     146.9 |         - |       146.9 |      True |    camera |                vehicle |           | 
+ 43.3 |      solo |      30.00 |    0 |     146.5 |     146.5 |         - |       146.5 |      True |    camera |                vehicle |           | 
+ 43.4 |      solo |      30.00 |    0 |     146.0 |     146.0 |         - |       146.0 |      True |    camera |                vehicle |           | 
+ 43.5 |      solo |      30.00 |    0 |     145.6 |     145.6 |         - |       145.6 |      True |    camera |                vehicle |           | 
+ 43.6 |      solo |      30.00 |    0 |     145.1 |     145.1 |         - |       145.1 |      True |    camera |                vehicle |           | 
+ 43.7 |      solo |      30.00 |    0 |     144.7 |     144.7 |         - |       144.7 |      True |    camera |                vehicle |           | 
+ 43.8 |      solo |      30.00 |    0 |     144.2 |     144.2 |         - |       144.2 |      True |    camera |                vehicle |           | 
+ 43.9 |      solo |      30.00 |    0 |     143.8 |     143.8 |         - |       143.8 |      True |    camera |                vehicle |           | 
+ 44.0 |      solo |      30.00 |    0 |     143.4 |     143.4 |         - |       143.4 |      True |    camera |                vehicle |           | 
+ 44.1 |      solo |      30.00 |    0 |     142.9 |     142.9 |         - |       142.9 |      True |    camera |                vehicle |           | 
+ 44.2 |      solo |      30.00 |    0 |     142.5 |     142.5 |         - |       142.5 |      True |    camera |                vehicle |           | 
+ 44.3 |      solo |      30.00 |    0 |     142.0 |     142.0 |         - |       142.0 |      True |    camera |                vehicle |           | 
+ 44.4 |      solo |      30.00 |    0 |     141.6 |     141.6 |         - |       141.6 |      True |    camera |                vehicle |           | 
+ 44.5 |      solo |      30.00 |    0 |     141.1 |     141.1 |         - |       141.1 |      True |    camera |                vehicle |           | 
+ 44.6 |      solo |      30.00 |    0 |     140.7 |     140.7 |         - |       140.7 |      True |    camera |                vehicle |           | 
+ 44.7 |      solo |      30.00 |    0 |     140.2 |     140.2 |         - |       140.2 |      True |    camera |                vehicle |           | 
+ 44.8 |      solo |      30.00 |    0 |     139.8 |     139.8 |         - |       139.8 |      True |    camera |                vehicle |           | 
+ 44.9 |      solo |      30.00 |    0 |     139.3 |     139.3 |         - |       139.3 |      True |    camera |                vehicle |           | 
+ 45.0 |      solo |      30.00 |    0 |     138.9 |     138.9 |         - |       138.9 |      True |    camera |                vehicle |           | 
+ 45.1 |      solo |      30.00 |    0 |     138.4 |     138.4 |         - |       138.4 |      True |    camera |                vehicle |           | 
+ 45.2 |      solo |      30.00 |    0 |     138.0 |     138.0 |         - |       138.0 |      True |    camera |                vehicle |           | 
+ 45.3 |      solo |      30.00 |    0 |     137.5 |     137.5 |         - |       137.5 |      True |    camera |                vehicle |           | 
+ 45.4 |      solo |      30.00 |    0 |     137.1 |     137.1 |         - |       137.1 |      True |    camera |                vehicle |           | 
+ 45.5 |      solo |      30.00 |    0 |     136.6 |     136.6 |         - |       136.6 |      True |    camera |                vehicle |           | 
+ 45.6 |      solo |      30.00 |    0 |     136.2 |     136.2 |         - |       136.2 |      True |    camera |                vehicle |           | 
+ 45.7 |      solo |      30.00 |    0 |     135.8 |     135.8 |         - |       135.8 |      True |    camera |                vehicle |           | 
+ 45.8 |      solo |      30.00 |    0 |     135.3 |     135.3 |         - |       135.3 |      True |    camera |                vehicle |           | 
+ 45.9 |      solo |      30.00 |    0 |     134.9 |     134.9 |         - |       134.9 |      True |    camera |                vehicle |           | 
+ 46.0 |      solo |      30.00 |    0 |     134.4 |     134.4 |         - |       134.4 |      True |    camera |                vehicle |           | 
+ 46.1 |      solo |      30.00 |    0 |     134.0 |     134.0 |         - |       134.0 |      True |    camera |                vehicle |           | 
+ 46.2 |      solo |      30.00 |    0 |     133.5 |     133.5 |         - |       133.5 |      True |    camera |                vehicle |           | 
+ 46.3 |      solo |      30.00 |    0 |     133.1 |     133.1 |         - |       133.1 |      True |    camera |                vehicle |           | 
+ 46.4 |      solo |      30.00 |    0 |     132.6 |     132.6 |         - |       132.6 |      True |    camera |                vehicle |           | 
+ 46.5 |      solo |      30.00 |    0 |     132.2 |     132.2 |         - |       132.2 |      True |    camera |                vehicle |           | 
+ 46.6 |      solo |      30.00 |    0 |     131.7 |     131.7 |         - |       131.7 |      True |    camera |                vehicle |           | 
+ 46.7 |      solo |      30.00 |    0 |     131.3 |     131.3 |         - |       131.3 |      True |    camera |                vehicle |           | 
+ 46.8 |      solo |      30.00 |    0 |     130.8 |     130.8 |         - |       130.8 |      True |    camera |                vehicle |           | 
+ 46.9 |      solo |      30.00 |    0 |     130.4 |     130.4 |         - |       130.4 |      True |    camera |                vehicle |           | 
+ 47.0 |      solo |      30.00 |    0 |     129.9 |     129.9 |         - |       129.9 |      True |    camera |                vehicle |           | 
+ 47.1 |      solo |      30.00 |    0 |     129.5 |     129.5 |         - |       129.5 |      True |    camera |                vehicle |           | 
+ 47.2 |      solo |      30.00 |    0 |     129.0 |     129.0 |         - |       129.0 |      True |    camera |                vehicle |           | 
+ 47.3 |      solo |      30.00 |    0 |     128.6 |     128.6 |         - |       128.6 |      True |    camera |                vehicle |           | 
+ 47.4 |      solo |      30.00 |    0 |     128.2 |     128.2 |         - |       128.2 |      True |    camera |                vehicle |           | 
+ 47.5 |      solo |      30.00 |    0 |     127.7 |     127.7 |         - |       127.7 |      True |    camera |                vehicle |           | 
+ 47.6 |      solo |      30.00 |    0 |     127.3 |     127.3 |         - |       127.3 |      True |    camera |                vehicle |           | 
+ 47.7 |      solo |      30.00 |    0 |     126.8 |     126.8 |         - |       126.8 |      True |    camera |                vehicle |           | 
+ 47.8 |      solo |      30.00 |    0 |     126.4 |     126.4 |         - |       126.4 |      True |    camera |                vehicle |           | 
+ 47.9 |      solo |      30.00 |    0 |     125.9 |     125.9 |         - |       125.9 |      True |    camera |                vehicle |           | 
+ 48.0 |      solo |      30.00 |    0 |     125.5 |     125.5 |         - |       125.5 |      True |    camera |                vehicle |           | 
+ 48.1 |      solo |      30.00 |    0 |     125.0 |     125.0 |         - |       125.0 |      True |    camera |                vehicle |           | 
+ 48.2 |      solo |      30.00 |    0 |     124.6 |     124.6 |         - |       124.6 |      True |    camera |                vehicle |           | 
+ 48.3 |      solo |      30.00 |    0 |     124.1 |     124.1 |         - |       124.1 |      True |    camera |                vehicle |           | 
+ 48.4 |      solo |      30.00 |    0 |     123.7 |     123.7 |         - |       123.7 |      True |    camera |                vehicle |           | 
+ 48.5 |      solo |      30.00 |    0 |     123.2 |     123.2 |         - |       123.2 |      True |    camera |                vehicle |           | 
+ 48.6 |      solo |      30.00 |    0 |     122.8 |     122.8 |         - |       122.8 |      True |    camera |                vehicle |           | 
+ 48.7 |      solo |      30.00 |    0 |     122.3 |     122.3 |         - |       122.3 |      True |    camera |                vehicle |           | 
+ 48.8 |      solo |      30.00 |    0 |     121.9 |     121.9 |         - |       121.9 |      True |    camera |                vehicle |           | 
+ 48.9 |      solo |      30.00 |    0 |     121.4 |     121.4 |         - |       121.4 |      True |    camera |                vehicle |           | 
+ 49.0 |      solo |      30.00 |    0 |     121.0 |     121.0 |         - |       121.0 |      True |    camera |                vehicle |           | 
+ 49.1 |      solo |      30.00 |    0 |     120.6 |     120.6 |         - |       120.6 |      True |    camera |                vehicle |           | 
+ 49.2 |      solo |      30.00 |    0 |     120.1 |     120.1 |         - |       120.1 |      True |    camera |                vehicle |           | 
+ 49.3 |      solo |      30.00 |    0 |     119.7 |     119.7 |         - |       119.7 |      True |    camera |                vehicle |           | 
+ 49.4 |      solo |      30.00 |    0 |     119.2 |     119.2 |         - |       119.2 |      True |    camera |                vehicle |           | 
+ 49.5 |      solo |      30.00 |    0 |     118.8 |     118.8 |         - |       118.8 |      True |    camera |                vehicle |           | 
+ 49.6 |      solo |      30.00 |    0 |     118.3 |     118.3 |         - |       118.3 |      True |    camera |                vehicle |           | 
+ 49.7 |      solo |      30.00 |    0 |     117.9 |     117.9 |         - |       117.9 |      True |    camera |                vehicle |           | 
+ 49.8 |      solo |      30.00 |    0 |     117.4 |     117.4 |         - |       117.4 |      True |    camera |                vehicle |           | 
+ 49.9 |      solo |      30.00 |    0 |     117.0 |     117.0 |         - |       117.0 |      True |    camera |                vehicle |           | 
+ 50.0 |      solo |      30.00 |    0 |     116.5 |     116.5 |         - |       116.5 |      True |    camera |                vehicle |           | 
+ 50.1 |      solo |      30.00 |    0 |     116.1 |     116.1 |         - |       116.1 |      True |    camera |                vehicle |           | 
+ 50.2 |      solo |      30.00 |    0 |     115.6 |     115.6 |         - |       115.6 |      True |    camera |                vehicle |           | 
+ 50.3 |      solo |      30.00 |    0 |     115.2 |     115.2 |         - |       115.2 |      True |    camera |                vehicle |           | 
+ 50.4 |      solo |      30.00 |    0 |     114.7 |     114.7 |         - |       114.7 |      True |    camera |                vehicle |           | 
+ 50.5 |      solo |      30.00 |    0 |     114.3 |     114.3 |         - |       114.3 |      True |    camera |                vehicle |           | 
+ 50.6 |      solo |      30.00 |    0 |     113.8 |     113.8 |         - |       113.8 |      True |    camera |                vehicle |           | 
+ 50.7 |      solo |      30.00 |    0 |     113.4 |     113.4 |         - |       113.4 |      True |    camera |                vehicle |           | 
+ 50.8 |      solo |      30.00 |    0 |     113.0 |     113.0 |         - |       113.0 |      True |    camera |                vehicle |           | 
+ 50.9 |      solo |      30.00 |    0 |     112.5 |     112.5 |         - |       112.5 |      True |    camera |                vehicle |           | 
+ 51.0 |      solo |      30.00 |    0 |     112.1 |     112.1 |         - |       112.1 |      True |    camera |                vehicle |           | 
+ 51.1 |      solo |      30.00 |    0 |     111.6 |     111.6 |         - |       111.6 |      True |    camera |                vehicle |           | 
+ 51.2 |      solo |      30.00 |    0 |     111.2 |     111.2 |         - |       111.2 |      True |    camera |                vehicle |           | 
+ 51.3 |      solo |      30.00 |    0 |     110.7 |     110.7 |         - |       110.7 |      True |    camera |                vehicle |           | 
+ 51.4 |      solo |      30.00 |    0 |     110.3 |     110.3 |         - |       110.3 |      True |    camera |                vehicle |           | 
+ 51.5 |      solo |      30.00 |    0 |     109.8 |     109.8 |         - |       109.8 |      True |    camera |                vehicle |           | 
+ 51.6 |      solo |      30.00 |    0 |     109.4 |     109.4 |         - |       109.4 |      True |    camera |                vehicle |           | 
+ 51.7 |      solo |      30.00 |    0 |     108.9 |     108.9 |         - |       108.9 |      True |    camera |                vehicle |           | 
+ 51.8 |      solo |      30.00 |    0 |     108.5 |     108.5 |         - |       108.5 |      True |    camera |                vehicle |           | 
+ 51.9 |      solo |      30.00 |    0 |     108.0 |     108.0 |         - |       108.0 |      True |    camera |                vehicle |           | 
+ 52.0 |      solo |      30.00 |    0 |     107.6 |     107.6 |         - |       107.6 |      True |    camera |                vehicle |           | 
+ 52.1 |      solo |      30.00 |    0 |     107.1 |     107.1 |         - |       107.1 |      True |    camera |                vehicle |           | 
+ 52.2 |      solo |      30.00 |    0 |     106.7 |     106.7 |         - |       106.7 |      True |    camera |                vehicle |           | 
+ 52.3 |      solo |      30.00 |    0 |     106.2 |     106.2 |         - |       106.2 |      True |    camera |                vehicle |           | 
+ 52.4 |      solo |      30.00 |    0 |     105.8 |     105.8 |         - |       105.8 |      True |    camera |                vehicle |           | 
+ 52.5 |      solo |      30.00 |    0 |     105.4 |     105.4 |         - |       105.4 |      True |    camera |                vehicle |           | 
+ 52.6 |      solo |      30.00 |    0 |     104.9 |     104.9 |         - |       104.9 |      True |    camera |                vehicle |           | 
+ 52.7 |      solo |      30.00 |    0 |     104.5 |     104.5 |         - |       104.5 |      True |    camera |                vehicle |           | 
+ 52.8 |      solo |      30.00 |    0 |     104.0 |     104.0 |         - |       104.0 |      True |    camera |                vehicle |           | 
+ 52.9 |      solo |      30.00 |    0 |     103.6 |     103.6 |         - |       103.6 |      True |    camera |                vehicle |           | 
+ 53.0 |      solo |      30.00 |    0 |     103.1 |     103.1 |         - |       103.1 |      True |    camera |                vehicle |           | 
+ 53.1 |      solo |      30.00 |    0 |     102.7 |     102.7 |         - |       102.7 |      True |    camera |                vehicle |           | 
+ 53.2 |      solo |      30.00 |    0 |     102.2 |     102.2 |         - |       102.2 |      True |    camera |                vehicle |           | 
+ 53.3 |      solo |      30.00 |    0 |     101.8 |     101.8 |         - |       101.8 |      True |    camera |                vehicle |           | 
+ 53.4 |      solo |      30.00 |    0 |     101.3 |     101.3 |         - |       101.3 |      True |    camera |                vehicle |           | 
+ 53.5 |      solo |      30.00 |    0 |     100.9 |     100.9 |         - |       100.9 |      True |    camera |                vehicle |           | 
+ 53.6 |      solo |      30.00 |    0 |     100.4 |     100.4 |         - |       100.4 |      True |    camera |                vehicle |           | 
+ 53.7 |      solo |      30.00 |    0 |     100.0 |     100.0 |         - |       100.0 |      True |    camera |                vehicle |           | 
+ 53.8 |      solo |      30.00 |    0 |      99.5 |      99.5 |         - |        99.5 |      True |    camera |                vehicle |           | 
+ 53.9 |      solo |      30.00 |    0 |      99.1 |      99.1 |         - |        99.1 |      True |    camera |                vehicle |           | 
+ 54.0 |      solo |      30.00 |    0 |      98.6 |      98.6 |         - |        98.6 |      True |    camera |                vehicle |           | 
+ 54.1 |      solo |      30.00 |    0 |      98.2 |      98.2 |         - |        98.2 |      True |    camera |                vehicle |           | 
+ 54.2 |      solo |      30.00 |    0 |      97.8 |      97.8 |         - |        97.8 |      True |    camera |                vehicle |           | 
+ 54.3 |      solo |      30.00 |    0 |      97.3 |      97.3 |         - |        97.3 |      True |    camera |                vehicle |           | 
+ 54.4 |      solo |      30.00 |    0 |      96.9 |      96.9 |         - |        96.9 |      True |    camera |                vehicle |           | 
+ 54.5 |      solo |      30.00 |    0 |      96.4 |      96.4 |         - |        96.4 |      True |    camera |                vehicle |           | 
+ 54.6 |      solo |      30.00 |    0 |      96.0 |      96.0 |         - |        96.0 |      True |    camera |                vehicle |           | 
+ 54.7 |      solo |      30.00 |    0 |      95.5 |      95.5 |         - |        95.5 |      True |    camera |                vehicle |           | 
+ 54.8 |      solo |      30.00 |    0 |      95.1 |      95.1 |         - |        95.1 |      True |    camera |                vehicle |           | 
+ 54.9 |      solo |      30.00 |    0 |      94.6 |      94.6 |         - |        94.6 |      True |    camera |                vehicle |           | 
+ 55.0 |      solo |      30.00 |    0 |      94.2 |      94.2 |         - |        94.2 |      True |    camera |                vehicle |           | 
+ 55.1 |      solo |      30.00 |    0 |      93.7 |      93.7 |         - |        93.7 |      True |    camera |                vehicle |           | 
+ 55.2 |      solo |      30.00 |    0 |      93.3 |      93.3 |         - |        93.3 |      True |    camera |                vehicle |           | 
+ 55.3 |      solo |      30.00 |    0 |      92.8 |      92.8 |         - |        92.8 |      True |    camera |                vehicle |           | 
+ 55.4 |      solo |      30.00 |    0 |      92.4 |      92.4 |         - |        92.4 |      True |    camera |                vehicle |           | 
+ 55.5 |      solo |      30.00 |    0 |      91.9 |      91.9 |         - |        91.9 |      True |    camera |                vehicle |           | 
+ 55.6 |      solo |      30.00 |    0 |      91.5 |      91.5 |         - |        91.5 |      True |    camera |                vehicle |           | 
+ 55.7 |      solo |      30.00 |    0 |      91.0 |      91.0 |         - |        91.0 |      True |    camera |                vehicle |           | 
+ 55.8 |      solo |      30.00 |    0 |      90.6 |      90.6 |         - |        90.6 |      True |    camera |                vehicle |           | 
+ 55.9 |      solo |      30.00 |    0 |      90.2 |      90.2 |         - |        90.2 |      True |    camera |                vehicle |           | 
+ 56.0 |      solo |      30.00 |    0 |      89.7 |      89.7 |         - |        89.7 |      True |    camera |                vehicle |           | 
+ 56.1 |      solo |      30.00 |    0 |      89.3 |      89.3 |         - |        89.3 |      True |    camera |                vehicle |           | 
+ 56.2 |      solo |      30.00 |    0 |      88.8 |      88.8 |         - |        88.8 |      True |    camera |                vehicle |           | 
+ 56.3 |      solo |      30.00 |    0 |      88.4 |      88.4 |         - |        88.4 |      True |    camera |                vehicle |           | 
+ 56.4 |      solo |      30.00 |    0 |      87.9 |      87.9 |         - |        87.9 |      True |    camera |                vehicle |           | 
+ 56.5 |      solo |      30.00 |    0 |      87.5 |      87.5 |         - |        87.5 |      True |    camera |                vehicle |           | 
+ 56.6 |      solo |      30.00 |    0 |      87.0 |      87.0 |         - |        87.0 |      True |    camera |                vehicle |           | 
+ 56.7 |      solo |      30.00 |    0 |      86.6 |      86.6 |         - |        86.6 |      True |    camera |                vehicle |           | 
+ 56.8 |      solo |      30.00 |    0 |      86.1 |      86.1 |         - |        86.1 |      True |    camera |                vehicle |           | 
+ 56.9 |      solo |      30.00 |    0 |      85.7 |      85.7 |         - |        85.7 |      True |    camera |                vehicle |           | 
+ 57.0 |      solo |      30.00 |    0 |      85.2 |      85.2 |         - |        85.2 |      True |    camera |                vehicle |           | 
+ 57.1 |      solo |      30.00 |    0 |      84.8 |      84.8 |         - |        84.8 |      True |    camera |                vehicle |           | 
+ 57.2 |      solo |      30.00 |    0 |      84.3 |      84.3 |         - |        84.3 |      True |    camera |                vehicle |           | 
+ 57.3 |      solo |      30.00 |    0 |      83.9 |      83.9 |         - |        83.9 |      True |    camera |                vehicle |           | 
+ 57.4 |      solo |      30.00 |    0 |      83.4 |      83.4 |         - |        83.4 |      True |    camera |                vehicle |           | 
+ 57.5 |      solo |      30.00 |    0 |      83.0 |      83.0 |         - |        83.0 |      True |    camera |                vehicle |           | 
+ 57.6 |      solo |      30.00 |    0 |      82.6 |      82.6 |         - |        82.6 |      True |    camera |                vehicle |           | 
+ 57.7 |      solo |      30.00 |    0 |      82.1 |      82.1 |         - |        82.1 |      True |    camera |                vehicle |           | 
+ 57.8 |      solo |      30.00 |    0 |      81.7 |      81.7 |         - |        81.7 |      True |    camera |                vehicle |           | 
+ 57.9 |      solo |      30.00 |    0 |      81.2 |      81.2 |         - |        81.2 |      True |    camera |                vehicle |           | 
+ 58.0 |      solo |      30.00 |    0 |      80.8 |      80.8 |         - |        80.8 |      True |    camera |                vehicle |           | 
+ 58.1 |      solo |      30.00 |    0 |      80.3 |      80.3 |         - |        80.3 |      True |    camera |                vehicle |           | 
+ 58.2 |      solo |      30.00 |    0 |      79.9 |      79.9 |      79.9 |        79.9 |      True |    camera |                vehicle |           | 
+ 58.3 |      solo |      30.00 |    0 |      79.4 |      79.4 |      79.4 |        79.4 |      True |    camera |                vehicle |           | 
+ 58.4 |      solo |      30.00 |    0 |      79.0 |      79.0 |      79.0 |        79.0 |      True |    camera |                vehicle |           | 
+ 58.5 |      solo |      30.00 |    0 |      78.5 |      78.5 |      78.5 |        78.5 |      True |    camera |                vehicle |           | 
+ 58.6 |      solo |      30.00 |    0 |      78.1 |      78.1 |      78.1 |        78.1 |      True |    camera |                vehicle |           | 
+ 58.7 |      solo |      30.00 |    0 |      77.6 |      77.6 |      77.6 |        77.6 |      True |    camera |                vehicle |           | 
+ 58.8 |      solo |      30.00 |    0 |      77.2 |      77.2 |      77.2 |        77.2 |      True |    camera |                vehicle |           | 
+ 58.9 |      solo |      30.00 |    0 |      76.7 |      76.7 |      76.7 |        76.7 |      True |    camera |                vehicle |           | 
+ 59.0 |      solo |      30.00 |    0 |      76.3 |      76.3 |      76.3 |        76.3 |      True |    camera |                vehicle |           | 
+ 59.1 |      solo |      30.00 |    0 |      75.8 |      75.8 |      75.8 |        75.8 |      True |    camera |                vehicle |           | 
+ 59.2 |      solo |      30.00 |    0 |      75.4 |      75.4 |      75.4 |        75.4 |      True |    camera |                vehicle |           | 
+ 59.3 |      solo |      30.00 |    0 |      75.0 |      75.0 |      75.0 |        75.0 |      True |    camera |                vehicle |           | 
+ 59.4 |      solo |      30.00 |    0 |      74.5 |      74.5 |      74.5 |        74.5 |      True |    camera |                vehicle |           | 
+ 59.5 |      solo |      30.00 |    0 |      74.1 |      74.1 |      74.1 |        74.1 |      True |    camera |                vehicle |           | 
+ 59.6 |      solo |      30.00 |    0 |      73.6 |      73.6 |      73.6 |        73.6 |      True |    camera |                vehicle |           | 
+ 59.7 |      solo |      30.00 |    0 |      73.2 |      73.2 |      73.2 |        73.2 |      True |    camera |                vehicle |           | 
+ 59.8 |      solo |      30.00 |    0 |      72.7 |      72.7 |      72.7 |        72.7 |      True |    camera |                vehicle |           | 
+ 59.9 |      solo |      30.00 |    0 |      72.3 |      72.3 |      72.3 |        72.3 |      True |    camera |                vehicle |           | 
+ 60.0 |      solo |      30.00 |    0 |      71.8 |      71.8 |      71.8 |        71.8 |      True |    camera |                vehicle |           | 
+ 60.1 |      solo |      30.00 |    0 |      71.4 |      71.4 |      71.4 |        71.4 |      True |    camera |                vehicle |           | 
+ 60.2 |      solo |      30.00 |    0 |      70.9 |      70.9 |      70.9 |        70.9 |      True |    camera |                vehicle |           | 
+ 60.3 |      solo |      30.00 |    0 |      70.5 |      70.5 |      70.5 |        70.5 |      True |    camera |                vehicle |           | 
+ 60.4 |      solo |      30.00 |    0 |      70.0 |      70.0 |      70.0 |        70.0 |      True |    camera |                vehicle |           | 
+ 60.5 |      solo |      30.00 |    0 |      69.6 |      69.6 |      69.6 |        69.6 |      True |    camera |                vehicle |           | 
+ 60.6 |      solo |      30.00 |    0 |      69.1 |      69.1 |      69.1 |        69.1 |      True |    camera |                vehicle |           | 
+ 60.7 |      solo |      30.00 |    0 |      68.7 |      68.7 |      68.7 |        68.7 |      True |    camera |                vehicle |           | 
+ 60.8 |      solo |      30.00 |    0 |      68.2 |      68.2 |      68.2 |        68.2 |      True |    camera |                vehicle |           | 
+ 60.9 |      solo |      30.00 |    0 |      67.8 |      67.8 |      67.8 |        67.8 |      True |    camera |                vehicle |           | 
+ 61.0 |      solo |      30.00 |    0 |      67.4 |      67.4 |      67.4 |        67.4 |      True |    camera |                vehicle |           | 
+ 61.1 |      solo |      30.00 |    0 |      66.9 |      66.9 |      66.9 |        66.9 |      True |    camera |                vehicle |           | 
+ 61.2 |      solo |      30.00 |    0 |      66.5 |      66.5 |      66.5 |        66.5 |      True |    camera |                vehicle |           | 
+ 61.3 |      solo |      30.00 |    0 |      66.0 |      66.0 |      66.0 |        66.0 |      True |    camera |                vehicle |           | 
+ 61.4 |      solo |      30.00 |    0 |      65.6 |      65.6 |      65.6 |        65.6 |      True |    camera |                vehicle |           | 
+ 61.5 |      solo |      30.00 |    0 |      65.1 |      65.1 |      65.1 |        65.1 |      True |    camera |                vehicle |           | 
+ 61.6 |      solo |      30.00 |    0 |      64.7 |      64.7 |      64.7 |        64.7 |      True |    camera |                vehicle |           | 
+ 61.7 |      solo |      30.00 |    0 |      64.2 |      64.2 |      64.2 |        64.2 |      True |    camera |                vehicle |           | 
+ 61.8 |      solo |      30.00 |    0 |      63.8 |      63.8 |      63.8 |        63.8 |      True |    camera |                vehicle |           | 
+ 61.9 |      solo |      30.00 |    0 |      63.3 |      63.3 |      63.3 |        63.3 |      True |    camera |                vehicle |           | 
+ 62.0 |      solo |      30.00 |    0 |      62.9 |      62.9 |      62.9 |        62.9 |      True |    camera |                vehicle |           | 
+ 62.1 |      solo |      30.00 |    0 |      62.4 |      62.4 |      62.4 |        62.4 |      True |    camera |                vehicle |           | 
+ 62.2 |      solo |      30.00 |    0 |      62.0 |      62.0 |      62.0 |        62.0 |      True |    camera |                vehicle |           | 
+ 62.3 |      solo |      30.00 |    0 |      61.5 |      61.5 |      61.5 |        61.5 |      True |    camera |                vehicle |           | 
+ 62.4 |      solo |      30.00 |    0 |      61.1 |      61.1 |      61.1 |        61.1 |      True |    camera |                vehicle |           | 
+ 62.5 |      solo |      30.00 |    0 |      60.6 |      60.6 |      60.6 |        60.6 |      True |    camera |                vehicle |           | 
+ 62.6 |      solo |      30.00 |    0 |      60.2 |      60.2 |      60.2 |        60.2 |      True |    camera |                vehicle |           | 
+ 62.7 |      solo |      30.00 |    0 |      59.8 |      59.8 |      59.8 |        59.8 |      True |    camera |                vehicle |           | 
+ 62.8 |      solo |      30.00 |    0 |      59.3 |      59.3 |      59.3 |        59.3 |      True |    camera |                vehicle |           | 
+ 62.9 |      solo |      30.00 |    0 |      58.9 |      58.9 |      58.9 |        58.9 |      True |    camera |                vehicle |           | 
+ 63.0 |      solo |      30.00 |    0 |      58.4 |      58.4 |      58.4 |        58.4 |      True |    camera |                vehicle |           | 
+ 63.1 |      solo |      30.00 |    0 |      58.0 |      58.0 |      58.0 |        58.0 |      True |    camera |                vehicle |           | 
+ 63.2 |      solo |      30.00 |    0 |      57.5 |      57.5 |      57.5 |        57.5 |      True |    camera |                vehicle |           | 
+ 63.3 |      solo |      30.00 |    0 |      57.1 |      57.1 |      57.1 |        57.1 |      True |    camera |                vehicle |           | 
+ 63.4 |      solo |      30.00 |    0 |      56.6 |      56.6 |      56.6 |        56.6 |      True |    camera |                vehicle |           | 
+ 63.5 |      solo |      30.00 |    0 |      56.2 |      56.2 |      56.2 |        56.2 |      True |    camera |                vehicle |           | 
+ 63.6 |      solo |      30.00 |    0 |      55.7 |      55.7 |      55.7 |        55.7 |      True |    camera |                vehicle |           | 
+ 63.7 |      solo |      30.00 |    0 |      55.3 |      55.3 |      55.3 |        55.3 |      True |    camera |                vehicle |           | 
+ 63.8 |      solo |      30.00 |    0 |      54.8 |      54.8 |      54.8 |        54.8 |      True |    camera |                vehicle |           | 
+ 63.9 |      solo |      30.00 |    0 |      54.4 |      54.4 |      54.4 |        54.4 |      True |    camera |                vehicle |           | 
+ 64.0 |      solo |      30.00 |    0 |      53.7 |      53.7 |      53.7 |        53.7 |      True |    camera |     roundabout_giveway |           | 
+ 64.1 |      solo |      30.00 |    0 |      52.3 |      52.3 |      52.3 |        52.3 |      True |    camera |     roundabout_giveway |           | 
+ 64.2 |      solo |      30.00 |    0 |      51.0 |      51.0 |      51.0 |        51.0 |      True |    camera |     roundabout_giveway |           | 
+ 64.3 |      solo |      30.00 |    0 |      49.7 |      49.7 |      49.7 |        49.7 |      True |    camera |     roundabout_giveway |           | 
+ 64.4 |      solo |      30.00 |    0 |      48.3 |      48.3 |      48.3 |        48.3 |      True |    camera |     roundabout_giveway |           | 
+ 64.5 |      solo |      30.00 |    0 |      47.0 |      47.0 |      47.0 |        47.0 |      True |    camera |     roundabout_giveway |           | 
+ 64.6 |      solo |      30.00 |    0 |      45.6 |      45.6 |      45.6 |        45.6 |      True |    camera |     roundabout_giveway |           | 
+ 64.7 |      solo |      30.00 |    0 |      44.3 |      44.3 |      44.3 |        44.3 |      True |    camera |     roundabout_giveway |           | 
+ 64.8 |      solo |      30.00 |    0 |      42.9 |      42.9 |      42.9 |        42.9 |      True |    camera |     roundabout_giveway |           | 
+ 64.9 |      solo |      30.00 |    0 |      41.6 |      41.6 |      41.6 |        41.6 |      True |    camera |     roundabout_giveway |           | 
+ 65.0 |      solo |      30.00 |    0 |      40.3 |      40.3 |      40.3 |        40.3 |      True |    camera |     roundabout_giveway |           | 
+ 65.1 |      solo |      30.00 |    0 |      38.9 |      38.9 |      38.9 |        38.9 |      True |    camera |     roundabout_giveway |           | 
+ 65.2 |      solo |      30.00 |    0 |      37.6 |      37.6 |      37.6 |        37.6 |      True |    camera |     roundabout_giveway |           | 
+ 65.3 |      solo |      30.00 |    0 |      36.2 |      36.2 |      36.2 |        36.2 |      True |    camera |     roundabout_giveway |           | 
+ 65.4 |      solo |      30.00 |    0 |      34.9 |      34.9 |      34.9 |        34.9 |      True |    camera |     roundabout_giveway |           | 
+ 65.5 |      solo |      29.92 |    0 |      33.6 |      33.6 |      33.6 |        33.6 |      True |    camera |     roundabout_giveway |           | 
+ 65.6 |      solo |      29.78 |    0 |      32.2 |      32.2 |      32.2 |        32.2 |      True |    camera |     roundabout_giveway |           | 
+ 65.7 |      solo |      29.57 |    0 |      30.9 |      30.9 |      30.9 |        30.9 |      True |    camera |     roundabout_giveway |           | 
+ 65.8 |      solo |      29.30 |    0 |      29.6 |      29.6 |      29.6 |        29.6 |      True |    camera |     roundabout_giveway |           | 
+ 65.9 |      solo |      28.97 |    0 |      28.3 |      28.3 |      28.3 |        28.3 |      True |    camera |     roundabout_giveway |           | 
+ 66.0 |      solo |      28.60 |    0 |      27.0 |      27.0 |      27.0 |        27.0 |      True |    camera |     roundabout_giveway |           | 
+ 66.1 |      solo |      28.18 |    0 |      25.7 |      25.7 |      25.7 |        25.7 |      True |    camera |     roundabout_giveway |           | 
+ 66.2 |      solo |      27.71 |    0 |      24.5 |      24.5 |      24.5 |        24.5 |      True |    camera |     roundabout_giveway |           | 
+ 66.3 |      solo |      27.20 |    0 |      23.2 |      23.2 |      23.2 |        23.2 |      True |    camera |     roundabout_giveway |           | 
+ 66.4 |      solo |      26.65 |    0 |      22.0 |      22.0 |      22.0 |        22.0 |      True |    camera |     roundabout_giveway |           | 
+ 66.5 |      solo |      26.05 |    0 |      20.9 |      20.9 |      20.9 |        20.9 |      True |    camera |     roundabout_giveway |           | 
+ 66.6 |      solo |      25.42 |    0 |      19.7 |      19.7 |      19.7 |        19.7 |      True |    camera |     roundabout_giveway |           | 
+ 66.7 |      solo |      24.75 |    0 |      18.6 |      18.6 |      18.6 |        18.6 |      True |    camera |     roundabout_giveway |           | 
+ 66.8 |      solo |      24.05 |    0 |      17.5 |      17.5 |      17.5 |        17.5 |      True |    camera |     roundabout_giveway |           | 
+ 66.9 |      solo |      23.31 |    0 |      42.6 |      42.6 |      42.6 |        42.6 |      True |    camera |                vehicle |           | 
+ 67.0 |      solo |      23.75 |    0 |      42.5 |      42.5 |      42.5 |        42.5 |      True |    camera |                vehicle |           | 
+ 67.1 |      solo |      24.20 |    0 |      42.3 |      42.3 |      42.3 |        42.3 |      True |    camera |                vehicle |           | 
+ 67.2 |      solo |      24.65 |    0 |      42.1 |      42.1 |      42.1 |        42.1 |      True |    camera |                vehicle |           | 
+ 67.3 |      solo |      25.10 |    0 |      41.9 |      41.9 |      41.9 |        41.9 |      True |    camera |                vehicle |           | 
+ 67.4 |      solo |      25.54 |    0 |      41.7 |      41.7 |      41.7 |        41.7 |      True |    camera |                vehicle |           | 
+ 67.5 |      solo |      25.99 |    0 |      41.4 |      41.4 |      41.4 |        41.4 |      True |    camera |                vehicle |           | 
+ 67.6 |      solo |      26.44 |    0 |      41.1 |      41.1 |      41.1 |        41.1 |      True |    camera |                vehicle |           | 
+ 67.7 |      solo |      26.89 |    0 |      40.8 |      40.8 |      40.8 |        40.8 |      True |    camera |                vehicle |           | 
+ 67.8 |      solo |      27.33 |    0 |      40.5 |      40.5 |      40.5 |        40.5 |      True |    camera |                vehicle |           | 
+ 67.9 |      solo |      27.78 |    0 |      40.2 |      40.2 |      40.2 |        40.2 |      True |    camera |                vehicle |           | 
+ 68.0 |      solo |      28.23 |    0 |      39.8 |      39.8 |      39.8 |        39.8 |      True |    camera |                vehicle |           | 
+ 68.1 |      solo |      28.68 |    0 |      39.4 |      39.4 |      39.4 |        39.4 |      True |    camera |                vehicle |           | 
+ 68.2 |      solo |      29.12 |    0 |       1.2 |       1.2 |       1.2 |         1.2 |      True |    camera |     roundabout_giveway |           | 
+ 68.3 |      solo |      27.67 |    0 |      38.7 |      38.7 |      38.7 |        38.7 |      True |    camera |                vehicle |           | 
+ 68.4 |      solo |      28.12 |    0 |      38.3 |      38.3 |      38.3 |        38.3 |      True |    camera |                vehicle |           | 
+ 68.5 |      solo |      28.56 |    0 |      37.9 |      37.9 |      37.9 |        37.9 |      True |    camera |                vehicle |           | 
+ 68.6 |      solo |      29.01 |    0 |      37.5 |      37.5 |      37.5 |        37.5 |      True |    camera |                vehicle |           | 
+ 68.7 |      solo |      29.46 |    0 |      37.1 |      37.1 |      37.1 |        37.1 |      True |    camera |                vehicle |           | 
+ 68.8 |      solo |      29.91 |    0 |      36.7 |      36.7 |      36.7 |        36.7 |      True |    camera |                vehicle |           | 
+ 68.9 |      solo |      30.00 |    0 |      36.2 |      36.2 |      36.2 |        36.2 |      True |    camera |                vehicle |           | 
+ 69.0 |      solo |      30.00 |    0 |      35.8 |      35.8 |      35.8 |        35.8 |      True |    camera |                vehicle |           | 
+ 69.1 |      solo |      29.98 |    0 |      35.4 |      35.4 |      35.4 |        35.4 |      True |    camera |                vehicle |           | 
+ 69.2 |      solo |      29.93 |    0 |      34.9 |      34.9 |      34.9 |        34.9 |      True |    camera |                vehicle |           | 
+ 69.3 |      solo |      29.86 |    0 |      34.5 |      34.5 |      34.5 |        34.5 |      True |    camera |                vehicle |           | 
+ 69.4 |      solo |      29.77 |    0 |      34.0 |      34.0 |      34.0 |        34.0 |      True |    camera |                vehicle |           | 
+ 69.5 |      solo |      29.67 |    0 |      33.6 |      33.6 |      33.6 |        33.6 |      True |    camera |                vehicle |           | 
+ 69.6 |      solo |      29.55 |    0 |      33.2 |      33.2 |      33.2 |        33.2 |      True |    camera |                vehicle |           | 
+ 69.7 |      solo |      29.41 |    0 |      32.7 |      32.7 |      32.7 |        32.7 |      True |    camera |                vehicle |           | 
+ 69.8 |      solo |      29.27 |    0 |      32.3 |      32.3 |      32.3 |        32.3 |      True |    camera |                vehicle |           | 
+ 69.9 |      solo |      29.11 |    0 |      31.9 |      31.9 |      31.9 |        31.9 |      True |    camera |                vehicle |           | 
+ 70.0 |      solo |      28.95 |    0 |      31.5 |      31.5 |      31.5 |        31.5 |      True |    camera |                vehicle |           | 
+ 70.1 |      solo |      28.77 |    0 |      31.1 |      31.1 |      31.1 |        31.1 |      True |    camera |                vehicle |           | 
+ 70.2 |      solo |      28.59 |    0 |      30.7 |      30.7 |      30.7 |        30.7 |      True |    camera |                vehicle |           | 
+ 70.3 |      solo |      28.41 |    0 |      30.3 |      30.3 |      30.3 |        30.3 |      True |    camera |                vehicle |           | 
+ 70.4 |      solo |      28.21 |    0 |      30.0 |      30.0 |      30.0 |        30.0 |      True |    camera |                vehicle |           | 
+ 70.5 |      solo |      28.02 |    0 |      29.6 |      29.6 |      29.6 |        29.6 |      True |    camera |                vehicle |           | 
+ 70.6 |      solo |      27.82 |    0 |      29.3 |      29.3 |      29.3 |        29.3 |      True |    camera |                vehicle |           | 
+ 70.7 |      solo |      27.61 |    0 |      28.9 |      28.9 |      28.9 |        28.9 |      True |    camera |                vehicle |           | 
+ 70.8 |      solo |      27.41 |    0 |      28.6 |      28.6 |      28.6 |        28.6 |      True |    camera |                vehicle |           | 
+ 70.9 |      solo |      27.20 |    0 |      28.2 |      28.2 |      28.2 |        28.2 |      True |    camera |                vehicle |           | 
+ 71.0 |      solo |      26.99 |    0 |      27.9 |      27.9 |      27.9 |        27.9 |      True |    camera |                vehicle |           | 
+ 71.1 |      solo |      26.78 |    0 |      27.6 |      27.6 |      27.6 |        27.6 |      True |    camera |                vehicle |           | 
+ 71.2 |      solo |      26.57 |    0 |      27.3 |      27.3 |      27.3 |        27.3 |      True |    camera |                vehicle |           | 
+ 71.3 |      solo |      26.36 |    0 |      27.0 |      27.0 |      27.0 |        27.0 |      True |    camera |                vehicle |           | 
+ 71.4 |      solo |      26.16 |    0 |      26.8 |      26.8 |      26.8 |        26.8 |      True |    camera |                vehicle |           | 
+ 71.5 |      solo |      25.95 |    0 |      26.5 |      26.5 |      26.5 |        26.5 |      True |    camera |                vehicle |           | 
+ 71.6 |      solo |      25.75 |    0 |      26.2 |      26.2 |      26.2 |        26.2 |      True |    camera |                vehicle |           | 
+ 71.7 |      solo |      25.55 |    0 |      26.0 |      26.0 |      26.0 |        26.0 |      True |    camera |                vehicle |           | 
+ 71.8 |      solo |      25.35 |    0 |      25.7 |      25.7 |      25.7 |        25.7 |      True |    camera |                vehicle |           | 
+ 71.9 |      solo |      25.16 |    0 |      25.5 |      25.5 |      25.5 |        25.5 |      True |    camera |                vehicle |           | 
+ 72.0 |      solo |      24.97 |    0 |      25.3 |      25.3 |      25.3 |        25.3 |      True |    camera |                vehicle |           | 
+ 72.1 |      solo |      24.78 |    0 |      25.0 |      25.0 |      25.0 |        25.0 |      True |    camera |                vehicle |           | 
+ 72.2 |      solo |      24.60 |    0 |      24.8 |      24.8 |      24.8 |        24.8 |      True |    camera |                vehicle |           | 
+ 72.3 |      solo |      24.42 |    0 |      24.6 |      24.6 |      24.6 |        24.6 |      True |    camera |                vehicle |           | 
+ 72.4 |      solo |      24.25 |    0 |      24.4 |      24.4 |      24.4 |        24.4 |      True |    camera |                vehicle |           | 
+ 72.5 |      solo |      24.08 |    0 |      24.3 |      24.3 |      24.3 |        24.3 |      True |    camera |                vehicle |           | 
+ 72.6 |      solo |      23.91 |    0 |      24.1 |      24.1 |      24.1 |        24.1 |      True |    camera |                vehicle |           | 
+ 72.7 |      solo |      23.75 |    0 |      23.9 |      23.9 |      23.9 |        23.9 |      True |    camera |                vehicle |           | 
+ 72.8 |      solo |      23.59 |    0 |      23.7 |      23.7 |      23.7 |        23.7 |      True |    camera |                vehicle |           | 
+ 72.9 |      solo |      23.44 |    0 |      23.6 |      23.6 |      23.6 |        23.6 |      True |    camera |                vehicle |           | 
+ 73.0 |      solo |      23.30 |    0 |      23.4 |      23.4 |      23.4 |        23.4 |      True |    camera |                vehicle |           | 
+ 73.1 |      solo |      23.16 |    0 |      23.3 |      23.3 |      23.3 |        23.3 |      True |    camera |                vehicle |           | 
+ 73.2 |      solo |      23.02 |    0 |      23.2 |      23.2 |      23.2 |        23.2 |      True |    camera |                vehicle |           | 
+ 73.3 |      solo |      22.89 |    0 |      23.0 |      23.0 |      23.0 |        23.0 |      True |    camera |                vehicle |           | 
+ 73.4 |      solo |      22.76 |    0 |      22.9 |      22.9 |      22.9 |        22.9 |      True |    camera |                vehicle |           | 
+ 73.5 |      solo |      22.64 |    0 |      22.8 |      22.8 |      22.8 |        22.8 |      True |    camera |                vehicle |           | 
+ 73.6 |      solo |      22.53 |    0 |      22.7 |      22.7 |      22.7 |        22.7 |      True |    camera |                vehicle |           | 
+ 73.7 |      solo |      22.41 |    0 |      22.5 |      22.5 |      22.5 |        22.5 |      True |    camera |                vehicle |           | 
+ 73.8 |      solo |      22.31 |    0 |      22.4 |      22.4 |      22.4 |        22.4 |      True |    camera |                vehicle |           | 
+ 73.9 |      solo |      22.20 |    0 |      22.3 |      22.3 |      22.3 |        22.3 |      True |    camera |                vehicle |           | 
+ 74.0 |      solo |      22.10 |    0 |      22.2 |      22.2 |      22.2 |        22.2 |      True |    camera |                vehicle |           | 
+ 74.1 |      solo |      22.01 |    0 |      22.2 |      22.2 |      22.2 |        22.2 |      True |    camera |                vehicle |           | 
+ 74.2 |      solo |      21.92 |    0 |      22.1 |      22.1 |      22.1 |        22.1 |      True |    camera |                vehicle |           | 
+ 74.3 |      solo |      21.83 |    0 |      22.0 |      22.0 |      22.0 |        22.0 |      True |    camera |                vehicle |           | 
+ 74.4 |      solo |      21.75 |    0 |      21.9 |      21.9 |      21.9 |        21.9 |      True |    camera |                vehicle |           | 
+ 74.5 |      solo |      21.67 |    0 |      21.8 |      21.8 |      21.8 |        21.8 |      True |    camera |                vehicle |           | 
+ 74.6 |      solo |      21.59 |    0 |      21.8 |      21.8 |      21.8 |        21.8 |      True |    camera |                vehicle |           | 
+ 74.7 |      solo |      21.52 |    0 |      21.7 |      21.7 |      21.7 |        21.7 |      True |    camera |                vehicle |           | 
+ 74.8 |      solo |      21.45 |    0 |      21.6 |      21.6 |      21.6 |        21.6 |      True |    camera |                vehicle |           | 
+ 74.9 |      solo |      21.38 |    0 |      21.6 |      21.6 |      21.6 |        21.6 |      True |    camera |                vehicle |           | 
+ 75.0 |      solo |      21.32 |    0 |      21.5 |      21.5 |      21.5 |        21.5 |      True |    camera |                vehicle |           | 
+ 75.1 |      solo |      21.26 |    0 |      21.4 |      21.4 |      21.4 |        21.4 |      True |    camera |                vehicle |           | 
+ 75.2 |      solo |      21.20 |    0 |      21.4 |      21.4 |      21.4 |        21.4 |      True |    camera |                vehicle |           | 
+ 75.3 |      solo |      21.15 |    0 |      21.3 |      21.3 |      21.3 |        21.3 |      True |    camera |                vehicle |           | 
+ 75.4 |      solo |      21.09 |    0 |      21.3 |      21.3 |      21.3 |        21.3 |      True |    camera |                vehicle |           | 
+ 75.5 |      solo |      21.04 |    0 |      21.2 |      21.2 |      21.2 |        21.2 |      True |    camera |                vehicle |           | 
+ 75.6 |      solo |      21.00 |    0 |      21.2 |      21.2 |      21.2 |        21.2 |      True |    camera |                vehicle |           | 
+ 75.7 |      solo |      20.95 |    0 |      21.1 |      21.1 |      21.1 |        21.1 |      True |    camera |                vehicle |           | 
+ 75.8 |      solo |      20.91 |    0 |      21.1 |      21.1 |      21.1 |        21.1 |      True |    camera |                vehicle |           | 
+ 75.9 |      solo |      20.87 |    0 |      21.1 |      21.1 |      21.1 |        21.1 |      True |    camera |                vehicle |           | 
+ 76.0 |      solo |      20.83 |    0 |      21.0 |      21.0 |      21.0 |        21.0 |      True |    camera |                vehicle |           | 
+ 76.1 |      solo |      20.79 |    0 |      21.0 |      21.0 |      21.0 |        21.0 |      True |    camera |                vehicle |           | 
+ 76.2 |      solo |      20.75 |    0 |      20.9 |      20.9 |      20.9 |        20.9 |      True |    camera |                vehicle |           | 
+ 76.3 |      solo |      20.72 |    0 |      20.9 |      20.9 |      20.9 |        20.9 |      True |    camera |                vehicle |           | 
+ 76.4 |      solo |      20.69 |    0 |      20.9 |      20.9 |      20.9 |        20.9 |      True |    camera |                vehicle |           | 
+ 76.5 |      solo |      20.66 |    0 |      20.9 |      20.9 |      20.9 |        20.9 |      True |    camera |                vehicle |           | 
+ 76.6 |      solo |      20.63 |    0 |      20.8 |      20.8 |      20.8 |        20.8 |      True |    camera |                vehicle |           | 
+ 76.7 |      solo |      20.60 |    0 |      20.8 |      20.8 |      20.8 |        20.8 |      True |    camera |                vehicle |           | 
+ 76.8 |      solo |      20.57 |    0 |      20.8 |      20.8 |      20.8 |        20.8 |      True |    camera |                vehicle |           | 
+ 76.9 |      solo |      20.55 |    0 |      20.7 |      20.7 |      20.7 |        20.7 |      True |    camera |                vehicle |           | 
+ 77.0 |      solo |      20.52 |    0 |      20.7 |      20.7 |      20.7 |        20.7 |      True |    camera |                vehicle |           | 
+ 77.1 |      solo |      20.50 |    0 |      20.7 |      20.7 |      20.7 |        20.7 |      True |    camera |                vehicle |           | 
+ 77.2 |      solo |      20.48 |    0 |      20.7 |      20.7 |      20.7 |        20.7 |      True |    camera |                vehicle |           | 
+ 77.3 |      solo |      20.45 |    0 |      20.7 |      20.7 |      20.7 |        20.7 |      True |    camera |                vehicle |           | 
+ 77.4 |      solo |      20.43 |    0 |      20.6 |      20.6 |      20.6 |        20.6 |      True |    camera |                vehicle |           | 
+ 77.5 |      solo |      20.41 |    0 |      20.6 |      20.6 |      20.6 |        20.6 |      True |    camera |                vehicle |           | 
+ 77.6 |      solo |      20.40 |    0 |      20.6 |      20.6 |      20.6 |        20.6 |      True |    camera |                vehicle |           | 
+ 77.7 |      solo |      20.38 |    0 |      20.6 |      20.6 |      20.6 |        20.6 |      True |    camera |                vehicle |           | 
+ 77.8 |      solo |      20.36 |    0 |      20.6 |      20.6 |      20.6 |        20.6 |      True |    camera |                vehicle |           | 
+ 77.9 |      solo |      20.35 |    0 |      20.6 |      20.6 |      20.6 |        20.6 |      True |    camera |                vehicle |           | 
+ 78.0 |      solo |      20.33 |    0 |      20.5 |      20.5 |      20.5 |        20.5 |      True |    camera |                vehicle |           | 
+ 78.1 |      solo |      20.32 |    0 |      20.5 |      20.5 |      20.5 |        20.5 |      True |    camera |                vehicle |           | 
+ 78.2 |      solo |      20.30 |    0 |      20.5 |      20.5 |      20.5 |        20.5 |      True |    camera |                vehicle |           | 
+ 78.3 |      solo |      20.29 |    0 |      20.5 |      20.5 |      20.5 |        20.5 |      True |    camera |                vehicle |           | 
+ 78.4 |      solo |      20.28 |    0 |      20.5 |      20.5 |      20.5 |        20.5 |      True |    camera |                vehicle |           | 
+ 78.5 |      solo |      20.26 |    0 |      20.5 |      20.5 |      20.5 |        20.5 |      True |    camera |                vehicle |           | 
+ 78.6 |      solo |      20.25 |    0 |      20.5 |      20.5 |      20.5 |        20.5 |      True |    camera |                vehicle |           | 
+ 78.7 |      solo |      20.24 |    0 |      20.4 |      20.4 |      20.4 |        20.4 |      True |    camera |                vehicle |           | 
+ 78.8 |      solo |      20.23 |    0 |      20.4 |      20.4 |      20.4 |        20.4 |      True |    camera |                vehicle |           | 
+ 78.9 |      solo |      20.22 |    0 |      20.4 |      20.4 |      20.4 |        20.4 |      True |    camera |                vehicle |           | 
+ 79.0 |      solo |      20.21 |    0 |      20.4 |      20.4 |      20.4 |        20.4 |      True |    camera |                vehicle |           | 
+ 79.1 |      solo |      20.20 |    0 |      20.4 |      20.4 |      20.4 |        20.4 |      True |    camera |                vehicle |           | 
+ 79.2 |      solo |      20.19 |    0 |      20.4 |      20.4 |      20.4 |        20.4 |      True |    camera |                vehicle |           | 
+ 79.3 |      solo |      20.18 |    0 |      20.4 |      20.4 |      20.4 |        20.4 |      True |    camera |                vehicle |           | 
+ 79.4 |      solo |      20.18 |    0 |      20.4 |      20.4 |      20.4 |        20.4 |      True |    camera |                vehicle |           | 
+ 79.5 |      solo |      20.17 |    0 |      20.4 |      20.4 |      20.4 |        20.4 |      True |    camera |                vehicle |           | 
+ 79.6 |      solo |      20.16 |    0 |      20.4 |      20.4 |      20.4 |        20.4 |      True |    camera |                vehicle |           | 
+ 79.7 |      solo |      20.15 |    0 |      20.4 |      20.4 |      20.4 |        20.4 |      True |    camera |                vehicle |           | 
+ 79.8 |      solo |      20.15 |    0 |      20.4 |      20.4 |      20.4 |        20.4 |      True |    camera |                vehicle |           | 
+ 79.9 |      solo |      20.14 |    0 |      20.3 |      20.3 |      20.3 |        20.3 |      True |    camera |                vehicle |           | 
+ 80.0 |      solo |      20.13 |    0 |      20.3 |      20.3 |      20.3 |        20.3 |      True |    camera |                vehicle |           | 
+ 80.1 |      solo |      20.13 |    0 |      20.3 |      20.3 |      20.3 |        20.3 |      True |    camera |                vehicle |           | 
+ 80.2 |      solo |      20.12 |    0 |      20.3 |      20.3 |      20.3 |        20.3 |      True |    camera |                vehicle |           | 
+ 80.3 |      solo |      20.12 |    0 |      20.3 |      20.3 |      20.3 |        20.3 |      True |    camera |                vehicle |           | 
+ 80.4 |      solo |      20.11 |    0 |      20.3 |      20.3 |      20.3 |        20.3 |      True |    camera |                vehicle |           | 
+ 80.5 |      solo |      20.11 |    0 |      20.3 |      20.3 |      20.3 |        20.3 |      True |    camera |                vehicle |           | 
+ 80.6 |      solo |      20.10 |    0 |      20.3 |      20.3 |      20.3 |        20.3 |      True |    camera |                vehicle |           | 
+ 80.7 |      solo |      20.10 |    0 |      20.3 |      20.3 |      20.3 |        20.3 |      True |    camera |                vehicle |           | 
+ 80.8 |      solo |      20.09 |    0 |      20.3 |      20.3 |      20.3 |        20.3 |      True |    camera |                vehicle |           | 
+ 80.9 |      solo |      20.09 |    0 |      20.3 |      20.3 |      20.3 |        20.3 |      True |    camera |                vehicle |           | 
+ 81.0 |      solo |      20.09 |    0 |      20.3 |      20.3 |      20.3 |        20.3 |      True |    camera |                vehicle |           | 
+ 81.1 |      solo |      20.08 |    0 |      20.3 |      20.3 |      20.3 |        20.3 |      True |    camera |                vehicle |           | 
+ 81.2 |      solo |      20.08 |    0 |      20.3 |      20.3 |      20.3 |        20.3 |      True |    camera |                vehicle |           | 
+ 81.3 |      solo |      20.07 |    0 |      20.3 |      20.3 |      20.3 |        20.3 |      True |    camera |                vehicle |           | 
+ 81.4 |      solo |      20.07 |    0 |      20.3 |      20.3 |      20.3 |        20.3 |      True |    camera |                vehicle |           | 
+ 81.5 |      solo |      20.07 |    0 |      20.3 |      20.3 |      20.3 |        20.3 |      True |    camera |                vehicle |           | 
+ 81.6 |      solo |      20.07 |    0 |      20.3 |      20.3 |      20.3 |        20.3 |      True |    camera |                vehicle |           | 
+ 81.7 |      solo |      20.06 |    0 |      20.3 |      20.3 |      20.3 |        20.3 |      True |    camera |                vehicle |           | 
+ 81.8 |      solo |      20.06 |    0 |      20.3 |      20.3 |      20.3 |        20.3 |      True |    camera |                vehicle |           | 
+ 81.9 |      solo |      20.06 |    0 |      20.3 |      20.3 |      20.3 |        20.3 |      True |    camera |                vehicle |           | 
+ 82.0 |      solo |      20.05 |    0 |      20.3 |      20.3 |      20.3 |        20.3 |      True |    camera |                vehicle |           | 
+ 82.1 |      solo |      20.05 |    0 |      20.3 |      20.3 |      20.3 |        20.3 |      True |    camera |                vehicle |           | 
+ 82.2 |      solo |      20.05 |    0 |      20.3 |      20.3 |      20.3 |        20.3 |      True |    camera |                vehicle |           | 
+ 82.3 |      solo |      20.05 |    0 |      20.3 |      20.3 |      20.3 |        20.3 |      True |    camera |                vehicle |           | 
+ 82.4 |      solo |      20.05 |    0 |      20.3 |      20.3 |      20.3 |        20.3 |      True |    camera |                vehicle |           | 
+ 82.5 |      solo |      20.04 |    0 |      20.3 |      20.3 |      20.3 |        20.3 |      True |    camera |                vehicle |           | 
+ 82.6 |      solo |      20.04 |    0 |      20.3 |      20.3 |      20.3 |        20.3 |      True |    camera |                vehicle |           | 
+ 82.7 |      solo |      20.04 |    0 |      20.2 |      20.2 |      20.2 |        20.2 |      True |    camera |                vehicle |           | 
+ 82.8 |      solo |      20.04 |    0 |      20.2 |      20.2 |      20.2 |        20.2 |      True |    camera |                vehicle |           | 
+ 82.9 |      solo |      20.04 |    0 |      20.2 |      20.2 |      20.2 |        20.2 |      True |    camera |                vehicle |           | 
+ 83.0 |      solo |      20.04 |    0 |      20.2 |      20.2 |      20.2 |        20.2 |      True |    camera |                vehicle |           | 
+ 83.1 |      solo |      20.03 |    0 |      20.2 |      20.2 |      20.2 |        20.2 |      True |    camera |                vehicle |           | 
+ 83.2 |      solo |      20.03 |    0 |      20.2 |      20.2 |      20.2 |        20.2 |      True |    camera |                vehicle |           | 
+ 83.3 |      solo |      20.03 |    0 |      20.2 |      20.2 |      20.2 |        20.2 |      True |    camera |                vehicle |           | 
+ 83.4 |      solo |      20.03 |    0 |      20.2 |      20.2 |      20.2 |        20.2 |      True |    camera |                vehicle |           | 
+ 83.5 |      solo |      20.03 |    0 |      20.2 |      20.2 |      20.2 |        20.2 |      True |    camera |                vehicle |           | 
+ 83.6 |      solo |      20.03 |    0 |      20.2 |      20.2 |      20.2 |        20.2 |      True |    camera |                vehicle |           | 
+ 83.7 |      solo |      20.03 |    0 |      20.2 |      20.2 |      20.2 |        20.2 |      True |    camera |                vehicle |           | 
+ 83.8 |      solo |      20.02 |    0 |      20.2 |      20.2 |      20.2 |        20.2 |      True |    camera |                vehicle |           | 
+ 83.9 |      solo |      20.02 |    0 |      20.2 |      20.2 |      20.2 |        20.2 |      True |    camera |                vehicle |           | 
+ 84.0 |      solo |      20.02 |    0 |      20.2 |      20.2 |      20.2 |        20.2 |      True |    camera |                vehicle |           | 
+ 84.1 |      solo |      20.02 |    0 |      20.2 |      20.2 |      20.2 |        20.2 |      True |    camera |                vehicle |           | 
+ 84.2 |      solo |      20.02 |    0 |      20.2 |      20.2 |      20.2 |        20.2 |      True |    camera |                vehicle |           | 
+ 84.3 |      solo |      20.02 |    0 |      20.2 |      20.2 |      20.2 |        20.2 |      True |    camera |                vehicle |           | 
+ 84.4 |      solo |      20.02 |    0 |      20.2 |      20.2 |      20.2 |        20.2 |      True |    camera |                vehicle |           | 
+ 84.5 |      solo |      20.02 |    0 |      20.2 |      20.2 |      20.2 |        20.2 |      True |    camera |                vehicle |           | 
+ 84.6 |      solo |      20.02 |    0 |      20.2 |      20.2 |      20.2 |        20.2 |      True |    camera |                vehicle |           | 
+ 84.7 |      solo |      20.02 |    0 |      20.2 |      20.2 |      20.2 |        20.2 |      True |    camera |                vehicle |           | 
+ 84.8 |      solo |      20.02 |    0 |      20.2 |      20.2 |      20.2 |        20.2 |      True |    camera |                vehicle |           | 
+ 84.9 |      solo |      20.02 |    0 |      20.2 |      20.2 |      20.2 |        20.2 |      True |    camera |                vehicle |           | 
+ 85.0 |      solo |      20.01 |    0 |      20.2 |      20.2 |      20.2 |        20.2 |      True |    camera |                vehicle |           | 
+ 85.1 |      solo |      20.01 |    0 |      20.2 |      20.2 |      20.2 |        20.2 |      True |    camera |                vehicle |           | 
+ 85.2 |      solo |      20.01 |    0 |      20.2 |      20.2 |      20.2 |        20.2 |      True |    camera |                vehicle |           | 
+ 85.3 |      solo |      20.01 |    0 |      20.2 |      20.2 |      20.2 |        20.2 |      True |    camera |                vehicle |           | 
+ 85.4 |      solo |      20.01 |    0 |      20.2 |      20.2 |      20.2 |        20.2 |      True |    camera |                vehicle |           | 
+ 85.5 |      solo |      20.01 |    0 |      20.2 |      20.2 |      20.2 |        20.2 |      True |    camera |                vehicle |           | 
+ 85.6 |      solo |      20.01 |    0 |      20.2 |      20.2 |      20.2 |        20.2 |      True |    camera |                vehicle |           | 
+ 85.7 |      solo |      20.01 |    0 |      20.2 |      20.2 |      20.2 |        20.2 |      True |    camera |                vehicle |           | 
+ 85.8 |      solo |      20.01 |    0 |      20.2 |      20.2 |      20.2 |        20.2 |      True |    camera |                vehicle |           | 
+ 85.9 |      solo |      20.01 |    0 |      20.2 |      20.2 |      20.2 |        20.2 |      True |    camera |                vehicle |           | 
+ 86.0 |      solo |      20.01 |    0 |      20.2 |      20.2 |      20.2 |        20.2 |      True |    camera |                vehicle |           | 
+ 86.1 |      solo |      20.01 |    0 |      20.2 |      20.2 |      20.2 |        20.2 |      True |    camera |                vehicle |           | 
+ 86.2 |      solo |      20.01 |    0 |      20.2 |      20.2 |      20.2 |        20.2 |      True |    camera |                vehicle |           | 
+ 86.3 |      solo |      20.01 |    0 |      20.2 |      20.2 |      20.2 |        20.2 |      True |    camera |                vehicle |           | 
+ 86.4 |      solo |      20.01 |    0 |      20.2 |      20.2 |      20.2 |        20.2 |      True |    camera |                vehicle |           | 
+ 86.5 |      solo |      20.01 |    0 |      20.2 |      20.2 |      20.2 |        20.2 |      True |    camera |                vehicle |           | 
+ 86.6 |      solo |      20.01 |    0 |      20.2 |      20.2 |      20.2 |        20.2 |      True |    camera |                vehicle |           | 
+ 86.7 |      solo |      20.01 |    0 |      20.2 |      20.2 |      20.2 |        20.2 |      True |    camera |                vehicle |           | 
+ 86.8 |      solo |      20.01 |    0 |      20.2 |      20.2 |      20.2 |        20.2 |      True |    camera |                vehicle |           | 
+ 86.9 |      solo |      20.01 |    0 |      20.2 |      20.2 |      20.2 |        20.2 |      True |    camera |                vehicle |           | 
+ 87.0 |      solo |      20.01 |    0 |      20.2 |      20.2 |      20.2 |        20.2 |      True |    camera |                vehicle |           | 
+ 87.1 |      solo |      20.01 |    0 |      20.2 |      20.2 |      20.2 |        20.2 |      True |    camera |                vehicle |           | 
+ 87.2 |      solo |      20.01 |    0 |      20.2 |      20.2 |      20.2 |        20.2 |      True |    camera |                vehicle |           | 
+ 87.3 |      solo |      20.01 |    0 |      20.2 |      20.2 |      20.2 |        20.2 |      True |    camera |                vehicle |           | 
+ 87.4 |      solo |      20.00 |    0 |      20.2 |      20.2 |      20.2 |        20.2 |      True |    camera |                vehicle |           | 
+ 87.5 |      solo |      20.00 |    0 |      20.2 |      20.2 |      20.2 |        20.2 |      True |    camera |                vehicle |           | 
+ 87.6 |      solo |      20.00 |    0 |      20.2 |      20.2 |      20.2 |        20.2 |      True |    camera |                vehicle |           | 
+ 87.7 |      solo |      20.00 |    0 |      20.2 |      20.2 |      20.2 |        20.2 |      True |    camera |                vehicle |           | 
+ 87.8 |      solo |      20.00 |    0 |      20.2 |      20.2 |      20.2 |        20.2 |      True |    camera |                vehicle |           | 
+ 87.9 |      solo |      20.00 |    0 |      20.2 |      20.2 |      20.2 |        20.2 |      True |    camera |                vehicle |           | 
+ 88.0 |      solo |      20.00 |    0 |      20.2 |      20.2 |      20.2 |        20.2 |      True |    camera |                vehicle |           | 
+ 88.1 |      solo |      20.00 |    0 |      20.2 |      20.2 |      20.2 |        20.2 |      True |    camera |                vehicle |           | 
+ 88.2 |      solo |      20.00 |    0 |      20.2 |      20.2 |      20.2 |        20.2 |      True |    camera |                vehicle |           | 
+ 88.3 |      solo |      20.00 |    0 |      20.2 |      20.2 |      20.2 |        20.2 |      True |    camera |                vehicle |           | 
+ 88.4 |      solo |      20.00 |    0 |      20.2 |      20.2 |      20.2 |        20.2 |      True |    camera |                vehicle |           | 
+ 88.5 |      solo |      20.00 |    0 |      20.2 |      20.2 |      20.2 |        20.2 |      True |    camera |                vehicle |           | 
+ 88.6 |      solo |      20.00 |    0 |      20.2 |      20.2 |      20.2 |        20.2 |      True |    camera |                vehicle |           | 
+ 88.7 |      solo |      20.00 |    0 |      20.2 |      20.2 |      20.2 |        20.2 |      True |    camera |                vehicle |           | 
+ 88.8 |      solo |      20.00 |    0 |      20.2 |      20.2 |      20.2 |        20.2 |      True |    camera |                vehicle |           | 
+ 88.9 |      solo |      20.00 |    0 |      20.2 |      20.2 |      20.2 |        20.2 |      True |    camera |                vehicle |           | 
+ 89.0 |      solo |      20.00 |    0 |      20.2 |      20.2 |      20.2 |        20.2 |      True |    camera |                vehicle |           | 
+ 89.1 |      solo |      20.00 |    0 |      20.2 |      20.2 |      20.2 |        20.2 |      True |    camera |                vehicle |           | 
+ 89.2 |      solo |      20.00 |    0 |      20.2 |      20.2 |      20.2 |        20.2 |      True |    camera |                vehicle |           | 
+ 89.3 |      solo |      20.00 |    0 |      20.2 |      20.2 |      20.2 |        20.2 |      True |    camera |                vehicle |           | 
+ 89.4 |      solo |      20.00 |    0 |      20.2 |      20.2 |      20.2 |        20.2 |      True |    camera |                vehicle |           | 
+ 89.5 |      solo |      20.00 |    0 |      20.2 |      20.2 |      20.2 |        20.2 |      True |    camera |                vehicle |           | 
+ 89.6 |      solo |      20.00 |    0 |      20.2 |      20.2 |      20.2 |        20.2 |      True |    camera |                vehicle |           | 
+ 89.7 |      solo |      20.00 |    0 |      20.2 |      20.2 |      20.2 |        20.2 |      True |    camera |                vehicle |           | 
+ 89.8 |      solo |      20.00 |    0 |      20.2 |      20.2 |      20.2 |        20.2 |      True |    camera |                vehicle |           | 
+ 89.9 |      solo |      20.00 |    0 |      20.2 |      20.2 |      20.2 |        20.2 |      True |    camera |                vehicle |           | 
+ 90.0 |      solo |      20.00 |    0 |      20.2 |      20.2 |      20.2 |        20.2 |      True |    camera |                vehicle |           | 
+ 90.1 |      solo |      20.00 |    0 |      20.2 |      20.2 |      20.2 |        20.2 |      True |    camera |                vehicle |           | 
+ 90.2 |      solo |      20.00 |    0 |      20.2 |      20.2 |      20.2 |        20.2 |      True |    camera |                vehicle |           | 
+ 90.3 |      solo |      20.00 |    0 |      20.2 |      20.2 |      20.2 |        20.2 |      True |    camera |                vehicle |           | 
+ 90.4 |      solo |      20.00 |    0 |      20.2 |      20.2 |      20.2 |        20.2 |      True |    camera |                vehicle |           | 
+ 90.5 |      solo |      20.00 |    0 |      20.2 |      20.2 |      20.2 |        20.2 |      True |    camera |                vehicle |           | 
+ 90.6 |      solo |      20.00 |    0 |      20.2 |      20.2 |      20.2 |        20.2 |      True |    camera |                vehicle |           | 
+ 90.7 |      solo |      20.00 |    0 |      20.2 |      20.2 |      20.2 |        20.2 |      True |    camera |                vehicle |           | 
+ 90.8 |      solo |      20.00 |    0 |      20.2 |      20.2 |      20.2 |        20.2 |      True |    camera |                vehicle |           | 
+ 90.9 |      solo |      20.00 |    0 |      20.2 |      20.2 |      20.2 |        20.2 |      True |    camera |                vehicle |           | 
+ 91.0 |      solo |      20.00 |    0 |      20.2 |      20.2 |      20.2 |        20.2 |      True |    camera |                vehicle |           | 
+ 91.1 |      solo |      20.00 |    0 |      20.2 |      20.2 |      20.2 |        20.2 |      True |    camera |                vehicle |           | 
+ 91.2 |      solo |      20.00 |    0 |      20.2 |      20.2 |      20.2 |        20.2 |      True |    camera |                vehicle |           | 
+ 91.3 |      solo |      20.00 |    0 |      20.2 |      20.2 |      20.2 |        20.2 |      True |    camera |                vehicle |           | 
+ 91.4 |      solo |      20.00 |    0 |      20.2 |      20.2 |      20.2 |        20.2 |      True |    camera |                vehicle |           | 
+ 91.5 |      solo |      20.00 |    0 |      20.2 |      20.2 |      20.2 |        20.2 |      True |    camera |                vehicle |           | 
+ 91.6 |      solo |      20.00 |    0 |      20.2 |      20.2 |      20.2 |        20.2 |      True |    camera |                vehicle |           | 
+ 91.7 |      solo |      20.00 |    0 |      20.2 |      20.2 |      20.2 |        20.2 |      True |    camera |                vehicle |           | 
+ 91.8 |      solo |      20.00 |    0 |      20.2 |      20.2 |      20.2 |        20.2 |      True |    camera |                vehicle |           | 
+ 91.9 |      solo |      20.00 |    0 |      20.2 |      20.2 |      20.2 |        20.2 |      True |    camera |                vehicle |           | 
+ 92.0 |      solo |      20.00 |    0 |      20.2 |      20.2 |      20.2 |        20.2 |      True |    camera |                vehicle |           | 
+ 92.1 |      solo |      20.00 |    0 |      20.2 |      20.2 |      20.2 |        20.2 |      True |    camera |                vehicle |           | 
+ 92.2 |      solo |      20.00 |    0 |      20.2 |      20.2 |      20.2 |        20.2 |      True |    camera |                vehicle |           | 
+ 92.3 |      solo |      20.00 |    0 |      20.2 |      20.2 |      20.2 |        20.2 |      True |    camera |                vehicle |           | 
+ 92.4 |      solo |      20.00 |    0 |      20.2 |      20.2 |      20.2 |        20.2 |      True |    camera |                vehicle |           | 
+ 92.5 |      solo |      20.00 |    0 |      20.2 |      20.2 |      20.2 |        20.2 |      True |    camera |                vehicle |           | 
+ 92.6 |      solo |      20.00 |    0 |      20.2 |      20.2 |      20.2 |        20.2 |      True |    camera |                vehicle |           | 
+ 92.7 |      solo |      20.00 |    0 |      20.2 |      20.2 |      20.2 |        20.2 |      True |    camera |                vehicle |           | 
+ 92.8 |      solo |      20.00 |    0 |      20.2 |      20.2 |      20.2 |        20.2 |      True |    camera |                vehicle |           | 
+ 92.9 |      solo |      20.00 |    0 |      20.2 |      20.2 |      20.2 |        20.2 |      True |    camera |                vehicle |           | 
+ 93.0 |      solo |      20.00 |    0 |      20.2 |      20.2 |      20.2 |        20.2 |      True |    camera |                vehicle |           | 
+ 93.1 |      solo |      20.00 |    0 |      20.2 |      20.2 |      20.2 |        20.2 |      True |    camera |                vehicle |           | 
+ 93.2 |      solo |      20.00 |    0 |      20.2 |      20.2 |      20.2 |        20.2 |      True |    camera |                vehicle |           | 
+ 93.3 |      solo |      20.00 |    0 |      20.2 |      20.2 |      20.2 |        20.2 |      True |    camera |                vehicle |           | 
+ 93.4 |      solo |      20.00 |    0 |      20.2 |      20.2 |      20.2 |        20.2 |      True |    camera |                vehicle |           | 
+ 93.5 |      solo |      20.00 |    0 |      20.2 |      20.2 |      20.2 |        20.2 |      True |    camera |                vehicle |           | 
+ 93.6 |      solo |      20.00 |    0 |      20.2 |      20.2 |      20.2 |        20.2 |      True |    camera |                vehicle |           | 
+ 93.7 |      solo |      20.00 |    0 |      20.2 |      20.2 |      20.2 |        20.2 |      True |    camera |                vehicle |           | 
+ 93.8 |      solo |      20.00 |    0 |      20.2 |      20.2 |      20.2 |        20.2 |      True |    camera |                vehicle |           | 
+ 93.9 |      solo |      20.00 |    0 |      20.2 |      20.2 |      20.2 |        20.2 |      True |    camera |                vehicle |           | 
+ 94.0 |      solo |      20.00 |    0 |      20.2 |      20.2 |      20.2 |        20.2 |      True |    camera |                vehicle |           | 
+ 94.1 |      solo |      20.00 |    0 |      20.2 |      20.2 |      20.2 |        20.2 |      True |    camera |                vehicle |           | 
+ 94.2 |      solo |      20.00 |    0 |      20.2 |      20.2 |      20.2 |        20.2 |      True |    camera |                vehicle |           | 
+ 94.3 |      solo |      20.00 |    0 |      20.2 |      20.2 |      20.2 |        20.2 |      True |    camera |                vehicle |           | 
+ 94.4 |      solo |      20.00 |    0 |      20.2 |      20.2 |      20.2 |        20.2 |      True |    camera |                vehicle |           | 
+ 94.5 |      solo |      20.00 |    0 |      20.2 |      20.2 |      20.2 |        20.2 |      True |    camera |                vehicle |           | 
+ 94.6 |      solo |      20.00 |    0 |      20.2 |      20.2 |      20.2 |        20.2 |      True |    camera |                vehicle |           | 
+ 94.7 |      solo |      20.00 |    0 |      20.2 |      20.2 |      20.2 |        20.2 |      True |    camera |                vehicle |           | 
+ 94.8 |      solo |      20.00 |    0 |      20.2 |      20.2 |      20.2 |        20.2 |      True |    camera |                vehicle |           | 
+ 94.9 |      solo |      20.00 |    0 |      20.2 |      20.2 |      20.2 |        20.2 |      True |    camera |                vehicle |           | 
+ 95.0 |      solo |      20.00 |    0 |      20.2 |      20.2 |      20.2 |        20.2 |      True |    camera |                vehicle |           | 
+ 95.1 |      solo |      20.00 |    0 |      20.2 |      20.2 |      20.2 |        20.2 |      True |    camera |                vehicle |           | 
+ 95.2 |      solo |      20.00 |    0 |      20.2 |      20.2 |      20.2 |        20.2 |      True |    camera |                vehicle |           | 
+ 95.3 |      solo |      20.00 |    0 |      20.2 |      20.2 |      20.2 |        20.2 |      True |    camera |                vehicle |           | 
+ 95.4 |      solo |      20.00 |    0 |      20.2 |      20.2 |      20.2 |        20.2 |      True |    camera |                vehicle |           | 
+ 95.5 |      solo |      20.00 |    0 |      20.2 |      20.2 |      20.2 |        20.2 |      True |    camera |                vehicle |           | 
+ 95.6 |      solo |      20.00 |    0 |      20.2 |      20.2 |      20.2 |        20.2 |      True |    camera |                vehicle |           | 
+ 95.7 |      solo |      20.00 |    0 |      20.2 |      20.2 |      20.2 |        20.2 |      True |    camera |                vehicle |           | 
+ 95.8 |      solo |      20.00 |    0 |      20.2 |      20.2 |      20.2 |        20.2 |      True |    camera |                vehicle |           | 
+ 95.9 |      solo |      20.00 |    0 |      20.2 |      20.2 |      20.2 |        20.2 |      True |    camera |                vehicle |           | 
+ 96.0 |      solo |      20.00 |    0 |      20.2 |      20.2 |      20.2 |        20.2 |      True |    camera |                vehicle |           | 
+ 96.1 |      solo |      20.00 |    0 |      20.2 |      20.2 |      20.2 |        20.2 |      True |    camera |                vehicle |           | 
+ 96.2 |      solo |      20.00 |    0 |      20.2 |      20.2 |      20.2 |        20.2 |      True |    camera |                vehicle |           | 
+ 96.3 |      solo |      20.00 |    0 |      20.2 |      20.2 |      20.2 |        20.2 |      True |    camera |                vehicle |           | 
+ 96.4 |      solo |      20.00 |    0 |      20.2 |      20.2 |      20.2 |        20.2 |      True |    camera |                vehicle |           | 
+ 96.5 |      solo |      20.00 |    0 |      20.2 |      20.2 |      20.2 |        20.2 |      True |    camera |                vehicle |           | 
+ 96.6 |      solo |      20.00 |    0 |      20.2 |      20.2 |      20.2 |        20.2 |      True |    camera |                vehicle |           | 
+ 96.7 |      solo |      20.00 |    0 |      20.2 |      20.2 |      20.2 |        20.2 |      True |    camera |                vehicle |           | 
+ 96.8 |      solo |      20.00 |    0 |      20.2 |      20.2 |      20.2 |        20.2 |      True |    camera |                vehicle |           | 
+ 96.9 |      solo |      20.00 |    0 |      20.2 |      20.2 |      20.2 |        20.2 |      True |    camera |                vehicle |           | 
+ 97.0 |      solo |      20.00 |    0 |      20.2 |      20.2 |      20.2 |        20.2 |      True |    camera |                vehicle |           | 
+ 97.1 |      solo |      20.00 |    0 |      20.2 |      20.2 |      20.2 |        20.2 |      True |    camera |                vehicle |           | 
+ 97.2 |      solo |      20.00 |    0 |      20.2 |      20.2 |      20.2 |        20.2 |      True |    camera |                vehicle |           | 
+ 97.3 |      solo |      20.00 |    0 |      20.2 |      20.2 |      20.2 |        20.2 |      True |    camera |                vehicle |           | 
+ 97.4 |      solo |      20.00 |    0 |      20.2 |      20.2 |      20.2 |        20.2 |      True |    camera |                vehicle |           | 
+ 97.5 |      solo |      20.00 |    0 |      20.2 |      20.2 |      20.2 |        20.2 |      True |    camera |                vehicle |           | 
+ 97.6 |      solo |      20.00 |    0 |      20.2 |      20.2 |      20.2 |        20.2 |      True |    camera |                vehicle |           | 
+ 97.7 |      solo |      20.00 |    0 |      20.2 |      20.2 |      20.2 |        20.2 |      True |    camera |                vehicle |           | 
+ 97.8 |      solo |      20.00 |    0 |      20.2 |      20.2 |      20.2 |        20.2 |      True |    camera |                vehicle |           | 
+ 97.9 |      solo |      20.00 |    0 |      20.2 |      20.2 |      20.2 |        20.2 |      True |    camera |                vehicle |           | 
+ 98.0 |      solo |      20.00 |    0 |      20.2 |      20.2 |      20.2 |        20.2 |      True |    camera |                vehicle |           | 
+ 98.1 |      solo |      20.00 |    0 |      20.2 |      20.2 |      20.2 |        20.2 |      True |    camera |                vehicle |           | 
+ 98.2 |      solo |      20.00 |    0 |      20.2 |      20.2 |      20.2 |        20.2 |      True |    camera |                vehicle |           | 
+ 98.3 |      solo |      20.00 |    0 |      20.2 |      20.2 |      20.2 |        20.2 |      True |    camera |                vehicle |           | 
+ 98.4 |      solo |      20.00 |    0 |      20.2 |      20.2 |      20.2 |        20.2 |      True |    camera |                vehicle |           | 
+ 98.5 |      solo |      20.00 |    0 |      20.2 |      20.2 |      20.2 |        20.2 |      True |    camera |                vehicle |           | 
+ 98.6 |      solo |      20.00 |    0 |      20.2 |      20.2 |      20.2 |        20.2 |      True |    camera |                vehicle |           | 
+ 98.7 |      solo |      20.00 |    0 |      20.2 |      20.2 |      20.2 |        20.2 |      True |    camera |                vehicle |           | 
+ 98.8 |      solo |      20.00 |    0 |      20.2 |      20.2 |      20.2 |        20.2 |      True |    camera |                vehicle |           | 
+ 98.9 |      solo |      20.00 |    0 |      20.2 |      20.2 |      20.2 |        20.2 |      True |    camera |                vehicle |           | 
+ 99.0 |      solo |      20.00 |    0 |      20.2 |      20.2 |      20.2 |        20.2 |      True |    camera |                vehicle |           | 
+ 99.1 |      solo |      20.00 |    0 |      20.2 |      20.2 |      20.2 |        20.2 |      True |    camera |                vehicle |           | 
+ 99.2 |      solo |      20.00 |    0 |      20.2 |      20.2 |      20.2 |        20.2 |      True |    camera |                vehicle |           | 
+ 99.3 |      solo |      20.00 |    0 |      20.2 |      20.2 |      20.2 |        20.2 |      True |    camera |                vehicle |           | 
+ 99.4 |      solo |      20.00 |    0 |      20.2 |      20.2 |      20.2 |        20.2 |      True |    camera |                vehicle |           | 
+ 99.5 |      solo |      20.00 |    0 |      20.2 |      20.2 |      20.2 |        20.2 |      True |    camera |                vehicle |           | 
+ 99.6 |      solo |      20.00 |    0 |      20.2 |      20.2 |      20.2 |        20.2 |      True |    camera |                vehicle |           | 
+ 99.7 |      solo |      20.00 |    0 |      20.2 |      20.2 |      20.2 |        20.2 |      True |    camera |                vehicle |           | 
+ 99.8 |      solo |      20.00 |    0 |      20.2 |      20.2 |      20.2 |        20.2 |      True |    camera |                vehicle |           | 
+ 99.9 |      solo |      20.00 |    0 |      20.2 |      20.2 |      20.2 |        20.2 |      True |    camera |                vehicle |           | 
+100.0 |      solo |      20.00 |    0 |      20.2 |      20.2 |      20.2 |        20.2 |      True |    camera |                vehicle |           | 
+100.1 |      solo |      20.00 |    0 |      20.2 |      20.2 |      20.2 |        20.2 |      True |    camera |                vehicle |           | 
+100.2 |      solo |      20.00 |    0 |      20.2 |      20.2 |      20.2 |        20.2 |      True |    camera |                vehicle |           | 
+100.3 |      solo |      20.00 |    0 |      20.2 |      20.2 |      20.2 |        20.2 |      True |    camera |                vehicle |           | 
+100.4 |      solo |      20.00 |    0 |      20.2 |      20.2 |      20.2 |        20.2 |      True |    camera |                vehicle |           | 
+100.5 |      solo |      20.00 |    0 |      20.2 |      20.2 |      20.2 |        20.2 |      True |    camera |                vehicle |           | 
+100.6 |      solo |      20.00 |    0 |      20.2 |      20.2 |      20.2 |        20.2 |      True |    camera |                vehicle |           | 
+100.7 |      solo |      20.00 |    0 |      20.2 |      20.2 |      20.2 |        20.2 |      True |    camera |                vehicle |           | 
+100.8 |      solo |      20.00 |    0 |      20.2 |      20.2 |      20.2 |        20.2 |      True |    camera |                vehicle |           | 
+100.9 |      solo |      20.00 |    0 |      20.2 |      20.2 |      20.2 |        20.2 |      True |    camera |                vehicle |           | 
+101.0 |      solo |      20.00 |    0 |      20.2 |      20.2 |      20.2 |        20.2 |      True |    camera |                vehicle |           | 
+101.1 |      solo |      20.00 |    0 |      20.2 |      20.2 |      20.2 |        20.2 |      True |    camera |                vehicle |           | 
+101.2 |      solo |      20.00 |    0 |      20.2 |      20.2 |      20.2 |        20.2 |      True |    camera |                vehicle |           | 
+101.3 |      solo |      20.00 |    0 |      20.2 |      20.2 |      20.2 |        20.2 |      True |    camera |                vehicle |           | 
+101.4 |      solo |      20.00 |    0 |      20.2 |      20.2 |      20.2 |        20.2 |      True |    camera |                vehicle |           | 
+101.5 |      solo |      20.00 |    0 |      20.2 |      20.2 |      20.2 |        20.2 |      True |    camera |                vehicle |           | 
+101.6 |      solo |      20.00 |    0 |      20.2 |      20.2 |      20.2 |        20.2 |      True |    camera |                vehicle |           | 
+101.7 |      solo |      20.00 |    0 |      20.2 |      20.2 |      20.2 |        20.2 |      True |    camera |                vehicle |           | 
+101.8 |      solo |      20.00 |    0 |      20.2 |      20.2 |      20.2 |        20.2 |      True |    camera |                vehicle |           | 
+101.9 |      solo |      20.00 |    0 |      20.2 |      20.2 |      20.2 |        20.2 |      True |    camera |                vehicle |           | 
+102.0 |      solo |      20.00 |    0 |      20.2 |      20.2 |      20.2 |        20.2 |      True |    camera |                vehicle |           | 
+102.1 |      solo |      20.00 |    0 |      20.2 |      20.2 |      20.2 |        20.2 |      True |    camera |                vehicle |           | 
+102.2 |      solo |      20.00 |    0 |      20.2 |      20.2 |      20.2 |        20.2 |      True |    camera |                vehicle |           | 
+102.3 |      solo |      20.00 |    0 |      20.1 |      20.1 |      20.1 |        20.1 |      True |    camera |                vehicle |           | 
+102.4 |      solo |      19.98 |    0 |      19.9 |      19.9 |      19.9 |        19.9 |      True |    camera |                vehicle |           | 
+102.5 |      solo |      19.95 |    0 |      19.7 |      19.7 |      19.7 |        19.7 |      True |    camera |                vehicle |           | 
+102.6 |      solo |      19.90 |    0 |      19.4 |      19.4 |      19.4 |        19.4 |      True |    camera |                vehicle |           | 
+102.7 |      solo |      19.82 |    0 |      19.1 |      19.1 |      19.1 |        19.1 |      True |    camera |                vehicle |           | 
+102.8 |      solo |      19.71 |    0 |      18.6 |      18.6 |      18.6 |        18.6 |      True |    camera |                vehicle |           | 
+102.9 |      solo |      19.56 |    0 |      18.2 |      18.2 |      18.2 |        18.2 |      True |    camera |                vehicle |           | 
+103.0 |      solo |      19.38 |    0 |      17.6 |      17.6 |      17.6 |        17.6 |      True |    camera |                vehicle |           | 
+103.1 |      solo |      19.17 |    0 |      17.1 |      17.1 |      17.1 |        17.1 |      True |    camera |                vehicle |           | 
+103.2 |      solo |      18.91 |    0 |      16.6 |      16.6 |      16.6 |        16.6 |      True |    camera |                vehicle |           | 
+103.3 |      solo |      18.63 |    0 |      16.1 |      16.1 |      16.1 |        16.1 |      True |    camera |                vehicle |           | 
+103.4 |      solo |      18.32 |    0 |      15.7 |      15.7 |      15.7 |        15.7 |      True |    camera |                vehicle |           | 
+103.5 |      solo |      18.00 |    0 |      15.2 |      15.2 |      15.2 |        15.2 |      True |    camera |                vehicle |           | 
+103.6 |      solo |      17.67 |    0 |      14.9 |      14.9 |      14.9 |        14.9 |      True |    camera |                vehicle |           | 
+103.7 |      solo |      17.34 |    0 |      14.5 |      14.5 |      14.5 |        14.5 |      True |    camera |                vehicle |           | 
+103.8 |      solo |      17.00 |    0 |      15.3 |      15.3 |      15.3 |        15.3 |      True |    camera |          traffic_light |           | 
+103.9 |      solo |      16.84 |    0 |      14.5 |      14.5 |      14.5 |        14.5 |      True |    camera |          traffic_light |           | 
+104.0 |      solo |      16.58 |    0 |      13.8 |      13.8 |      13.8 |        13.8 |      True |    camera |          traffic_light |           | 
+104.1 |      solo |      16.25 |    0 |      13.0 |      13.0 |      13.0 |        13.0 |      True |    camera |          traffic_light |           | 
+104.2 |      solo |      15.85 |    0 |      12.3 |      12.3 |      12.3 |        12.3 |      True |    camera |          traffic_light |           | 
+104.3 |      solo |      15.38 |    0 |      11.6 |      11.6 |      11.6 |        11.6 |      True |    camera |          traffic_light |           | 
+104.4 |      solo |      14.87 |    0 |      10.9 |      10.9 |      10.9 |        10.9 |      True |    camera |          traffic_light |           | 
+104.5 |      solo |      14.31 |    0 |      10.3 |      10.3 |      10.3 |        10.3 |      True |    camera |          traffic_light |           | 
+104.6 |      solo |      13.70 |    0 |       9.7 |       9.7 |       9.7 |         9.7 |      True |    camera |          traffic_light |           | 
+104.7 |      solo |      13.06 |    0 |       9.1 |       9.1 |       9.1 |         9.1 |      True |    camera |          traffic_light |           | 
+104.8 |      solo |      12.38 |    0 |       8.5 |       8.5 |       8.5 |         8.5 |      True |    camera |          traffic_light |           | 
+104.9 |      solo |      11.68 |    0 |       8.0 |       8.0 |       8.0 |         8.0 |      True |    camera |          traffic_light |           | 
+105.0 |      solo |      10.96 |    0 |       7.5 |       7.5 |       7.5 |         7.5 |      True |    camera |          traffic_light |           | 
+105.1 |      solo |      10.22 |    0 |       7.0 |       7.0 |       7.0 |         7.0 |      True |    camera |          traffic_light |           | 
+105.2 |      solo |       9.47 |    0 |       6.5 |       6.5 |       6.5 |         6.5 |      True |    camera |          traffic_light |           | 
+105.3 |      solo |       8.73 |    0 |       6.1 |       6.1 |       6.1 |         6.1 |      True |    camera |          traffic_light |           | 
+105.4 |      solo |       7.99 |    0 |       5.8 |       5.8 |       5.8 |         5.8 |      True |    camera |          traffic_light |           | 
+105.5 |      solo |       7.28 |    0 |       5.4 |       5.4 |       5.4 |         5.4 |      True |    camera |          traffic_light |           | 
+105.6 |      solo |       6.61 |    0 |       5.1 |       5.1 |       5.1 |         5.1 |      True |    camera |          traffic_light |           | 
+105.7 |      solo |       5.97 |    0 |       4.8 |       4.8 |       4.8 |         4.8 |      True |    camera |          traffic_light |           | 
+105.8 |      solo |       5.40 |    0 |       4.6 |       4.6 |       4.6 |         4.6 |      True |    camera |          traffic_light |           | 
+105.9 |      solo |       4.88 |    0 |       4.3 |       4.3 |       4.3 |         4.3 |      True |    camera |          traffic_light |           | 
+106.0 |      solo |       4.43 |    0 |       4.1 |       4.1 |       4.1 |         4.1 |      True |    camera |          traffic_light |           | 
+106.1 |      solo |       4.03 |    0 |       3.9 |       3.9 |       3.9 |         3.9 |      True |    camera |          traffic_light |           | 
+106.2 |      solo |       3.67 |    0 |       3.8 |       3.8 |       3.8 |         3.8 |      True |    camera |          traffic_light |           | 
+106.3 |      solo |       3.35 |    0 |       3.6 |       3.6 |       3.6 |         3.6 |      True |    camera |          traffic_light |           | 
+106.4 |      solo |       3.07 |    0 |       3.5 |       3.5 |       3.5 |         3.5 |      True |    camera |          traffic_light |           | 
+106.5 |      solo |       2.80 |    0 |       3.3 |       3.3 |       3.3 |         3.3 |      True |    camera |          traffic_light |           | 
+106.6 |      solo |       2.56 |    0 |       3.2 |       3.2 |       3.2 |         3.2 |      True |    camera |          traffic_light |           | 
+106.7 |      solo |       2.34 |    0 |       3.1 |       3.1 |       3.1 |         3.1 |      True |    camera |          traffic_light |           | 
+106.8 |      solo |       2.14 |    0 |       3.0 |       3.0 |       3.0 |         3.0 |      True |    camera |          traffic_light |           | 
+106.9 |      solo |       1.95 |    0 |       2.9 |       2.9 |       2.9 |         2.9 |      True |    camera |          traffic_light |           | 
+107.0 |      solo |       1.78 |    0 |       2.8 |       2.8 |       2.8 |         2.8 |      True |    camera |          traffic_light |           | 
+107.1 |      solo |       1.62 |    0 |       2.8 |       2.8 |       2.8 |         2.8 |      True |    camera |          traffic_light |           | 
+107.2 |      solo |       1.48 |    0 |       2.7 |       2.7 |       2.7 |         2.7 |      True |    camera |          traffic_light |           | 
+107.3 |      solo |       1.35 |    0 |       2.6 |       2.6 |       2.6 |         2.6 |      True |    camera |          traffic_light |           | 
+107.4 |      solo |       1.23 |    0 |       2.6 |       2.6 |       2.6 |         2.6 |      True |    camera |          traffic_light |           | 
+107.5 |      solo |       1.12 |    0 |       2.5 |       2.5 |       2.5 |         2.5 |      True |    camera |          traffic_light |           | 
+107.6 |      solo |       1.02 |    0 |       2.5 |       2.5 |       2.5 |         2.5 |      True |    camera |          traffic_light |           | 
+107.7 |      solo |       0.93 |    0 |       2.4 |       2.4 |       2.4 |         2.4 |      True |    camera |          traffic_light |           | 
+107.8 |      solo |       0.84 |    0 |       2.4 |       2.4 |       2.4 |         2.4 |      True |    camera |          traffic_light |           | 
+107.9 |      solo |       0.76 |    0 |       2.4 |       2.4 |       2.4 |         2.4 |      True |    camera |          traffic_light |           | 
+108.0 |      solo |       0.70 |    0 |       2.3 |       2.3 |       2.3 |         2.3 |      True |    camera |          traffic_light |           | 
+108.1 |      solo |       0.63 |    0 |       2.3 |       2.3 |       2.3 |         2.3 |      True |    camera |          traffic_light |           | 
+108.2 |      solo |       0.58 |    0 |       2.3 |       2.3 |       2.3 |         2.3 |      True |    camera |          traffic_light |           | 
+108.3 |      solo |       0.48 |    0 |       2.2 |       2.2 |       2.2 |         2.2 |      True |    camera |          traffic_light |           | 
+108.4 |      solo |       0.03 |    0 |       2.2 |       2.2 |       2.2 |         2.2 |      True |    camera |          traffic_light |           | 
+108.5 |      solo |       0.00 |    0 |       2.2 |       2.2 |       2.2 |         2.2 |      True |    camera |          traffic_light |           | 
+108.6 |      solo |       0.00 |    0 |       2.2 |       2.2 |       2.2 |         2.2 |      True |    camera |          traffic_light |           | 
+108.7 |      solo |       0.00 |    0 |       2.2 |       2.2 |       2.2 |         2.2 |      True |    camera |          traffic_light |           | 
+108.8 |      solo |       0.00 |    0 |       2.2 |       2.2 |       2.2 |         2.2 |      True |    camera |          traffic_light |           | 
+108.9 |      solo |       0.00 |    0 |       2.2 |       2.2 |       2.2 |         2.2 |      True |    camera |          traffic_light |           | 
+109.0 |      solo |       0.00 |    0 |       2.2 |       2.2 |       2.2 |         2.2 |      True |    camera |          traffic_light |           | 
+109.1 |      solo |       0.00 |    0 |       2.2 |       2.2 |       2.2 |         2.2 |      True |    camera |          traffic_light |           | 
+109.2 |      solo |       0.00 |    0 |       2.2 |       2.2 |       2.2 |         2.2 |      True |    camera |          traffic_light |           | 
+109.3 |      solo |       0.00 |    0 |       2.2 |       2.2 |       2.2 |         2.2 |      True |    camera |          traffic_light |           | 
+109.4 |      solo |       0.00 |    0 |       2.2 |       2.2 |       2.2 |         2.2 |      True |    camera |          traffic_light |           | 
+109.5 |      solo |       0.00 |    0 |       2.2 |       2.2 |       2.2 |         2.2 |      True |    camera |          traffic_light |           | 
+109.6 |      solo |       0.00 |    0 |       2.2 |       2.2 |       2.2 |         2.2 |      True |    camera |          traffic_light |           | 
+109.7 |      solo |       0.00 |    0 |       2.2 |       2.2 |       2.2 |         2.2 |      True |    camera |          traffic_light |           | 
+109.8 |      solo |       0.00 |    0 |       2.2 |       2.2 |       2.2 |         2.2 |      True |    camera |          traffic_light |           | 
+109.9 |      solo |       0.00 |    0 |       2.2 |       2.2 |       2.2 |         2.2 |      True |    camera |          traffic_light |           | 
+110.0 |      solo |       0.00 |    0 |       2.2 |       2.2 |       2.2 |         2.2 |      True |    camera |          traffic_light |           | 
+110.1 |      solo |       0.00 |    0 |       2.2 |       2.2 |       2.2 |         2.2 |      True |    camera |          traffic_light |           | 
+110.2 |      solo |       0.00 |    0 |       2.2 |       2.2 |       2.2 |         2.2 |      True |    camera |          traffic_light |           | 
+110.3 |      solo |       0.00 |    0 |       2.2 |       2.2 |       2.2 |         2.2 |      True |    camera |          traffic_light |           | 
+110.4 |      solo |       0.00 |    0 |       2.2 |       2.2 |       2.2 |         2.2 |      True |    camera |          traffic_light |           | 
+110.5 |      solo |       0.00 |    0 |       2.2 |       2.2 |       2.2 |         2.2 |      True |    camera |          traffic_light |           | 
+110.6 |      solo |       0.00 |    0 |       2.2 |       2.2 |       2.2 |         2.2 |      True |    camera |          traffic_light |           | 
+110.7 |      solo |       0.00 |    0 |       2.2 |       2.2 |       2.2 |         2.2 |      True |    camera |          traffic_light |           | 
+110.8 |      solo |       0.00 |    0 |       2.2 |       2.2 |       2.2 |         2.2 |      True |    camera |          traffic_light |           | 
+110.9 |      solo |       0.00 |    0 |       2.2 |       2.2 |       2.2 |         2.2 |      True |    camera |          traffic_light |           | 
+111.0 |      solo |       0.00 |    0 |       2.2 |       2.2 |       2.2 |         2.2 |      True |    camera |          traffic_light |           | 
+111.1 |      solo |       0.00 |    0 |       2.2 |       2.2 |       2.2 |         2.2 |      True |    camera |          traffic_light |           | 
+111.2 |      solo |       0.00 |    0 |       2.2 |       2.2 |       2.2 |         2.2 |      True |    camera |          traffic_light |           | 
+111.3 |      solo |       0.00 |    0 |       2.2 |       2.2 |       2.2 |         2.2 |      True |    camera |          traffic_light |           | 
+111.4 |      solo |       0.00 |    0 |       2.2 |       2.2 |       2.2 |         2.2 |      True |    camera |          traffic_light |           | 
+111.5 |      solo |       0.00 |    0 |       2.2 |       2.2 |       2.2 |         2.2 |      True |    camera |          traffic_light |           | 
+111.6 |      solo |       0.00 |    0 |       2.2 |       2.2 |       2.2 |         2.2 |      True |    camera |          traffic_light |           | 
+111.7 |      solo |       0.00 |    0 |       2.2 |       2.2 |       2.2 |         2.2 |      True |    camera |          traffic_light |           | 
+111.8 |      solo |       0.00 |    0 |       2.2 |       2.2 |       2.2 |         2.2 |      True |    camera |          traffic_light |           | 
+111.9 |      solo |       0.00 |    0 |       2.2 |       2.2 |       2.2 |         2.2 |      True |    camera |          traffic_light |           | 
+112.0 |      solo |       0.00 |    0 |       2.2 |       2.2 |       2.2 |         2.2 |      True |    camera |          traffic_light |           | 
+112.1 |      solo |       0.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+112.2 |      solo |       0.45 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+112.3 |      solo |       0.89 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+112.4 |      solo |       1.34 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+112.5 |      solo |       1.79 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+112.6 |      solo |       2.24 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+112.7 |      solo |       2.68 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+112.8 |      solo |       3.13 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+112.9 |      solo |       3.58 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+113.0 |      solo |       4.03 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+113.1 |      solo |       4.47 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+113.2 |      solo |       4.92 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+113.3 |      solo |       5.37 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+113.4 |      solo |       5.82 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+113.5 |      solo |       6.26 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+113.6 |      solo |       6.71 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+113.7 |      solo |       7.16 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+113.8 |      solo |       7.61 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+113.9 |      solo |       8.05 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+114.0 |      solo |       8.50 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+114.1 |      solo |       8.95 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+114.2 |      solo |       9.40 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+114.3 |      solo |       9.84 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+114.4 |      solo |      10.29 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+114.5 |      solo |      10.74 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+114.6 |      solo |      11.18 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+114.7 |      solo |      11.63 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+114.8 |      solo |      12.08 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+114.9 |      solo |      12.53 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+115.0 |      solo |      12.97 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+115.1 |      solo |      13.42 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+115.2 |      solo |      13.87 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+115.3 |      solo |      14.32 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+115.4 |      solo |      14.76 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+115.5 |      solo |      15.21 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+115.6 |      solo |      15.66 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+115.7 |      solo |      16.11 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+115.8 |      solo |      16.55 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+115.9 |      solo |      17.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+116.0 |      solo |      17.45 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+116.1 |      solo |      17.90 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+116.2 |      solo |      18.34 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+116.3 |      solo |      18.79 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+116.4 |      solo |      19.24 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+116.5 |      solo |      19.69 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+116.6 |      solo |      20.13 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+116.7 |      solo |      20.58 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+116.8 |      solo |      21.03 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+116.9 |      solo |      21.47 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+117.0 |      solo |      21.92 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+117.1 |      solo |      22.37 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+117.2 |      solo |      22.82 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+117.3 |      solo |      23.26 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+117.4 |      solo |      23.71 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+117.5 |      solo |      24.16 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+117.6 |      solo |      24.61 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+117.7 |      solo |      25.05 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+117.8 |      solo |      25.50 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+117.9 |      solo |      25.95 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+118.0 |      solo |      26.40 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+118.1 |      solo |      26.84 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+118.2 |      solo |      27.29 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+118.3 |      solo |      27.74 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+118.4 |      solo |      28.19 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+118.5 |      solo |      28.63 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+118.6 |      solo |      29.08 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+118.7 |      solo |      29.53 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+118.8 |      solo |      29.97 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+118.9 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+119.0 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+119.1 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+119.2 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+119.3 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+119.4 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+119.5 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+119.6 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+119.7 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+119.8 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+119.9 |      solo |      30.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 

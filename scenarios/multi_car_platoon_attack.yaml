@@ -1,0 +1,90 @@
+# Five vehicles in a tight platoon (80m gaps, calibrated to exceed
+# the safe following distance so none brake for each other before any
+# attack fires), each on a different fusion policy, approach a
+# pedestrian crossing together. Four are simultaneously targeted by a
+# different attack type matched to that policy's known weakness.
+# Oncoming traffic blocks any swerve, so avoidance has to be braking
+# alone. See multi_car_platoon_attack_randomised.yaml for the
+# background-traffic variant of this same setup.
+name: "Multi-car platoon: four attacks across four fusion policies"
+duration: 40
+timestep: 0.1
+
+track:
+  straight_length: 200
+  radius: 60
+  features:
+    - feature_id: "crossing_1"
+      feature_type: "pedestrian_crossing"
+      position: 500
+
+vehicles:
+  - vehicle_id: "v1_camera"
+    start_distance: 320
+    start_speed_mph: 28
+    fusion_policy: "camera_priority"
+    lane: 0
+    direction: 1
+  - vehicle_id: "v2_majority"
+    start_distance: 240
+    start_speed_mph: 28
+    fusion_policy: "majority_vote"
+    lane: 0
+    direction: 1
+  - vehicle_id: "v3_confidence"
+    start_distance: 160
+    start_speed_mph: 28
+    fusion_policy: "confidence_weighted"
+    lane: 0
+    direction: 1
+  - vehicle_id: "v4_plausibility"
+    start_distance: 80
+    start_speed_mph: 28
+    fusion_policy: "plausibility_filtered"
+    lane: 0
+    direction: 1
+  - vehicle_id: "v5_control"
+    start_distance: 0
+    start_speed_mph: 28
+    fusion_policy: "camera_priority"
+    lane: 0
+    direction: 1
+  - vehicle_id: "oncoming"
+    start_distance: 550
+    start_speed_mph: 25
+    fusion_policy: "camera_priority"
+    lane: 1
+    direction: -1
+
+hazards:
+  - type: "pedestrian_crossing"
+    feature_id: "crossing_1"
+    start_time: 0.0
+    duration: 90.0
+
+attacks:
+  - type: "camera_jam"
+    target_vehicle: "v1_camera"
+    trigger_before_feature: "crossing_1"
+    trigger_distance: 60
+    duration: 8.0
+  - type: "radar_spoof"
+    target_vehicle: "v2_majority"
+    trigger_before_feature: "crossing_1"
+    trigger_distance: 60
+    duration: 8.0
+    spoofed_distance: 200.0
+    spoofed_velocity: 0.0
+  - type: "radar_spoof"
+    target_vehicle: "v3_confidence"
+    trigger_before_feature: "crossing_1"
+    trigger_distance: 60
+    duration: 8.0
+    spoofed_distance: 200.0
+    spoofed_velocity: 0.0
+  - type: "camera_phantom"
+    target_vehicle: "v4_plausibility"
+    trigger_before_feature: "crossing_1"
+    trigger_distance: 60
+    duration: 8.0
+    phantom_distance: 5.0

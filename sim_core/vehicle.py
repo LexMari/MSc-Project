@@ -46,6 +46,8 @@ class VehicleState:
     swerve_active: bool = False
     swerve_progress: float = 0.0          # metres travelled since the swerve began
     swerve_return_progress: float = 0.0   # metres of travel needed before swerving back
+    swerve_evaluated: bool = False   # whether swerve-worthiness has already been assessed for the CURRENT, continuous stretch of obstacle perception - see _maybe_swerve in engine.py
+    last_seen_obstacle_distance: float | None = None   # the belief distance seen on the PREVIOUS tick (updated every tick, not just at evaluation time) - used to detect a single-tick discontinuous jump
 
     crashed: bool = False   # set once this vehicle has been involved in a collision - see engine.py step()
     severity: str | None = None   # "slight" | "serious" | "fatal" - set once, at the moment crashed becomes True, see severity.py
@@ -60,8 +62,10 @@ class VehicleState:
 
     def step(self, dt: float) -> None:
         """Advance vehicle ground-truth state forward by dt seconds"""
+        old_speed = self.speed
         self.speed = max(0.0, self.speed + self.acceleration * dt)
-        travel = self.speed * dt * self.direction
+        average_speed = (old_speed + self.speed) / 2
+        travel = average_speed * dt * self.direction
 
         if self.roundabout_excursion_remaining > 0:
             magnitude = abs(travel)
@@ -72,4 +76,4 @@ class VehicleState:
 
         self.s += travel
         if self.swerve_active:
-            self.swerve_progress += self.speed * dt
+            self.swerve_progress += average_speed * dt

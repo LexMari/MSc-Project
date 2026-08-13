@@ -1,0 +1,11 @@
+run 1/9: {'oncoming.start_speed': 9.924}
+run 2/9: {'oncoming.start_speed': 10.014}
+run 3/9: {'oncoming.start_speed': 10.103}
+run 4/9: {'oncoming.start_speed': 10.193}
+run 5/9: {'oncoming.start_speed': 10.282}
+run 6/9: {'oncoming.start_speed': 10.371}
+run 7/9: {'oncoming.start_speed': 10.461}
+run 8/9: {'oncoming.start_speed': 10.55}
+run 9/9: {'oncoming.start_speed': 10.64}
+
+18 rows written

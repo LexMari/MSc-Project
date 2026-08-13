@@ -12,15 +12,15 @@ track:
   features:
     - feature_id: "junction_1"
       feature_type: "junction"
-      position: 60
+      position: 413.4955592153876
 
 vehicles:
   - vehicle_id: "follower"
-    start_distance: 0
+    start_distance: 313.4955592153876
     start_speed_mph: 20
     fusion_policy: "camera_priority"
   - vehicle_id: "lead"
-    start_distance: 20
+    start_distance: 333.4955592153876
     start_speed_mph: 20
     fusion_policy: "camera_priority"
 
@@ -30,4 +30,4 @@ attacks:
     trigger_after_feature: "junction_1"
     trigger_distance: 3
     duration: 1
-    phantom_distance: 2.0
+    phantom_distance: 17.0

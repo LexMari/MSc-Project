@@ -1,0 +1,13 @@
+# Second pass narrowing obstacle_swerve_speed_threshold.yaml's result
+# (safe at 22mph, collides at 24mph) further.
+#
+# Values are in m/s, not mph - load_scenario() converts start_speed_mph
+# to start_speed (m/s) at load time, and the batch sweep applies to the
+# already-loaded VehicleConfig, so the sweep field is start_speed and
+# needs m/s values here, not the mph the scenario file itself uses.
+name: "obstacle_swerve.yaml - fine tuning threshold pass"
+base_scenario: "scenarios/obstacle_swerve.yaml"
+output_csv: "results/obstacle_swerve_speed_fine.csv"
+
+sweep:
+  oncoming.start_speed: [9.924, 10.014, 10.103, 10.193, 10.282, 10.371, 10.461, 10.550, 10.640]

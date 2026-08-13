@@ -23,5 +23,5 @@ attacks:
   - type: "camera_phantom"
     target_vehicle: "solo"
     start_time: 1.0
-    duration: 1.0
+    duration: 0.5
     phantom_distance: 3.0

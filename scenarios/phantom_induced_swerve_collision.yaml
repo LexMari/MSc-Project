@@ -1,0 +1,31 @@
+# A camera phantom fires on solo with oncoming traffic already present
+# in lane 1. Tests whether the belief-based swerve check correctly
+# holds solo in lane when swerving would mean colliding with oncoming
+# instead of avoiding a real hazard.
+name: "Camera phantom forces unnecessary braking, but the corrected swerve check prevents a collision"
+duration: 20
+timestep: 0.1
+
+track:
+  straight_length: 200
+  radius: 60
+  features: []
+
+vehicles:
+  - vehicle_id: "solo"
+    start_distance: 0
+    start_speed_mph: 44.74
+    fusion_policy: "camera_priority"
+  - vehicle_id: "oncoming"
+    start_distance: 100
+    start_speed_mph: 20
+    lane: 1
+    direction: -1
+    fusion_policy: "camera_priority"
+
+attacks:
+  - type: "camera_phantom"
+    target_vehicle: "solo"
+    start_time: 3.0
+    duration: 1.0
+    phantom_distance: 5.0

@@ -10,7 +10,7 @@ from .track import Track, TrackFeature
 from .junction import TrafficLight, STOP_LINE_OFFSET
 from .hazards import HAZARD_TYPES
 from .sensors import SensorReading, SensorType
-from .attacks import Attack, ATTACK_TYPES
+from .attacks import Attack, ATTACK_TYPES, Jam
 from .fusion import FusionPolicy, FusedBelief, FUSION_POLICIES
 from .navigation import GPSPolicy, GPS_POLICIES
 from .braking import required_deceleration, can_stop_safely, REACTION_TIME, MAX_DECELERATION
@@ -23,11 +23,13 @@ SEVERITY_RANK = {"slight": 0, "serious": 1, "fatal": 2}
 RESUME_ACCELERATION = 2.0      # m/s^2 - comfortable acceleration back toward cruise_speed once no obstacle is believed present
 MAX_SENSOR_RANGE = 150.0       # metres - candidates beyond this are treated as "nothing detected," not "a very distant obstacle" (radar/camera)
 LIDAR_MAX_SENSOR_RANGE = 80.0  # metres - LiDAR's own, shorter effective range compared to radar/camera above, reflecting real automotive LiDAR
-COLLISION_DISTANCE = 4.5       # metres - roughly a car length. Two vehicles in the same lane closer than this are treated as having collided
+COLLISION_DISTANCE = 1.4       # metres - a vehicle correctly, safely braking to a stop behind another vehicle settles at a gap that varies with speed (measured 1.6-2.6m across 20-70mph), since the proportional control law in braking.py doesn't converge exactly to SAFETY_MARGIN=2.0m at a discrete timestep, and can overshoot in either direction. This needs to sit comfortably below the smallest of those. It also needs to still catch a genuine near-miss swerve encounter as a real collision (obstacle_swerve.yaml's minimum observed gap is ~1.17m) - the two constraints leave a narrow but workable window. Originally 4.5m ("roughly a car length"), which was checked against a premature mid-deceleration reading rather than the vehicle's actual final resting gap, and left no real headroom once measured properly. Found via a 3-vehicle chain scenario where a correctly-stopped following vehicle was misclassified as having collided with the vehicle ahead of it.
 PEDESTRIAN_COLLISION_DISTANCE = 1.0   # metres - a person is nowhere near a car's length wide, so this is deliberately its own, smaller threshold, not a reuse of COLLISION_DISTANCE. Also deliberately smaller than braking.py's SAFETY_MARGIN (2.0m): a vehicle that brakes correctly and holds at its intended safety clearance must not register as having collided with the pedestrian it correctly stopped for.
+VEHICLE_LENGTH = 4.5           # metres - used only for sensing/occlusion (see _ahead_distance_to_vehicle), not for collision detection, which stays based on raw reference-point distance and is separately calibrated via COLLISION_DISTANCE above. Represents a real vehicle's approximate length, so a vehicle-ahead's reported distance is to its rear, not to a zero-length point - without this, a stopped vehicle's body doesn't block anything positioned close behind it.
 SWERVE_RETURN_BUFFER = 5.0     # metres of extra travel past the obstacle before swerving back into lane 0
 SWERVE_TIME_SAFETY_MARGIN = 1.5  # a vehicle only swerves if the oncoming lane looks clear for at least this multiple of the estimated swerve duration
 MIN_SWERVE_SPEED = 3.0         # m/s - below this, a vehicle just stops rather than ever swerving (see _maybe_swerve)
+SWERVE_REEVALUATION_JUMP_THRESHOLD = 4.0   # metres - a belief distance jumping by more than this from one swerve evaluation to the next is treated as a different hazard requiring a fresh assessment, not a continuous approach to the same one (see _maybe_swerve). Originally 10.0, found too high once organic background traffic sometimes ended up tracked at a distance close enough to a later phantom's fabricated distance that the jump between them fell under the old threshold, leaving a stale "already safe" assessment in place and silently suppressing a swerve that should have been attempted.
 ROUNDABOUT_TRIGGER_WINDOW = 2.0    # metres - how close (in the vehicle's own direction of travel) counts as "arriving" at a roundabout, for the confusion check
 ROUNDABOUT_RESET_DISTANCE = 50.0   # metres - once further than this past a roundabout, the confusion check re-arms for the vehicle's next lap
 GPS_CONFUSION_MAGNITUDE = 15.0     # metres - how far an *accepted* belief must actually be from true position to plausibly cause a wrong exit, distinct from GPS_NOISE_MARGIN (navigation.py), which governs whether a reading is accepted at all
@@ -104,10 +106,23 @@ class Simulation:
             for vc in config.vehicles
         }
 
+        self.oncoming_fusion_policies: dict[str, FusionPolicy] = {
+            vc.vehicle_id: FUSION_POLICIES[vc.fusion_policy]()
+            for vc in config.vehicles
+        }
+
         self.gps_policies: dict[str, GPSPolicy] = {
             vc.vehicle_id: GPS_POLICIES[vc.gps_policy]()
             for vc in config.vehicles
         }
+
+        self._last_belief: dict[str, FusedBelief] = {}
+
+        self._last_belief_speed: dict[str, float] = {}
+
+        self._last_oncoming_belief: dict[str, FusedBelief] = {}
+
+        self._last_ground_truth_kind: dict[str, str | None] = {}
 
         # attacks are stored as (target_vehicle_id, Attack instance) pairs
         self.attacks: list[tuple[str, Attack]] = []
@@ -177,7 +192,7 @@ class Simulation:
         traffic this returns the shortest-path proximity regardless of
         which side of the crossing the coordinates currently fall on."""
         if other.direction == vehicle.direction:
-            return self._ahead_distance(vehicle, other.s)
+            return max(0.0, self._ahead_distance(vehicle, other.s) - VEHICLE_LENGTH)
 
         return abs(self.track.signed_gap(vehicle.s, other.s))
 
@@ -288,7 +303,7 @@ class Simulation:
         if candidates:
             nearest_distance, nearest_closing_speed, nearest_kind = min(candidates, key=lambda c: c[0])
             readings[SensorType.RADAR] = SensorReading(SensorType.RADAR, detected_distance=nearest_distance, detected_velocity=nearest_closing_speed)
-            readings[SensorType.CAMERA] = SensorReading(SensorType.CAMERA, detected_distance=nearest_distance)
+            readings[SensorType.CAMERA] = SensorReading(SensorType.CAMERA, detected_distance=nearest_distance, detected_velocity=nearest_closing_speed)
             # LiDAR shares the same ground-truth nearest-candidate value
             # as radar/camera (the existing simplification that every
             # sensor observes the same real object - see Sensor and
@@ -303,6 +318,54 @@ class Simulation:
                 readings[SensorType.LIDAR] = SensorReading(SensorType.LIDAR, detected_distance=nearest_distance, detected_velocity=nearest_closing_speed)
 
         return readings, nearest_kind
+
+    def _oncoming_lane_readings(self, vehicle_id: str) -> dict[SensorType, SensorReading]:
+        """Sensor readings for the lane OPPOSITE vehicle's current one,
+        used specifically by _maybe_swerve to judge whether it's safe to
+        swerve into it. Scoped to vehicle candidates only - no hazards,
+        lights, or give-way points, since none of those are relevant to
+        "is another vehicle about to be in the space I'd swerve into" -
+        otherwise structured like _ground_truth_readings
+
+        This exists because the oncoming-lane check used to read
+        vehicle.s/.speed directly from ground truth, bypassing sensing,
+        attacks, and visibility entirely - no attack could ever affect
+        whether a vehicle correctly judged the oncoming lane clear, and
+        fog/rain didn't degrade that judgement either, even though every
+        other perception in the same tick was affected by both."""
+        vehicle = self.vehicles[vehicle_id]
+        opposite_lane = 1 - vehicle.lane
+
+        readings: dict[SensorType, SensorReading] = {
+            SensorType.RADAR: SensorReading(SensorType.RADAR),
+            SensorType.CAMERA: SensorReading(SensorType.CAMERA),
+            SensorType.LIDAR: SensorReading(SensorType.LIDAR),
+            SensorType.GPS: SensorReading(SensorType.GPS),
+        }
+
+        others = [v for v in self.vehicles.values()
+                  if v.vehicle_id != vehicle_id and v.lane == opposite_lane]
+        candidates: list[tuple[float, float]] = []  # (distance, closing_speed)
+        for other in others:
+            distance = self._ahead_distance_to_vehicle(vehicle, other)
+            if distance is None:
+                continue
+            own_rate = vehicle.speed * vehicle.direction
+            other_rate = other.speed * other.direction
+            candidates.append((distance, own_rate - other_rate))
+
+        effective_max_range = MAX_SENSOR_RANGE * self.config.visibility
+        effective_lidar_range = LIDAR_MAX_SENSOR_RANGE * self.config.visibility
+        candidates = [c for c in candidates if c[0] <= effective_max_range]
+
+        if candidates:
+            nearest_distance, nearest_closing_speed = min(candidates, key=lambda c: c[0])
+            readings[SensorType.RADAR] = SensorReading(SensorType.RADAR, detected_distance=nearest_distance, detected_velocity=nearest_closing_speed)
+            readings[SensorType.CAMERA] = SensorReading(SensorType.CAMERA, detected_distance=nearest_distance, detected_velocity=nearest_closing_speed)
+            if nearest_distance <= effective_lidar_range:
+                readings[SensorType.LIDAR] = SensorReading(SensorType.LIDAR, detected_distance=nearest_distance, detected_velocity=nearest_closing_speed)
+
+        return readings
 
     def _check_roundabout_confusion(self, vehicle: VehicleState, gps_reading: SensorReading, believed_xy: tuple[float, float]) -> bool:
         """Checks whether vehicle is arriving at any roundabout this tick,
@@ -379,35 +442,26 @@ class Simulation:
                 best = max(best, hazard.caution_multiplier)
         return best
 
-    def _apply_attacks(self, vehicle_id: str, readings: dict[SensorType, SensorReading]) -> dict[SensorType, SensorReading]:
+    def _apply_attacks(self, vehicle_id: str, readings: dict[SensorType, SensorReading], only_general: bool = False) -> dict[SensorType, SensorReading]:
+        """Applies every attack targeting vehicle_id to the given
+        readings. only_general=True restricts this to Jam-type attacks
+        only (RadarJam/CameraJam/LidarJam) - used for
+        _oncoming_lane_readings, since a jammed sensor is
+        unavailable in every direction, but a spoof or phantom attack
+        (RadarSpoof/LidarSpoof/CameraPhantom) fabricates a specific,
+        localized value representing something directly ahead in the
+        vehicle's own lane."""
         vehicle = self.vehicles[vehicle_id]
         for target_id, attack in self.attacks:
             if target_id != vehicle_id:
+                continue
+            if only_general and not isinstance(attack, Jam):
                 continue
             attack.check_trigger(self.time, vehicle.s, self.track)
             sensor = attack.target_sensor
             if sensor in readings:
                 readings[sensor] = attack.apply(readings[sensor], self.time)
         return readings
-
-    def _obstacle_in_own_lane(self, vehicle: VehicleState) -> float | None:
-        """Forward distance to the nearest currently-present obstacle_in_road
-        hazard blocking this vehicle's current lane, or None if there
-        isn't one. Used to decide whether a swerve is warranted - this is
-        deliberately ground-truth (not sensor/fusion-derived), since the
-        decision to swerve is a physical manoeuvre, not a belief about
-        what a sensor reported."""
-        nearest = None
-        for hazard in self.hazards:
-            if type(hazard).__name__ != "ObstacleInRoad":
-                continue
-            if not hazard.is_present(self.time) or hazard.lane != vehicle.lane:
-                continue
-            feature = self.track.feature(hazard.feature_id)
-            distance = self._ahead_distance(vehicle, feature.position)
-            if nearest is None or distance < nearest:
-                nearest = distance
-        return nearest
 
     def _maybe_swerve(self, vehicle: VehicleState) -> None:
         """Checks whether vehicle should begin or end a swerve manoeuvre
@@ -441,10 +495,34 @@ class Simulation:
             # swerve.
             return
 
-        obstacle_distance = self._obstacle_in_own_lane(vehicle)
-        if obstacle_distance is None:
+        belief = self._last_belief.get(vehicle.vehicle_id)
+        if belief is None or not belief.obstacle_present or belief.distance_to_obstacle is None:
+            # not currently perceiving anything - clear so a future,
+            # different hazard gets evaluated when it appears
+            vehicle.swerve_evaluated = False
+            vehicle.last_seen_obstacle_distance = None
             return
-        if can_stop_safely(vehicle.speed, obstacle_distance, vehicle.reaction_time, vehicle.max_deceleration, self._pedestrian_caution_multiplier(vehicle)):
+
+        ground_truth_kind = self._last_ground_truth_kind.get(vehicle.vehicle_id)
+        if ground_truth_kind in ("traffic_light", "roundabout_giveway"):
+            vehicle.swerve_evaluated = False
+            vehicle.last_seen_obstacle_distance = None
+            return
+
+        obstacle_distance = belief.distance_to_obstacle
+
+        if (vehicle.last_seen_obstacle_distance is not None
+                and abs(obstacle_distance - vehicle.last_seen_obstacle_distance) > SWERVE_REEVALUATION_JUMP_THRESHOLD):
+            vehicle.swerve_evaluated = False
+
+        vehicle.last_seen_obstacle_distance = obstacle_distance
+
+        if vehicle.swerve_evaluated:
+            return
+
+        snapshot_speed = self._last_belief_speed.get(vehicle.vehicle_id, vehicle.speed)
+        if can_stop_safely(snapshot_speed, obstacle_distance, vehicle.reaction_time, vehicle.max_deceleration, self._pedestrian_caution_multiplier(vehicle)):
+            vehicle.swerve_evaluated = True
             return  # braking alone is enough - no need to swerve
 
         # is the oncoming lane clear enough to swerve into? "clear" is
@@ -457,16 +535,15 @@ class Simulation:
         # (SWERVE_TIME_SAFETY_MARGIN) since misjudging this is exactly
         # the failure mode this scenario exists to explore.
         estimated_swerve_time = (obstacle_distance + SWERVE_RETURN_BUFFER) / vehicle.speed
-        for other in self.vehicles.values():
-            if other.vehicle_id == vehicle.vehicle_id or other.lane != 1:
-                continue
-            gap = self.track.distance_ahead(vehicle.s, other.s)
-            closing_speed = vehicle.speed + other.speed
-            if closing_speed <= 0:
-                continue
-            time_to_close = gap / closing_speed
-            if time_to_close < estimated_swerve_time * SWERVE_TIME_SAFETY_MARGIN:
-                return  # not enough time before the oncoming vehicle would reach this point
+        oncoming_belief = self._last_oncoming_belief.get(vehicle.vehicle_id)
+        if oncoming_belief is None:
+            return
+        if oncoming_belief.obstacle_present and oncoming_belief.distance_to_obstacle is not None:
+            closing_speed = oncoming_belief.detected_velocity
+            if closing_speed is not None and closing_speed > 0:
+                time_to_close = oncoming_belief.distance_to_obstacle / closing_speed
+                if time_to_close < estimated_swerve_time * SWERVE_TIME_SAFETY_MARGIN:
+                    return  # not enough time before the believed oncoming vehicle would reach this point
 
         vehicle.lane = 1
         vehicle.swerve_active = True
@@ -490,25 +567,18 @@ class Simulation:
         is (rarely) involved in more than one collision in the same
         tick, the most severe classification wins."""
         involved: dict[str, str] = {}
-        # already-crashed vehicles are excluded entirely: their severity
-        # was sampled once, at the moment of impact, and must not be
-        # resampled every subsequent tick just because a stopped,
-        # already-crashed vehicle is still sitting within
-        # COLLISION_DISTANCE of whatever it hit - that would silently
-        # change a vehicle's reported severity partway through a run,
-        # and burn a fresh RNG draw every tick it stayed crashed for no
-        # reason, which would also make runs of different duration
-        # consume different amounts of the seeded random stream and
-        # diverge from each other despite the same random_seed.
         vehicles = [v for v in self.vehicles.values() if not v.crashed]
 
         def _record(vehicle_id: str, sev: str) -> None:
             if vehicle_id not in involved or SEVERITY_RANK[sev] > SEVERITY_RANK[involved[vehicle_id]]:
                 involved[vehicle_id] = sev
 
-        for i in range(len(vehicles)):
-            for j in range(i + 1, len(vehicles)):
-                a, b = vehicles[i], vehicles[j]
+        all_vehicles = list(self.vehicles.values())
+        for i in range(len(all_vehicles)):
+            for j in range(i + 1, len(all_vehicles)):
+                a, b = all_vehicles[i], all_vehicles[j]
+                if a.crashed and b.crashed:
+                    continue
                 if a.lane != b.lane:
                     continue
                 ax, ay, _ = self.track.lane_position_at(a.s, a.lane)
@@ -516,8 +586,29 @@ class Simulation:
                 if ((ax - bx) ** 2 + (ay - by) ** 2) ** 0.5 <= COLLISION_DISTANCE:
                     closing_speed = abs(a.speed * a.direction - b.speed * b.direction)
                     sev = severity.classify_severity(severity.vehicle_fatality_risk(closing_speed), self.rng)
-                    _record(a.vehicle_id, sev)
-                    _record(b.vehicle_id, sev)
+                    if not a.crashed:
+                        _record(a.vehicle_id, sev)
+                    if not b.crashed:
+                        _record(b.vehicle_id, sev)
+
+        def _occluded(v: VehicleState, target_s: float) -> bool:
+            """Whether another vehicle's body (same lane, same direction,
+            positioned between v and target_s) physically blocks v from
+            reaching target_s at all - reuses the same VEHICLE_LENGTH
+            concept already used for sensing in
+            _ahead_distance_to_vehicle, so a vehicle can't register a
+            collision with a hazard positioned just past a stopped
+            vehicle that should have blocked it first"""
+            distance_to_target = (target_s - v.s) * v.direction
+            if distance_to_target < 0:
+                return False
+            for other in self.vehicles.values():
+                if other.vehicle_id == v.vehicle_id or other.lane != v.lane or other.direction != v.direction:
+                    continue
+                other_rear = max(0.0, (other.s - v.s) * v.direction - VEHICLE_LENGTH)
+                if other_rear < distance_to_target:
+                    return True
+            return False
 
         for hazard in self.hazards:
             if type(hazard).__name__ != "ObstacleInRoad" or not hazard.is_present(self.time):
@@ -526,6 +617,8 @@ class Simulation:
             ox, oy, _ = self.track.lane_position_at(feature.position, hazard.lane)
             for v in vehicles:
                 if v.lane != hazard.lane:
+                    continue
+                if _occluded(v, feature.position):
                     continue
                 vx, vy, _ = self.track.lane_position_at(v.s, v.lane)
                 if ((vx - ox) ** 2 + (vy - oy) ** 2) ** 0.5 <= COLLISION_DISTANCE:
@@ -551,10 +644,13 @@ class Simulation:
             for v in vehicles:
                 if hazard.lane_at(self.time) != v.lane:
                     continue
+                if _occluded(v, feature.position):
+                    continue
                 vx, vy, _ = self.track.lane_position_at(v.s, v.lane)
                 px, py, _ = self.track.lane_position_at(feature.position, v.lane)
                 if ((vx - px) ** 2 + (vy - py) ** 2) ** 0.5 <= PEDESTRIAN_COLLISION_DISTANCE:
                     sev = severity.classify_severity(severity.pedestrian_fatality_risk(v.speed), self.rng)
+                    hazard.struck = True
                     _record(v.vehicle_id, sev)
 
         return involved
@@ -593,6 +689,7 @@ class Simulation:
             lane=lane, direction=direction, reaction_time=reaction_time, max_deceleration=max_deceleration,
         )
         self.fusion_policies[vehicle_id] = FUSION_POLICIES[cfg.fusion_policy]()
+        self.oncoming_fusion_policies[vehicle_id] = FUSION_POLICIES[cfg.fusion_policy]()
         self.gps_policies[vehicle_id] = GPS_POLICIES["naive"]()
         self._spawned_vehicle_ids.add(vehicle_id)
         self._spawn_origin_s[vehicle_id] = feature.position
@@ -610,8 +707,13 @@ class Simulation:
             if abs(vehicle.s - origin) >= self.track.total_length:
                 del self.vehicles[vehicle_id]
                 del self.fusion_policies[vehicle_id]
+                del self.oncoming_fusion_policies[vehicle_id]
                 del self.gps_policies[vehicle_id]
                 del self._spawn_origin_s[vehicle_id]
+                self._last_belief.pop(vehicle_id, None)
+                self._last_belief_speed.pop(vehicle_id, None)
+                self._last_oncoming_belief.pop(vehicle_id, None)
+                self._last_ground_truth_kind.pop(vehicle_id, None)
                 self._spawned_vehicle_ids.discard(vehicle_id)
 
     def step(self, dt: float) -> list[TickResult]:
@@ -642,6 +744,14 @@ class Simulation:
             readings, ground_truth_kind = self._ground_truth_readings(vehicle_id)
             readings = self._apply_attacks(vehicle_id, readings)
             belief = self.fusion_policies[vehicle_id].fuse(readings)
+            self._last_belief[vehicle_id] = belief
+            self._last_belief_speed[vehicle_id] = vehicle.speed
+            self._last_ground_truth_kind[vehicle_id] = ground_truth_kind
+
+            oncoming_readings = self._oncoming_lane_readings(vehicle_id)
+            oncoming_readings = self._apply_attacks(vehicle_id, oncoming_readings, only_general=True)
+            oncoming_belief = self.oncoming_fusion_policies[vehicle_id].fuse(oncoming_readings)
+            self._last_oncoming_belief[vehicle_id] = oncoming_belief
 
             gps_reading = readings[SensorType.GPS]
             believed_xy = self.gps_policies[vehicle_id].resolve(gps_reading, vehicle, dt)

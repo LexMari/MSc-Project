@@ -1,0 +1,42 @@
+# Lead is attacked (radar spoof masking a pedestrian crossing under
+# confidence_weighted fusion, the one policy radar_spoof_masking.yaml
+# reliably defeats) and crashes. Follower, 65m behind at the same
+# cruise speed the whole approach (so the gap never closes until Lead
+# suddenly stops), is not attacked at all and only has to react.
+name: "Unattacked Follower avoids Lead's attack-induced collision"
+duration: 20
+timestep: 0.1
+random_seed: 0
+
+track:
+  straight_length: 200
+  radius: 60
+  features:
+    - feature_id: "crossing_1"
+      feature_type: "pedestrian_crossing"
+      position: 150
+
+vehicles:
+  - vehicle_id: "lead"
+    start_distance: 65
+    start_speed_mph: 44.74
+    fusion_policy: "confidence_weighted"
+  - vehicle_id: "follower"
+    start_distance: 0
+    start_speed_mph: 44.74
+    fusion_policy: "camera_priority"
+
+hazards:
+  - type: "pedestrian_crossing"
+    feature_id: "crossing_1"
+    start_time: 0.0
+    duration: 20.0
+
+attacks:
+  - type: "radar_spoof"
+    target_vehicle: "lead"
+    trigger_before_feature: "crossing_1"
+    trigger_distance: 60
+    duration: 10.0
+    spoofed_distance: 200.0
+    spoofed_velocity: 0.0

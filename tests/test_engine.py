@@ -109,8 +109,9 @@ def test_red_light_is_treated_as_an_obstacle_but_green_is_not():
     """A junction's traffic light should act as a virtual obstacle at its
     stop line while red/amber, and contribute nothing at all once green"""
     light = TrafficLight(red_duration=8.0, green_duration=6.0, amber_duration=2.0)
-    assert light.state_at(0.0) == "red"      # should be treated as an obstacle
-    assert light.state_at(8.0) == "green"    # should be treated as if it weren't there
+    assert light.state_at(0.0) == "green"    # should be treated as if it weren't there
+    assert light.state_at(6.0) == "amber"    # should be treated as an obstacle
+    assert light.state_at(8.0) == "red"      # should be treated as an obstacle
 
 def test_vehicle_stops_at_red_light_and_resumes_at_green():
     """End-to-end: a vehicle approaching a junction should brake for a
@@ -178,10 +179,10 @@ def test_distance_ahead_wraps_around_loop():
 
 def test_traffic_light_cycles_through_states():
     light = TrafficLight(red_duration=8.0, green_duration=6.0, amber_duration=2.0)
-    assert light.state_at(0.0) == "red"
-    assert light.state_at(8.0) == "green"
-    assert light.state_at(14.0) == "amber"
-    assert light.state_at(16.0) == "red"  # cycle repeats
+    assert light.state_at(0.0) == "green"
+    assert light.state_at(6.0) == "amber"
+    assert light.state_at(8.0) == "red"
+    assert light.state_at(16.0) == "green"  # cycle repeats
 
 def test_camera_priority_trusts_camera_over_missing_radar():
     readings = {SensorType.CAMERA: SensorReading(SensorType.CAMERA, detected_distance=5.0)}
@@ -339,7 +340,7 @@ def test_phantom_brake_scenario_triggers_measurable_braking():
     speeds = [e.speed for e in follower_log]
     assert 20.0 < speeds[0] < 20.2, "should start at its configured cruising speed (45 mph)"
 
-    attack_tick = next(i for i, e in enumerate(follower_log) if e.fused_belief.distance_to_obstacle == 3.0)
+    attack_tick = next(i for i, e in enumerate(follower_log) if e.fused_belief.distance_to_obstacle == 55.0)
     speed_just_before_attack = follower_log[attack_tick - 1].speed
     speed_shortly_after_attack_starts = follower_log[attack_tick + 3].speed
     assert speed_shortly_after_attack_starts < speed_just_before_attack, \
@@ -469,20 +470,27 @@ def test_vehicle_swerves_when_it_cannot_stop_safely_in_time():
     swerved, _collided, _min_gap = _run_obstacle_swerve(solo_mph=44.74, oncoming_mph=20.0)
     assert swerved
 
-def test_swerve_can_produce_a_genuine_collision_with_oncoming_traffic():
-    """At high enough closing speeds, the swerve-into-the-oncoming-lane
-    response is not risk-free - it can itself cause a collision with
-    oncoming traffic, an emergency response to one hazard creating a
-    different one.
+def test_vehicle_declines_an_unsafe_swerve_and_collides_with_the_original_hazard_instead():
+    """At high enough oncoming closing speeds, the swerve-into-the-
+    oncoming-lane response is not risk-free - it can itself be more
+    dangerous than the hazard it's meant to avoid. The corrected
+    oncoming-lane check (see _maybe_swerve in engine.py) correctly
+    recognises this and declines the swerve, so the vehicle collides
+    with the original stationary obstacle instead of risking a
+    collision with oncoming traffic - the raw time-to-close here is
+    already shorter than the estimated swerve duration, before any
+    safety margin is applied, so declining is the right call, not an
+    overly cautious one.
 
-    Checked against COLLISION_DISTANCE itself rather than a fixed,
-    tighter number: the exact minimum gap at collision depends on the
-    braking dynamics leading up to it, which can shift as that model is
-    refined, without changing whether a collision occurs at all."""
-    from sim_core.engine import COLLISION_DISTANCE
-    _swerved, collided, min_gap = _run_obstacle_swerve(solo_mph=44.74, oncoming_mph=33.55)
-    assert collided
-    assert min_gap < COLLISION_DISTANCE
+    An earlier, ground-truth-based version of this check allowed the
+    swerve to be attempted here, and it collided with oncoming traffic
+    anyway - this test's own name and assertions were rewritten once
+    the fix made that no longer happen, since it was a genuine
+    correction, not a regression"""
+    swerved, collided, min_gap_to_oncoming = _run_obstacle_swerve(solo_mph=44.74, oncoming_mph=33.55)
+    assert not swerved, "expected the check to correctly decline a swerve this unsafe"
+    assert collided, "expected a collision with the original obstacle, since braking alone was already established as insufficient"
+    assert min_gap_to_oncoming > 3.0, "expected oncoming traffic to never actually be approached closely, since the swerve was correctly never attempted"
 
 def test_swerve_can_also_pass_cleanly_with_a_slower_oncoming_vehicle():
     """Contrast case: with more of a gap to the oncoming vehicle, the
@@ -503,8 +511,16 @@ def test_crashed_vehicle_stops_instead_of_resuming_normal_control():
     just get logged while it carries on driving as if nothing happened.
     A collision is modelled as an immediate stop (not a gradual brake --
     see engine.py's crashed branch for why), so speed should drop to (near)
-    zero on the tick immediately after the collision, and stay there."""
-    config = load_scenario(os.path.join("scenarios", "obstacle_swerve.yaml"))
+    zero on the tick immediately after the collision, and stay there.
+
+    Uses radar_spoof_masking.yaml under confidence_weighted (a reliable
+    collision, established elsewhere in this file) rather than
+    obstacle_swerve.yaml - the swerve scenario's own collision now
+    depends on the exact oncoming speed chosen (see the swerve-specific
+    tests), and this test only needs *some* collision to check the
+    post-crash behaviour, not that specific one."""
+    config = load_scenario(os.path.join("scenarios", "radar_spoof_masking.yaml"))
+    config.vehicles[0].fusion_policy = "confidence_weighted"
     sim = Simulation(config)
     steps = int(config.duration / config.timestep)
 
@@ -533,26 +549,47 @@ def test_opposite_direction_vehicle_is_sensed_through_the_crossing_point():
     down exactly at that crossing (see _ahead_distance_to_vehicle in
     engine.py) - this checks the vehicle is still correctly sensed as a
     close-range obstacle right at and after the crossing point, not lost
-    entirely the way it would be with a pure wraparound-forward distance."""
-    config = load_scenario(os.path.join("scenarios", "obstacle_swerve.yaml"))
+    entirely the way it would be with a pure wraparound-forward distance.
+
+    Directly constructs both vehicles already sharing lane 1, rather than
+    relying on obstacle_swerve.yaml's swerve mechanism to naturally
+    produce a close approach while both happen to share that lane - a
+    safely-completed swerve doesn't reliably get that close by design,
+    and the two situations (does a safe swerve avoid a collision, is the
+    crossing point itself sensed correctly) are better tested
+    independently of each other."""
+    import yaml
+    scenario_dict = {
+        "name": "crossing point sensing test", "duration": 10, "timestep": 0.1,
+        "track": {"straight_length": 200, "radius": 60, "features": []},
+        "vehicles": [
+            {"vehicle_id": "solo", "start_distance": 0, "start_speed_mph": 30, "fusion_policy": "camera_priority", "lane": 1, "direction": 1},
+            {"vehicle_id": "onc", "start_distance": 20, "start_speed_mph": 30, "fusion_policy": "camera_priority", "lane": 1, "direction": -1},
+        ],
+    }
+    path = os.path.join(tempfile.gettempdir(), "_crossing_point_test.yaml")
+    with open(path, "w") as f:
+        yaml.dump(scenario_dict, f)
+    config = load_scenario(path)
     sim = Simulation(config)
     steps = int(config.duration / config.timestep)
 
     for _ in range(steps):
         results = sim.step(config.timestep)
         solo = sim.vehicles["solo"]
-        onc = sim.vehicles["oncoming"]
-        if solo.lane == 1 and onc.lane == 1:
-            # once both share the oncoming lane, and they're within a
-            # small physical distance of each other, the belief should
-            # reflect a close, genuine detection - not "no obstacle"
-            gap = ((solo.s - onc.s) ** 2) ** 0.5  # same-track proximity, ignoring the small lane offset
-            solo_result = next(r for r in results if r.vehicle_id == "solo")
-            if gap < 5.0:
-                belief = solo_result.fused_belief
-                assert belief.obstacle_present, \
-                    "expected the oncoming vehicle to be sensed at close range, not silently lost at the crossing point"
-                return
+        onc = sim.vehicles["onc"]
+        # once both share the lane, and they're within a small physical
+        # distance of each other, the belief should reflect a close,
+        # genuine detection - not "no obstacle"
+        gap = abs(solo.s - onc.s)
+        solo_result = next(r for r in results if r.vehicle_id == "solo")
+        if gap < 5.0:
+            belief = solo_result.fused_belief
+            assert belief.obstacle_present, \
+                "expected the oncoming vehicle to be sensed at close range, not silently lost at the crossing point"
+            return
+
+    raise AssertionError("expected solo and onc to reach a close gap at some point in this scenario")
 
     raise AssertionError("expected solo and oncoming to share lane 1 with a close gap at some point in this scenario")
 
@@ -1499,3 +1536,430 @@ def test_plausibility_filtered_is_the_only_policy_resisting_every_attack():
             if collided_or_fooled(scenario_path, policy, check):
                 others_have_a_weakness = True
     assert others_have_a_weakness, "expected each original policy to have at least one demonstrated weakness"
+def test_follower_avoids_lead_crash_under_every_policy():
+    """A following vehicle with no attack of its own, at a gap close to
+    the Highway Code safe stopping distance for its speed, should react
+    to a lead vehicle's sudden, attack-induced collision and stop
+    safely, regardless of its own fusion policy."""
+    for policy in ("camera_priority", "majority_vote", "confidence_weighted", "plausibility_filtered"):
+        config = load_scenario("scenarios/follower_avoids_lead_crash.yaml")
+        config.vehicles[1].fusion_policy = policy
+        sim = Simulation(config)
+        log = sim.run()
+        lead_collided = any(e.collision for e in log if e.vehicle_id == "lead")
+        follower_collided = any(e.collision for e in log if e.vehicle_id == "follower")
+        assert lead_collided, "expected lead to be defeated by the radar spoof, as in radar_spoof_masking.yaml"
+        assert not follower_collided, f"expected follower to avoid the crash under {policy}"
+
+def test_follower_camera_jam_causes_crash_only_for_camera_priority():
+    """Once follower's own camera is independently jammed at the
+    critical moment, camera_priority (no fallback) should collide, but
+    majority_vote, confidence_weighted, and plausibility_filtered
+    should all fall back to follower's still-working radar/LiDAR."""
+    config = load_scenario("scenarios/follower_camera_jam_causes_crash.yaml")
+    config.vehicles[1].fusion_policy = "camera_priority"
+    sim = Simulation(config)
+    log = sim.run()
+    assert any(e.collision for e in log if e.vehicle_id == "follower")
+
+    for policy in ("majority_vote", "confidence_weighted", "plausibility_filtered"):
+        config = load_scenario("scenarios/follower_camera_jam_causes_crash.yaml")
+        config.vehicles[1].fusion_policy = policy
+        sim = Simulation(config)
+        log = sim.run()
+        follower_collided = any(e.collision for e in log if e.vehicle_id == "follower")
+        assert not follower_collided, f"expected {policy} to fall back to radar/LiDAR and avoid the crash"
+
+def test_a_correctly_stopped_vehicle_does_not_register_as_a_vehicle_collision():
+    """Mirrors test_a_correctly_braked_stop_does_not_register_as_a_pedestrian_collision:
+    a vehicle correctly, safely braking to a stop behind another vehicle
+    should not be misclassified as having collided with it. Found via a
+    3-vehicle chain scenario where this was happening at the original
+    COLLISION_DISTANCE=4.5m, since a correct stop naturally settles
+    around 4.3m (the proportional braking model is cautious by design
+    and doesn't converge exactly to SAFETY_MARGIN at a discrete
+    timestep), leaving almost no headroom below the old threshold."""
+    import yaml
+    scenario_dict = {
+        "name": "correct stop is not a collision test", "duration": 20, "timestep": 0.1,
+        "track": {"straight_length": 200, "radius": 60, "features": []},
+        "vehicles": [
+            {"vehicle_id": "lead", "start_distance": 50, "start_speed_mph": 0, "fusion_policy": "camera_priority"},
+            {"vehicle_id": "follower", "start_distance": 0, "start_speed_mph": 30, "fusion_policy": "camera_priority"},
+        ],
+    }
+    path = os.path.join(tempfile.gettempdir(), "_vehicle_no_false_collision_test.yaml")
+    with open(path, "w") as f:
+        yaml.dump(scenario_dict, f)
+    config = load_scenario(path)
+    sim = Simulation(config)
+    log = sim.run()
+    collided = any(e.collision for e in log if e.vehicle_id == "follower")
+    assert not collided, "a correctly-braked stop behind another vehicle should never register as a collision"
+
+def test_an_already_crashed_vehicle_is_still_visible_to_a_different_vehicle():
+    """A vehicle that runs into an already-crashed vehicle ahead of it
+    should register its own, new collision - excluding crashed vehicles
+    from collision detection entirely (to stop them resampling their own
+    severity every tick) was found to have the side effect of making
+    them invisible to every OTHER vehicle too, silently understating
+    pileup risk in every multi-vehicle scenario. Uses a following
+    vehicle placed deliberately too close to safely stop for a
+    stationary lead, with an oncoming vehicle blocking the swerve lane
+    too - without that, follower now correctly swerves around lead
+    instead of colliding, since swerve decisions were later switched
+    from ground truth to belief (see _maybe_swerve in engine.py) and
+    work here."""
+    import yaml
+    scenario_dict = {
+        "name": "crashed vehicle still visible test", "duration": 20, "timestep": 0.1,
+        "track": {"straight_length": 200, "radius": 60, "features": []},
+        "vehicles": [
+            {"vehicle_id": "lead", "start_distance": 5, "start_speed_mph": 0, "fusion_policy": "camera_priority"},
+            {"vehicle_id": "follower", "start_distance": 0, "start_speed_mph": 44.74, "fusion_policy": "camera_priority"},
+            {"vehicle_id": "oncoming", "start_distance": 10, "start_speed_mph": 30, "lane": 1, "direction": -1, "fusion_policy": "camera_priority"},
+        ],
+    }
+    path = os.path.join(tempfile.gettempdir(), "_crashed_visible_test.yaml")
+    with open(path, "w") as f:
+        yaml.dump(scenario_dict, f)
+    config = load_scenario(path)
+    sim = Simulation(config)
+    log = sim.run()
+    collided = any(e.collision for e in log if e.vehicle_id == "follower")
+    assert collided, "expected follower, given no room to stop or swerve safely, to register a collision with the stationary lead"
+
+def test_a_stopped_vehicle_occludes_a_hazard_positioned_just_past_it():
+    """A vehicle that never brakes and drives through both a stopped
+    lead vehicle and a hazard positioned just past it should collide
+    with the lead vehicle, not phase through it to hit the hazard
+    behind it - vehicles have no modelled body length, so without
+    occlusion, a stopped vehicle doesn't physically block anything
+    close behind it. Uses follower_camera_jam_causes_crash.yaml under
+    camera_priority, where follower's camera is jammed and it never
+    reacts to anything at all."""
+    config = load_scenario("scenarios/follower_camera_jam_causes_crash.yaml")
+    config.vehicles[1].fusion_policy = "camera_priority"
+    sim = Simulation(config)
+    log = sim.run()
+
+    lead = [e for e in log if e.vehicle_id == "lead"]
+    follower = [e for e in log if e.vehicle_id == "follower"]
+    lead_crash_s = next(e.position[0] for e in lead if e.collision)
+    follower_crash_s = next(e.position[0] for e in follower if e.collision)
+
+    gap_to_lead = abs(lead_crash_s - follower_crash_s)
+    gap_to_pedestrian = abs(150 - follower_crash_s)
+    assert gap_to_lead < gap_to_pedestrian, \
+        "expected follower's collision to be with lead (the nearer, occluding body), not the pedestrian behind it"
+
+def test_ground_truth_kind_correctly_shows_vehicle_not_hazard_when_occluding():
+    """A vehicle stopped just before a hazard should be reported as the
+    nearest candidate (ground_truth_kind == 'vehicle'), not the more
+    distant hazard behind it, for the whole approach."""
+    config = load_scenario("scenarios/follower_camera_jam_causes_crash.yaml")
+    config.vehicles[1].fusion_policy = "majority_vote"
+    sim = Simulation(config)
+    log = sim.run()
+    follower = [e for e in log if e.vehicle_id == "follower"]
+    kinds_seen = {e.ground_truth_kind for e in follower if e.ground_truth_kind}
+    assert kinds_seen == {"vehicle"}, f"expected only 'vehicle' to be reported, got {kinds_seen}"
+
+def test_a_vehicle_successfully_braking_does_not_spuriously_swerve():
+    """A vehicle gradually, successfully braking for a real,
+    stoppable-for hazard should never swerve partway through - can_stop_safely()
+    is a cold-start check, correct to ask once when a hazard is first
+    perceived, but spuriously returns False for a large stretch of an
+    already-in-progress, ultimately-successful brake if re-evaluated
+    every tick. Uses radar_spoof_masking.yaml under camera_priority,
+    which brakes successfully to a near-stop for a real pedestrian
+    crossing."""
+    config = load_scenario("scenarios/radar_spoof_masking.yaml")
+    config.vehicles[0].fusion_policy = "camera_priority"
+    sim = Simulation(config)
+    log = sim.run()
+    lanes_used = {e.lane for e in log if e.vehicle_id == "solo"}
+    assert lanes_used == {0}, f"expected solo to stay in lane 0 throughout, saw lanes {lanes_used}"
+
+def test_camera_phantom_forces_braking_but_the_swerve_check_prevents_a_collision():
+    """A camera_phantom attack fabricates a close obstacle from nothing,
+    forcing genuine, unnecessary hard braking - the attack still
+    succeeds at its narrower goal. But the corrected, sensor-driven
+    oncoming-lane check (see _maybe_swerve in engine.py) correctly
+    recognises real oncoming traffic is too close for a safe swerve and
+    declines it throughout, so solo never actually collides with
+    anything - a genuine second line of defence, not a weakened finding.
+    An earlier, ground-truth-based version of this check would have let
+    this same attack cause a real collision with oncoming traffic."""
+    config = load_scenario("scenarios/phantom_induced_swerve_collision.yaml")
+    sim = Simulation(config)
+    log = sim.run()
+    solo = [e for e in log if e.vehicle_id == "solo"]
+    swerved = any(e.lane == 1 for e in solo)
+    collided = any(e.collision for e in solo)
+    min_speed = min(e.speed for e in solo)
+    assert not swerved, "expected the oncoming-lane check to correctly decline an unsafe swerve"
+    assert not collided, "expected no collision, since the swerve was correctly never attempted"
+    from sim_core.units import ms_to_mph
+    assert ms_to_mph(min_speed) < 35.0, "expected the phantom to still force genuine, unnecessary braking"
+
+def test_without_the_phantom_attack_no_swerve_or_collision_occurs():
+    """Control case for test_camera_phantom_can_trigger_a_swerve_into_real_oncoming_traffic:
+    the same two vehicles, same speeds, same positions, but no attack -
+    solo should never swerve and both vehicles should pass safely,
+    confirming the attack is what causes the danger, not the presence
+    of oncoming traffic on its own."""
+    import yaml
+    scenario_dict = {
+        "name": "no attack control", "duration": 20, "timestep": 0.1,
+        "track": {"straight_length": 200, "radius": 60, "features": []},
+        "vehicles": [
+            {"vehicle_id": "solo", "start_distance": 0, "start_speed_mph": 44.74, "fusion_policy": "camera_priority"},
+            {"vehicle_id": "oncoming", "start_distance": 100, "start_speed_mph": 20, "lane": 1, "direction": -1, "fusion_policy": "camera_priority"},
+        ],
+    }
+    path = os.path.join(tempfile.gettempdir(), "_no_attack_control_test.yaml")
+    with open(path, "w") as f:
+        yaml.dump(scenario_dict, f)
+    config = load_scenario(path)
+    sim = Simulation(config)
+    log = sim.run()
+    swerved = any(e.lane == 1 for e in log if e.vehicle_id == "solo")
+    collided = any(e.collision for e in log if e.vehicle_id == "solo")
+    assert not swerved
+    assert not collided
+
+def test_roundabout_dual_attack_produces_a_collision():
+    """Both independent attacks (camera_jam masking Second's give-way
+    perception, gps_spoof causing First to take an extra lap) should
+    result in Second colliding with First."""
+    config = load_scenario("scenarios/roundabout_dual_attack.yaml")
+    sim = Simulation(config)
+    log = sim.run()
+    collided = any(e.collision for e in log if e.vehicle_id == "second")
+    assert collided
+
+def test_roundabout_baseline_without_attacks_is_safe():
+    """Control case: the same vehicles, same speeds, same positions, but
+    no attacks - Second should correctly yield to First and no collision
+    should occur."""
+    import yaml
+    scenario_dict = {
+        "name": "roundabout baseline control", "duration": 25, "timestep": 0.1,
+        "vehicles": [
+            {"vehicle_id": "first", "start_distance": 140, "start_speed_mph": 5, "fusion_policy": "camera_priority", "gps_policy": "naive"},
+            {"vehicle_id": "second", "start_distance": 0, "start_speed_mph": 44.74, "fusion_policy": "camera_priority"},
+        ],
+    }
+    path = os.path.join(tempfile.gettempdir(), "_roundabout_baseline_test.yaml")
+    with open(path, "w") as f:
+        yaml.dump(scenario_dict, f)
+    config = load_scenario(path)
+    sim = Simulation(config)
+    log = sim.run()
+    collided = any(e.collision for e in log)
+    assert not collided
+
+def test_camera_jam_alone_is_already_sufficient_for_the_roundabout_collision():
+    """The camera_jam attack on Second alone is already fully reliable,
+    without needing the gps_spoof attack on First - Second never slows
+    from cruise speed at all once blind to the give-way hazard,
+    guaranteeing it catches a much slower First."""
+    import yaml
+    scenario_dict = {
+        "name": "single attack sufficiency test", "duration": 25, "timestep": 0.1,
+        "vehicles": [
+            {"vehicle_id": "first", "start_distance": 140, "start_speed_mph": 5, "fusion_policy": "camera_priority"},
+            {"vehicle_id": "second", "start_distance": 0, "start_speed_mph": 44.74, "fusion_policy": "camera_priority"},
+        ],
+        "attacks": [
+            {"type": "camera_jam", "target_vehicle": "second", "trigger_before_feature": "roundabout_1", "trigger_distance": 100, "duration": 10.0},
+        ],
+    }
+    path = os.path.join(tempfile.gettempdir(), "_single_attack_sufficiency_test.yaml")
+    with open(path, "w") as f:
+        yaml.dump(scenario_dict, f)
+    config = load_scenario(path)
+    sim = Simulation(config)
+    log = sim.run()
+    collided = any(e.collision for e in log if e.vehicle_id == "second")
+    assert collided
+
+def test_attacked_vehicle_amid_traffic_composes_without_error():
+    """The attack, swerve, and spawner mechanisms should all function
+    together without error. Deliberately does not assert a swerve must
+    happen - whether can_stop_safely judges the phantom's fabricated
+    distance survivable depends on solo's actual speed at the moment
+    the phantom fires, which is legitimately affected by whatever
+    organic background traffic did to it beforehand, not a fixed
+    property of this scenario. What's checked instead: the phantom's
+    fabricated distance genuinely reaches solo's belief at some point
+    (confirming the attack itself still fires and is perceived
+    correctly amid the spawner), and background traffic actually
+    spawned."""
+    config = load_scenario("scenarios/attacked_vehicle_amid_traffic.yaml")
+    sim = Simulation(config)
+    log = sim.run()
+    solo = [e for e in log if e.vehicle_id == "solo"]
+    phantom_seen = any(e.fused_belief.distance_to_obstacle == 15.0 for e in solo)
+    assert phantom_seen, "expected the phantom's fabricated 15.0m distance to reach solo's belief at some point"
+    assert len({e.vehicle_id for e in log}) > 1, "expected at least one background vehicle to have spawned"
+
+def test_swerve_reevaluates_when_a_fabricated_belief_replaces_a_real_one():
+    """If a vehicle is already tracking a real, slower vehicle ahead
+    (already correctly assessed as not needing a swerve), and an
+    attack's fabricated belief then seamlessly replaces that real one
+    without obstacle_present ever dropping to False, swerve-worthiness
+    should still be freshly reassessed for the new, attack-fabricated
+    situation - not suppressed by a stale "already evaluated" flag left
+    over from the real vehicle's assessment. Found via
+    attacked_vehicle_amid_traffic.yaml."""
+    import yaml
+    scenario_dict = {
+        "name": "belief discontinuity test", "duration": 15, "timestep": 0.1,
+        "track": {"straight_length": 200, "radius": 60, "features": []},
+        "vehicles": [
+            {"vehicle_id": "solo", "start_distance": 0, "start_speed_mph": 30, "fusion_policy": "camera_priority"},
+            {"vehicle_id": "slow_lead", "start_distance": 100, "start_speed_mph": 25, "fusion_policy": "camera_priority"},
+        ],
+        "attacks": [
+            {"type": "camera_phantom", "target_vehicle": "solo", "start_time": 8.0, "duration": 2.0, "phantom_distance": 5.0},
+        ],
+    }
+    path = os.path.join(tempfile.gettempdir(), "_swerve_discontinuity_test.yaml")
+    with open(path, "w") as f:
+        yaml.dump(scenario_dict, f)
+    config = load_scenario(path)
+    sim = Simulation(config)
+    log = sim.run()
+    solo = [e for e in log if e.vehicle_id == "solo"]
+    swerved = any(e.lane == 1 for e in solo)
+    assert swerved, "expected the phantom to trigger a fresh swerve assessment despite solo already tracking slow_lead"
+
+def test_oncoming_lane_sensing_is_scaled_by_visibility():
+    """The oncoming-lane check should be degraded by reduced visibility
+    exactly like every other perception, not read from ground truth
+    directly - an oncoming vehicle beyond the visibility-scaled
+    effective range should be reported as undetected."""
+    import yaml
+    def make_scenario(visibility):
+        return {
+            "name": "oncoming visibility test", "duration": 1, "timestep": 0.1, "visibility": visibility,
+            "track": {"straight_length": 200, "radius": 60, "features": []},
+            "vehicles": [
+                {"vehicle_id": "solo", "start_distance": 0, "start_speed_mph": 30, "fusion_policy": "camera_priority"},
+                {"vehicle_id": "onc", "start_distance": 100, "start_speed_mph": 30, "lane": 1, "direction": -1, "fusion_policy": "camera_priority"},
+            ],
+        }
+    path = os.path.join(tempfile.gettempdir(), "_oncoming_visibility_test.yaml")
+
+    with open(path, "w") as f:
+        yaml.dump(make_scenario(1.0), f)
+    config = load_scenario(path)
+    sim = Simulation(config)
+    sim.step(config.timestep)
+    belief_clear = sim._last_oncoming_belief["solo"]
+    assert belief_clear.obstacle_present, "expected the oncoming vehicle to be sensed at full visibility, 100m well within range"
+
+    with open(path, "w") as f:
+        yaml.dump(make_scenario(0.3), f)
+    config = load_scenario(path)
+    sim = Simulation(config)
+    sim.step(config.timestep)
+    belief_foggy = sim._last_oncoming_belief["solo"]
+    assert not belief_foggy.obstacle_present, "expected the oncoming vehicle to be beyond the reduced effective range at low visibility"
+
+def test_jam_attacks_affect_oncoming_lane_sensing_but_spoofs_do_not():
+    """A Jam-type attack (general sensor failure) should affect both the
+    primary and oncoming-lane readings, since a jammed sensor is jammed
+    in every direction. A spoof or phantom attack (a specific, localized
+    fabrication) should affect the primary-lane reading only - it says
+    nothing about the opposite lane, and applying it there too would
+    nonsensically imply the real oncoming vehicle had teleported to the
+    fabricated distance."""
+    import yaml
+    def make_scenario(attack):
+        return {
+            "name": "oncoming attack scoping test", "duration": 1, "timestep": 0.1,
+            "track": {"straight_length": 200, "radius": 60, "features": []},
+            "vehicles": [
+                {"vehicle_id": "solo", "start_distance": 0, "start_speed_mph": 30, "fusion_policy": "camera_priority"},
+                {"vehicle_id": "onc", "start_distance": 50, "start_speed_mph": 30, "lane": 1, "direction": -1, "fusion_policy": "camera_priority"},
+            ],
+            "attacks": [attack],
+        }
+    path = os.path.join(tempfile.gettempdir(), "_oncoming_attack_scoping_test.yaml")
+
+    with open(path, "w") as f:
+        yaml.dump(make_scenario({"type": "camera_jam", "target_vehicle": "solo", "start_time": 0.0, "duration": 5.0}), f)
+    config = load_scenario(path)
+    sim = Simulation(config)
+    sim.step(config.timestep)
+    belief_jammed = sim._last_oncoming_belief["solo"]
+    assert not belief_jammed.obstacle_present, "expected a jammed camera to also blind oncoming-lane sensing"
+
+    with open(path, "w") as f:
+        yaml.dump(make_scenario({"type": "camera_phantom", "target_vehicle": "solo", "start_time": 0.0, "duration": 5.0, "phantom_distance": 3.0}), f)
+    config = load_scenario(path)
+    sim = Simulation(config)
+    sim.step(config.timestep)
+    belief_phantom = sim._last_oncoming_belief["solo"]
+    assert belief_phantom.obstacle_present, "expected the real oncoming vehicle to still be correctly sensed"
+    assert abs(belief_phantom.distance_to_obstacle - 3.0) > 1.0, \
+        "expected the oncoming-lane distance to reflect the real oncoming vehicle, not the phantom's fabricated primary-lane distance"
+
+def test_phantom_brake_scenario_does_not_swerve():
+    """phantom_brake.yaml is meant to demonstrate pure phantom-induced
+    braking - one vehicle, no oncoming lane traffic present for it to
+    swerve around at all. Retuned once the swerve mechanism was made
+    belief-based (see the oncoming-lane check write-up) and started
+    reacting to this phantom too, undermining the scenario's actual
+    point. Guards against that regression recurring if phantom_distance
+    or the braking model changes again."""
+    config = load_scenario("scenarios/phantom_brake.yaml")
+    sim = Simulation(config)
+    log = sim.run()
+    follower_log = [e for e in log if e.vehicle_id == "follower"]
+    lanes_used = {e.lane for e in follower_log}
+    assert lanes_used == {0}, f"expected follower to stay in lane 0 throughout, saw lanes {lanes_used}"
+
+def test_a_struck_pedestrian_stops_being_present_and_crossing():
+    """Once a pedestrian has been hit, they should stop being treated
+    as present/crossing for the rest of the scenario - previously
+    is_present()/lane_at() were purely time-based, so a struck
+    pedestrian would keep "crossing" into the next lane and then off
+    again on schedule, as if the collision never happened, both
+    visually and to the engine itself (a different vehicle could still
+    perceive and react to a pedestrian who is, narratively, already
+    down)."""
+    import yaml
+    scenario_dict = {
+        "name": "struck pedestrian test", "duration": 15, "timestep": 0.1,
+        "track": {"straight_length": 200, "radius": 60,
+                  "features": [{"feature_id": "crossing_1", "feature_type": "pedestrian_crossing", "position": 150}]},
+        "vehicles": [{"vehicle_id": "solo", "start_distance": 0, "start_speed_mph": 44.74, "fusion_policy": "camera_priority"}],
+        "hazards": [{"type": "pedestrian_crossing", "feature_id": "crossing_1", "start_time": 6.0, "duration": 2.0}],
+    }
+    path = os.path.join(tempfile.gettempdir(), "_struck_pedestrian_test.yaml")
+    with open(path, "w") as f:
+        yaml.dump(scenario_dict, f)
+    config = load_scenario(path)
+    sim = Simulation(config)
+    steps = int(config.duration / config.timestep)
+
+    struck_at = None
+    for i in range(steps):
+        t = round(sim.time, 2)
+        results = sim.step(config.timestep)
+        solo = next(r for r in results if r.vehicle_id == "solo")
+        pedestrian = sim.hazards[0]
+        if solo.collision and struck_at is None:
+            struck_at = t
+            assert pedestrian.struck, "expected the hazard to be marked struck the same tick the collision registers"
+        if struck_at is not None and t > struck_at:
+            assert pedestrian.lane_at(sim.time) is None, \
+                "expected a struck pedestrian to no longer be in any lane, not still walking on schedule"
+            assert not pedestrian.is_present(sim.time), \
+                "expected a struck pedestrian to no longer be present at all"
+
+    assert struck_at is not None, "expected this scenario to produce a collision at all"

@@ -1,0 +1,9 @@
+# Sweeps follower's fusion policy across the range of following gaps
+
+name: "Follower policy x following gap sweep for follower_camera_jam_causes_crash.yaml"
+base_scenario: "scenarios/follower_camera_jam_causes_crash.yaml"
+output_csv: "results/follower_camera_jam_causes_crash_sweep.csv"
+
+sweep:
+  follower.fusion_policy: ["camera_priority", "majority_vote", "confidence_weighted", "plausibility_filtered"]
+  lead.start_distance: [60, 65, 70, 75]
