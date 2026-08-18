@@ -17,6 +17,19 @@ import matplotlib.pyplot as plt
 
 OUTCOME_COLUMNS = {"run_id", "vehicle_id", "collided", "severity", "collision_time", "min_speed_mph", "final_speed_mph"}
 
+FIELD_UNITS = {
+    "start_distance": "m",
+    "start_speed": "m/s",
+    "duration": "s",
+    "timestep": "s",
+    "visibility": "fraction, 0-1",
+}
+
+def _axis_label(swept_field: str) -> str:
+    bare_field = swept_field.split(".")[-1]
+    unit = FIELD_UNITS.get(bare_field)
+    return f"{swept_field} ({unit})" if unit else swept_field
+
 def load_rows(csv_path: str) -> list[dict]:
     with open(csv_path, newline="") as f:
         return list(csv.DictReader(f))
@@ -56,7 +69,7 @@ def plot_collision_rate(rows: list[dict], swept_field: str, out_path: str, title
     fig, ax = plt.subplots(figsize=(max(6, len(groups) * 1.2), 5))
     bars = ax.bar(groups, rates, color="#c0392b")
     ax.set_ylabel("Collision rate (%)")
-    ax.set_xlabel(swept_field)
+    ax.set_xlabel(_axis_label(swept_field))
     ax.set_title(title)
     ax.set_ylim(0, 105)
     for bar, group in zip(bars, groups):
@@ -69,18 +82,38 @@ def plot_collision_rate(rows: list[dict], swept_field: str, out_path: str, title
     plt.close(fig)
 
 def plot_min_speed(rows: list[dict], swept_field: str, out_path: str, title: str) -> None:
-    by_group = defaultdict(list)
+    by_group = defaultdict(list)   # group -> list of (min_speed_mph, collided) tuples
     for row in rows:
         if row["min_speed_mph"]:
-            by_group[row[swept_field]].append(float(row["min_speed_mph"]))
+            by_group[row[swept_field]].append((float(row["min_speed_mph"]), row["collided"] == "True"))
 
     groups = _sort_groups(by_group.keys())
-    data = [by_group[g] for g in groups]
+    data = [[v for v, _ in by_group[g]] for g in groups]
+    multi_run = any(len(d) > 1 for d in data)
 
     fig, ax = plt.subplots(figsize=(max(6, len(groups) * 1.2), 5))
-    ax.boxplot(data, tick_labels=groups)
-    ax.set_ylabel("Minimum speed reached (mph)")
-    ax.set_xlabel(swept_field)
+
+    if multi_run:
+        ax.boxplot(data, tick_labels=groups, showfliers=False, zorder=1,
+                   boxprops={"color": "#888888"}, whiskerprops={"color": "#888888"}, capprops={"color": "#888888"})
+    else:
+        ax.set_xticks(range(1, len(groups) + 1))
+        ax.set_xticklabels(groups)
+        ax.set_xlim(0.5, len(groups) + 0.5)
+
+    for i, g in enumerate(groups, start=1):
+        n = len(by_group[g])
+        for j, (speed, collided) in enumerate(by_group[g]):
+            jitter = 0.0 if n == 1 else (j / max(n - 1, 1) - 0.5) * 0.5
+            colour = "#c0392b" if collided else "#2980b9"
+            ax.scatter(i + jitter, speed, color=colour, s=28, zorder=3, edgecolor="white", linewidth=0.6)
+
+    ax.scatter([], [], color="#c0392b", label="collided")
+    ax.scatter([], [], color="#2980b9", label="no collision")
+    ax.legend(loc="upper right", framealpha=0.9)
+
+    ax.set_ylabel("Lowest speed reached (mph)")
+    ax.set_xlabel(_axis_label(swept_field))
     ax.set_title(title)
     plt.xticks(rotation=20, ha="right")
     plt.tight_layout()
@@ -99,11 +132,11 @@ def main(csv_path: str, swept_field: str | None = None) -> None:
     stem = os.path.splitext(os.path.basename(csv_path))[0]
 
     collision_path = f"results/graphs/{stem}_collision_rate.png"
-    plot_collision_rate(rows, swept_field, collision_path, f"Collision rate by {swept_field}\n({stem})")
+    plot_collision_rate(rows, swept_field, collision_path, f"Collision rate by {_axis_label(swept_field)}\n({stem})")
     print(f"saved {collision_path}")
 
     speed_path = f"results/graphs/{stem}_min_speed.png"
-    plot_min_speed(rows, swept_field, speed_path, f"Minimum speed reached by {swept_field}\n({stem})")
+    plot_min_speed(rows, swept_field, speed_path, f"Lowest speed reached by {_axis_label(swept_field)}\n({stem})")
     print(f"saved {speed_path}")
 
 if __name__ == "__main__":

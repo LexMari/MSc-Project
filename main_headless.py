@@ -6,7 +6,6 @@ By default, prints the FIRST vehicle listed in the scenario's YAML (which
 happens to be the attacked one in every current example scenario). Pass a
 second argument to print a different vehicle by name.
 """
-
 import csv
 import os
 import sys
@@ -46,6 +45,7 @@ def main(scenario_path: str, vehicle_id: str | None = None, csv_path: str | None
         vehicle_id = config.vehicles[0].vehicle_id  # default: first vehicle in the scenario
         if vehicle_id not in {v.vehicle_id for v in config.vehicles}:
             raise ValueError(f"no such vehicle {vehicle_id!r} in this scenario")
+    show_all = vehicle_id == "all"
 
     csv_writer = None
     csv_file = None
@@ -55,12 +55,29 @@ def main(scenario_path: str, vehicle_id: str | None = None, csv_path: str | None
         csv_writer.writeheader()
 
     print(f"Scenario: {config.name}")
-    print(f"Showing vehicle: {vehicle_id!r} (pass a second argument to choose a different one)")
+    if show_all:
+        print("Showing all vehicles, one after another")
+    else:
+        print(f"Showing vehicle: {vehicle_id!r} (pass a second argument to choose a different one (by name), or 'all' for every vehicle)")
     print(f"{'t':>5} | {'vehicle':>9} | {'speed(mph)':>10} | {'lane':>4} | {'radar':>9} | {'camera':>9} | {'lidar':>9} | {'belief_dist':>11} | {'obstacle?':>9} | {'source':>9} | {'reacting_to':>22} | collision | roundabout")
     printed_any = False
-    for entry in log:
-        if entry.vehicle_id != vehicle_id:
+
+    if show_all:
+        declared_order = [v.vehicle_id for v in config.vehicles]
+        seen_order = list(dict.fromkeys(e.vehicle_id for e in log))
+        vehicle_order = declared_order + [v for v in seen_order if v not in declared_order]
+        by_vehicle = {vid: [e for e in log if e.vehicle_id == vid] for vid in vehicle_order}
+        ordered_log = [e for vid in vehicle_order for e in by_vehicle[vid]]
+    else:
+        ordered_log = log
+
+    current_vehicle = None
+    for entry in ordered_log:
+        if not show_all and entry.vehicle_id != vehicle_id:
             continue
+        if show_all and entry.vehicle_id != current_vehicle:
+            current_vehicle = entry.vehicle_id
+            print(f"--- {current_vehicle} ---")
         printed_any = True
         belief = entry.fused_belief
         dist_str = f"{belief.distance_to_obstacle:.1f}" if belief.distance_to_obstacle is not None else "-"
