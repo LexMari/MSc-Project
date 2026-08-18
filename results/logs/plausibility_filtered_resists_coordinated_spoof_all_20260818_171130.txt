@@ -1,5 +1,5 @@
 Scenario: Plausibility-filtered fusion resists the coordinated multi-sensor spoof
-Showing all vehicles, one after another (not interleaved tick-by-tick)
+Showing all vehicles, one after another
     t |   vehicle | speed(mph) | lane |     radar |    camera |     lidar | belief_dist | obstacle? |    source |            reacting_to | collision | roundabout
 --- solo ---
   0.0 |      solo |      44.74 |    0 |     150.0 |     150.0 |         - |       150.0 |      True | plausibility:majority | hazard:pedestrian_crossing |           | 

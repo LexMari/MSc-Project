@@ -20,7 +20,7 @@ vehicles:
     start_speed_mph: 20
     fusion_policy: "camera_priority"
   - vehicle_id: "lead"
-    start_distance: 328.4955592153876
+    start_distance: 333.4955592153876
     start_speed_mph: 20
     fusion_policy: "camera_priority"
 

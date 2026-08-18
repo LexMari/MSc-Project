@@ -1,5 +1,5 @@
-Scenario: Unattacked Follower avoids Lead's attack-induced collision
-Showing all vehicles, one after another (not interleaved tick-by-tick)
+Scenario: Follower's own camera jam, timed with Lead's crash, causes Follower to also collide
+Showing all vehicles, one after another
     t |   vehicle | speed(mph) | lane |     radar |    camera |     lidar | belief_dist | obstacle? |    source |            reacting_to | collision | roundabout
 --- lead ---
   0.0 |      lead |      44.74 |    0 |      85.0 |      85.0 |         - |        85.0 |      True |  weighted | hazard:pedestrian_crossing |           | 
@@ -235,171 +235,171 @@ Showing all vehicles, one after another (not interleaved tick-by-tick)
   2.9 |  follower |      42.80 |    0 |      62.7 |      62.7 |      62.7 |        62.7 |      True |    camera |                vehicle |           | 
   3.0 |  follower |      42.78 |    0 |      62.7 |      62.7 |      62.7 |        62.7 |      True |    camera |                vehicle |           | 
   3.1 |  follower |      42.76 |    0 |      62.8 |      62.8 |      62.8 |        62.8 |      True |    camera |                vehicle |           | 
-  3.2 |  follower |      42.74 |    0 |      62.9 |      62.9 |      62.9 |        62.9 |      True |    camera |                vehicle |           | 
-  3.3 |  follower |      42.73 |    0 |      63.0 |      63.0 |      63.0 |        63.0 |      True |    camera |                vehicle |           | 
-  3.4 |  follower |      42.72 |    0 |      63.1 |      63.1 |      63.1 |        63.1 |      True |    camera |                vehicle |           | 
-  3.5 |  follower |      42.71 |    0 |      63.2 |      63.2 |      63.2 |        63.2 |      True |    camera |                vehicle |           | 
-  3.6 |  follower |      42.71 |    0 |      63.3 |      63.3 |      63.3 |        63.3 |      True |    camera |                vehicle |           | 
-  3.7 |  follower |      43.16 |    0 |      63.4 |      63.4 |      63.4 |        63.4 |      True |    camera |                vehicle |           | 
-  3.8 |  follower |      43.13 |    0 |      63.4 |      63.4 |      63.4 |        63.4 |      True |    camera |                vehicle |           | 
-  3.9 |  follower |      43.11 |    0 |      63.5 |      63.5 |      63.5 |        63.5 |      True |    camera |                vehicle |           | 
-  4.0 |  follower |      43.08 |    0 |      63.6 |      63.6 |      63.6 |        63.6 |      True |    camera |                vehicle |           | 
-  4.1 |  follower |      43.07 |    0 |      63.7 |      63.7 |      63.7 |        63.7 |      True |    camera |                vehicle |           | 
-  4.2 |  follower |      43.05 |    0 |      63.7 |      63.7 |      63.7 |        63.7 |      True |    camera |                vehicle |           | 
-  4.3 |  follower |      43.04 |    0 |      63.8 |      63.8 |      63.8 |        63.8 |      True |    camera |                vehicle |           | 
-  4.4 |  follower |      43.04 |    0 |      61.9 |      61.9 |      61.9 |        61.9 |      True |    camera |                vehicle |           | 
-  4.5 |  follower |      42.97 |    0 |      60.0 |      60.0 |      60.0 |        60.0 |      True |    camera |                vehicle |           | 
-  4.6 |  follower |      42.85 |    0 |      58.0 |      58.0 |      58.0 |        58.0 |      True |    camera |                vehicle |           | 
-  4.7 |  follower |      42.69 |    0 |      56.1 |      56.1 |      56.1 |        56.1 |      True |    camera |                vehicle |           | 
-  4.8 |  follower |      42.48 |    0 |      54.2 |      54.2 |      54.2 |        54.2 |      True |    camera |                vehicle |           | 
-  4.9 |  follower |      42.22 |    0 |      52.3 |      52.3 |      52.3 |        52.3 |      True |    camera |                vehicle |           | 
-  5.0 |  follower |      41.92 |    0 |      50.4 |      50.4 |      50.4 |        50.4 |      True |    camera |                vehicle |           | 
-  5.1 |  follower |      41.58 |    0 |      48.6 |      48.6 |      48.6 |        48.6 |      True |    camera |                vehicle |           | 
-  5.2 |  follower |      41.20 |    0 |      46.7 |      46.7 |      46.7 |        46.7 |      True |    camera |                vehicle |           | 
-  5.3 |  follower |      40.79 |    0 |      44.9 |      44.9 |      44.9 |        44.9 |      True |    camera |                vehicle |           | 
-  5.4 |  follower |      40.34 |    0 |      43.1 |      43.1 |      43.1 |        43.1 |      True |    camera |                vehicle |           | 
-  5.5 |  follower |      39.85 |    0 |      41.3 |      41.3 |      41.3 |        41.3 |      True |    camera |                vehicle |           | 
-  5.6 |  follower |      39.33 |    0 |      39.5 |      39.5 |      39.5 |        39.5 |      True |    camera |                vehicle |           | 
-  5.7 |  follower |      38.78 |    0 |      37.8 |      37.8 |      37.8 |        37.8 |      True |    camera |                vehicle |           | 
-  5.8 |  follower |      38.19 |    0 |      36.1 |      36.1 |      36.1 |        36.1 |      True |    camera |                vehicle |           | 
-  5.9 |  follower |      37.57 |    0 |      34.4 |      34.4 |      34.4 |        34.4 |      True |    camera |                vehicle |           | 
-  6.0 |  follower |      36.92 |    0 |      32.7 |      32.7 |      32.7 |        32.7 |      True |    camera |                vehicle |           | 
-  6.1 |  follower |      36.24 |    0 |      31.1 |      31.1 |      31.1 |        31.1 |      True |    camera |                vehicle |           | 
-  6.2 |  follower |      35.53 |    0 |      29.5 |      29.5 |      29.5 |        29.5 |      True |    camera |                vehicle |           | 
-  6.3 |  follower |      34.79 |    0 |      27.9 |      27.9 |      27.9 |        27.9 |      True |    camera |                vehicle |           | 
-  6.4 |  follower |      34.01 |    0 |      26.3 |      26.3 |      26.3 |        26.3 |      True |    camera |                vehicle |           | 
-  6.5 |  follower |      33.21 |    0 |      24.8 |      24.8 |      24.8 |        24.8 |      True |    camera |                vehicle |           | 
-  6.6 |  follower |      32.37 |    0 |      23.4 |      23.4 |      23.4 |        23.4 |      True |    camera |                vehicle |           | 
-  6.7 |  follower |      31.50 |    0 |      22.0 |      22.0 |      22.0 |        22.0 |      True |    camera |                vehicle |           | 
-  6.8 |  follower |      30.60 |    0 |      20.6 |      20.6 |      20.6 |        20.6 |      True |    camera |                vehicle |           | 
-  6.9 |  follower |      29.67 |    0 |      19.2 |      19.2 |      19.2 |        19.2 |      True |    camera |                vehicle |           | 
-  7.0 |  follower |      28.70 |    0 |      17.9 |      17.9 |      17.9 |        17.9 |      True |    camera |                vehicle |           | 
-  7.1 |  follower |      27.71 |    0 |      16.7 |      16.7 |      16.7 |        16.7 |      True |    camera |                vehicle |           | 
-  7.2 |  follower |      26.68 |    0 |      15.4 |      15.4 |      15.4 |        15.4 |      True |    camera |                vehicle |           | 
-  7.3 |  follower |      25.61 |    0 |      14.3 |      14.3 |      14.3 |        14.3 |      True |    camera |                vehicle |           | 
-  7.4 |  follower |      24.51 |    0 |      13.1 |      13.1 |      13.1 |        13.1 |      True |    camera |                vehicle |           | 
-  7.5 |  follower |      23.37 |    0 |      12.1 |      12.1 |      12.1 |        12.1 |      True |    camera |                vehicle |           | 
-  7.6 |  follower |      22.19 |    0 |      11.1 |      11.1 |      11.1 |        11.1 |      True |    camera |                vehicle |           | 
-  7.7 |  follower |      20.98 |    0 |      10.1 |      10.1 |      10.1 |        10.1 |      True |    camera |                vehicle |           | 
-  7.8 |  follower |      19.72 |    0 |       9.2 |       9.2 |       9.2 |         9.2 |      True |    camera |                vehicle |           | 
-  7.9 |  follower |      18.42 |    0 |       8.3 |       8.3 |       8.3 |         8.3 |      True |    camera |                vehicle |           | 
-  8.0 |  follower |      17.08 |    0 |       7.5 |       7.5 |       7.5 |         7.5 |      True |    camera |                vehicle |           | 
-  8.1 |  follower |      15.69 |    0 |       6.8 |       6.8 |       6.8 |         6.8 |      True |    camera |                vehicle |           | 
-  8.2 |  follower |      14.26 |    0 |       6.1 |       6.1 |       6.1 |         6.1 |      True |    camera |                vehicle |           | 
-  8.3 |  follower |      12.80 |    0 |       5.5 |       5.5 |       5.5 |         5.5 |      True |    camera |                vehicle |           | 
-  8.4 |  follower |      11.35 |    0 |       5.0 |       5.0 |       5.0 |         5.0 |      True |    camera |                vehicle |           | 
-  8.5 |  follower |       9.90 |    0 |       4.5 |       4.5 |       4.5 |         4.5 |      True |    camera |                vehicle |           | 
-  8.6 |  follower |       8.44 |    0 |       4.1 |       4.1 |       4.1 |         4.1 |      True |    camera |                vehicle |           | 
-  8.7 |  follower |       6.99 |    0 |       3.8 |       3.8 |       3.8 |         3.8 |      True |    camera |                vehicle |           | 
-  8.8 |  follower |       5.53 |    0 |       3.5 |       3.5 |       3.5 |         3.5 |      True |    camera |                vehicle |           | 
-  8.9 |  follower |       4.08 |    0 |       3.3 |       3.3 |       3.3 |         3.3 |      True |    camera |                vehicle |           | 
-  9.0 |  follower |       2.69 |    0 |       3.1 |       3.1 |       3.1 |         3.1 |      True |    camera |                vehicle |           | 
-  9.1 |  follower |       2.02 |    0 |       3.0 |       3.0 |       3.0 |         3.0 |      True |    camera |                vehicle |           | 
-  9.2 |  follower |       1.58 |    0 |       2.9 |       2.9 |       2.9 |         2.9 |      True |    camera |                vehicle |           | 
-  9.3 |  follower |       1.13 |    0 |       2.9 |       2.9 |       2.9 |         2.9 |      True |    camera |                vehicle |           | 
-  9.4 |  follower |       0.68 |    0 |       2.8 |       2.8 |       2.8 |         2.8 |      True |    camera |                vehicle |           | 
-  9.5 |  follower |       0.23 |    0 |       2.8 |       2.8 |       2.8 |         2.8 |      True |    camera |                vehicle |           | 
-  9.6 |  follower |       0.00 |    0 |       2.8 |       2.8 |       2.8 |         2.8 |      True |    camera |                vehicle |           | 
-  9.7 |  follower |       0.00 |    0 |       2.8 |       2.8 |       2.8 |         2.8 |      True |    camera |                vehicle |           | 
-  9.8 |  follower |       0.00 |    0 |       2.8 |       2.8 |       2.8 |         2.8 |      True |    camera |                vehicle |           | 
-  9.9 |  follower |       0.00 |    0 |       2.8 |       2.8 |       2.8 |         2.8 |      True |    camera |                vehicle |           | 
- 10.0 |  follower |       0.00 |    0 |       2.8 |       2.8 |       2.8 |         2.8 |      True |    camera |                vehicle |           | 
- 10.1 |  follower |       0.00 |    0 |       2.8 |       2.8 |       2.8 |         2.8 |      True |    camera |                vehicle |           | 
- 10.2 |  follower |       0.00 |    0 |       2.8 |       2.8 |       2.8 |         2.8 |      True |    camera |                vehicle |           | 
- 10.3 |  follower |       0.00 |    0 |       2.8 |       2.8 |       2.8 |         2.8 |      True |    camera |                vehicle |           | 
- 10.4 |  follower |       0.00 |    0 |       2.8 |       2.8 |       2.8 |         2.8 |      True |    camera |                vehicle |           | 
- 10.5 |  follower |       0.00 |    0 |       2.8 |       2.8 |       2.8 |         2.8 |      True |    camera |                vehicle |           | 
- 10.6 |  follower |       0.00 |    0 |       2.8 |       2.8 |       2.8 |         2.8 |      True |    camera |                vehicle |           | 
- 10.7 |  follower |       0.00 |    0 |       2.8 |       2.8 |       2.8 |         2.8 |      True |    camera |                vehicle |           | 
- 10.8 |  follower |       0.00 |    0 |       2.8 |       2.8 |       2.8 |         2.8 |      True |    camera |                vehicle |           | 
- 10.9 |  follower |       0.00 |    0 |       2.8 |       2.8 |       2.8 |         2.8 |      True |    camera |                vehicle |           | 
- 11.0 |  follower |       0.00 |    0 |       2.8 |       2.8 |       2.8 |         2.8 |      True |    camera |                vehicle |           | 
- 11.1 |  follower |       0.00 |    0 |       2.8 |       2.8 |       2.8 |         2.8 |      True |    camera |                vehicle |           | 
- 11.2 |  follower |       0.00 |    0 |       2.8 |       2.8 |       2.8 |         2.8 |      True |    camera |                vehicle |           | 
- 11.3 |  follower |       0.00 |    0 |       2.8 |       2.8 |       2.8 |         2.8 |      True |    camera |                vehicle |           | 
- 11.4 |  follower |       0.00 |    0 |       2.8 |       2.8 |       2.8 |         2.8 |      True |    camera |                vehicle |           | 
- 11.5 |  follower |       0.00 |    0 |       2.8 |       2.8 |       2.8 |         2.8 |      True |    camera |                vehicle |           | 
- 11.6 |  follower |       0.00 |    0 |       2.8 |       2.8 |       2.8 |         2.8 |      True |    camera |                vehicle |           | 
- 11.7 |  follower |       0.00 |    0 |       2.8 |       2.8 |       2.8 |         2.8 |      True |    camera |                vehicle |           | 
- 11.8 |  follower |       0.00 |    0 |       2.8 |       2.8 |       2.8 |         2.8 |      True |    camera |                vehicle |           | 
- 11.9 |  follower |       0.00 |    0 |       2.8 |       2.8 |       2.8 |         2.8 |      True |    camera |                vehicle |           | 
- 12.0 |  follower |       0.00 |    0 |       2.8 |       2.8 |       2.8 |         2.8 |      True |    camera |                vehicle |           | 
- 12.1 |  follower |       0.00 |    0 |       2.8 |       2.8 |       2.8 |         2.8 |      True |    camera |                vehicle |           | 
- 12.2 |  follower |       0.00 |    0 |       2.8 |       2.8 |       2.8 |         2.8 |      True |    camera |                vehicle |           | 
- 12.3 |  follower |       0.00 |    0 |       2.8 |       2.8 |       2.8 |         2.8 |      True |    camera |                vehicle |           | 
- 12.4 |  follower |       0.00 |    0 |       2.8 |       2.8 |       2.8 |         2.8 |      True |    camera |                vehicle |           | 
- 12.5 |  follower |       0.00 |    0 |       2.8 |       2.8 |       2.8 |         2.8 |      True |    camera |                vehicle |           | 
- 12.6 |  follower |       0.00 |    0 |       2.8 |       2.8 |       2.8 |         2.8 |      True |    camera |                vehicle |           | 
- 12.7 |  follower |       0.00 |    0 |       2.8 |       2.8 |       2.8 |         2.8 |      True |    camera |                vehicle |           | 
- 12.8 |  follower |       0.00 |    0 |       2.8 |       2.8 |       2.8 |         2.8 |      True |    camera |                vehicle |           | 
- 12.9 |  follower |       0.00 |    0 |       2.8 |       2.8 |       2.8 |         2.8 |      True |    camera |                vehicle |           | 
- 13.0 |  follower |       0.00 |    0 |       2.8 |       2.8 |       2.8 |         2.8 |      True |    camera |                vehicle |           | 
- 13.1 |  follower |       0.00 |    0 |       2.8 |       2.8 |       2.8 |         2.8 |      True |    camera |                vehicle |           | 
- 13.2 |  follower |       0.00 |    0 |       2.8 |       2.8 |       2.8 |         2.8 |      True |    camera |                vehicle |           | 
- 13.3 |  follower |       0.00 |    0 |       2.8 |       2.8 |       2.8 |         2.8 |      True |    camera |                vehicle |           | 
- 13.4 |  follower |       0.00 |    0 |       2.8 |       2.8 |       2.8 |         2.8 |      True |    camera |                vehicle |           | 
- 13.5 |  follower |       0.00 |    0 |       2.8 |       2.8 |       2.8 |         2.8 |      True |    camera |                vehicle |           | 
- 13.6 |  follower |       0.00 |    0 |       2.8 |       2.8 |       2.8 |         2.8 |      True |    camera |                vehicle |           | 
- 13.7 |  follower |       0.00 |    0 |       2.8 |       2.8 |       2.8 |         2.8 |      True |    camera |                vehicle |           | 
- 13.8 |  follower |       0.00 |    0 |       2.8 |       2.8 |       2.8 |         2.8 |      True |    camera |                vehicle |           | 
- 13.9 |  follower |       0.00 |    0 |       2.8 |       2.8 |       2.8 |         2.8 |      True |    camera |                vehicle |           | 
- 14.0 |  follower |       0.00 |    0 |       2.8 |       2.8 |       2.8 |         2.8 |      True |    camera |                vehicle |           | 
- 14.1 |  follower |       0.00 |    0 |       2.8 |       2.8 |       2.8 |         2.8 |      True |    camera |                vehicle |           | 
- 14.2 |  follower |       0.00 |    0 |       2.8 |       2.8 |       2.8 |         2.8 |      True |    camera |                vehicle |           | 
- 14.3 |  follower |       0.00 |    0 |       2.8 |       2.8 |       2.8 |         2.8 |      True |    camera |                vehicle |           | 
- 14.4 |  follower |       0.00 |    0 |       2.8 |       2.8 |       2.8 |         2.8 |      True |    camera |                vehicle |           | 
- 14.5 |  follower |       0.00 |    0 |       2.8 |       2.8 |       2.8 |         2.8 |      True |    camera |                vehicle |           | 
- 14.6 |  follower |       0.00 |    0 |       2.8 |       2.8 |       2.8 |         2.8 |      True |    camera |                vehicle |           | 
- 14.7 |  follower |       0.00 |    0 |       2.8 |       2.8 |       2.8 |         2.8 |      True |    camera |                vehicle |           | 
- 14.8 |  follower |       0.00 |    0 |       2.8 |       2.8 |       2.8 |         2.8 |      True |    camera |                vehicle |           | 
- 14.9 |  follower |       0.00 |    0 |       2.8 |       2.8 |       2.8 |         2.8 |      True |    camera |                vehicle |           | 
- 15.0 |  follower |       0.00 |    0 |       2.8 |       2.8 |       2.8 |         2.8 |      True |    camera |                vehicle |           | 
- 15.1 |  follower |       0.00 |    0 |       2.8 |       2.8 |       2.8 |         2.8 |      True |    camera |                vehicle |           | 
- 15.2 |  follower |       0.00 |    0 |       2.8 |       2.8 |       2.8 |         2.8 |      True |    camera |                vehicle |           | 
- 15.3 |  follower |       0.00 |    0 |       2.8 |       2.8 |       2.8 |         2.8 |      True |    camera |                vehicle |           | 
- 15.4 |  follower |       0.00 |    0 |       2.8 |       2.8 |       2.8 |         2.8 |      True |    camera |                vehicle |           | 
- 15.5 |  follower |       0.00 |    0 |       2.8 |       2.8 |       2.8 |         2.8 |      True |    camera |                vehicle |           | 
- 15.6 |  follower |       0.00 |    0 |       2.8 |       2.8 |       2.8 |         2.8 |      True |    camera |                vehicle |           | 
- 15.7 |  follower |       0.00 |    0 |       2.8 |       2.8 |       2.8 |         2.8 |      True |    camera |                vehicle |           | 
- 15.8 |  follower |       0.00 |    0 |       2.8 |       2.8 |       2.8 |         2.8 |      True |    camera |                vehicle |           | 
- 15.9 |  follower |       0.00 |    0 |       2.8 |       2.8 |       2.8 |         2.8 |      True |    camera |                vehicle |           | 
- 16.0 |  follower |       0.00 |    0 |       2.8 |       2.8 |       2.8 |         2.8 |      True |    camera |                vehicle |           | 
- 16.1 |  follower |       0.00 |    0 |       2.8 |       2.8 |       2.8 |         2.8 |      True |    camera |                vehicle |           | 
- 16.2 |  follower |       0.00 |    0 |       2.8 |       2.8 |       2.8 |         2.8 |      True |    camera |                vehicle |           | 
- 16.3 |  follower |       0.00 |    0 |       2.8 |       2.8 |       2.8 |         2.8 |      True |    camera |                vehicle |           | 
- 16.4 |  follower |       0.00 |    0 |       2.8 |       2.8 |       2.8 |         2.8 |      True |    camera |                vehicle |           | 
- 16.5 |  follower |       0.00 |    0 |       2.8 |       2.8 |       2.8 |         2.8 |      True |    camera |                vehicle |           | 
- 16.6 |  follower |       0.00 |    0 |       2.8 |       2.8 |       2.8 |         2.8 |      True |    camera |                vehicle |           | 
- 16.7 |  follower |       0.00 |    0 |       2.8 |       2.8 |       2.8 |         2.8 |      True |    camera |                vehicle |           | 
- 16.8 |  follower |       0.00 |    0 |       2.8 |       2.8 |       2.8 |         2.8 |      True |    camera |                vehicle |           | 
- 16.9 |  follower |       0.00 |    0 |       2.8 |       2.8 |       2.8 |         2.8 |      True |    camera |                vehicle |           | 
- 17.0 |  follower |       0.00 |    0 |       2.8 |       2.8 |       2.8 |         2.8 |      True |    camera |                vehicle |           | 
- 17.1 |  follower |       0.00 |    0 |       2.8 |       2.8 |       2.8 |         2.8 |      True |    camera |                vehicle |           | 
- 17.2 |  follower |       0.00 |    0 |       2.8 |       2.8 |       2.8 |         2.8 |      True |    camera |                vehicle |           | 
- 17.3 |  follower |       0.00 |    0 |       2.8 |       2.8 |       2.8 |         2.8 |      True |    camera |                vehicle |           | 
- 17.4 |  follower |       0.00 |    0 |       2.8 |       2.8 |       2.8 |         2.8 |      True |    camera |                vehicle |           | 
- 17.5 |  follower |       0.00 |    0 |       2.8 |       2.8 |       2.8 |         2.8 |      True |    camera |                vehicle |           | 
- 17.6 |  follower |       0.00 |    0 |       2.8 |       2.8 |       2.8 |         2.8 |      True |    camera |                vehicle |           | 
- 17.7 |  follower |       0.00 |    0 |       2.8 |       2.8 |       2.8 |         2.8 |      True |    camera |                vehicle |           | 
- 17.8 |  follower |       0.00 |    0 |       2.8 |       2.8 |       2.8 |         2.8 |      True |    camera |                vehicle |           | 
- 17.9 |  follower |       0.00 |    0 |       2.8 |       2.8 |       2.8 |         2.8 |      True |    camera |                vehicle |           | 
- 18.0 |  follower |       0.00 |    0 |       2.8 |       2.8 |       2.8 |         2.8 |      True |    camera |                vehicle |           | 
- 18.1 |  follower |       0.00 |    0 |       2.8 |       2.8 |       2.8 |         2.8 |      True |    camera |                vehicle |           | 
- 18.2 |  follower |       0.00 |    0 |       2.8 |       2.8 |       2.8 |         2.8 |      True |    camera |                vehicle |           | 
- 18.3 |  follower |       0.00 |    0 |       2.8 |       2.8 |       2.8 |         2.8 |      True |    camera |                vehicle |           | 
- 18.4 |  follower |       0.00 |    0 |       2.8 |       2.8 |       2.8 |         2.8 |      True |    camera |                vehicle |           | 
- 18.5 |  follower |       0.00 |    0 |       2.8 |       2.8 |       2.8 |         2.8 |      True |    camera |                vehicle |           | 
- 18.6 |  follower |       0.00 |    0 |       2.8 |       2.8 |       2.8 |         2.8 |      True |    camera |                vehicle |           | 
- 18.7 |  follower |       0.00 |    0 |       2.8 |       2.8 |       2.8 |         2.8 |      True |    camera |                vehicle |           | 
- 18.8 |  follower |       0.00 |    0 |       2.8 |       2.8 |       2.8 |         2.8 |      True |    camera |                vehicle |           | 
- 18.9 |  follower |       0.00 |    0 |       2.8 |       2.8 |       2.8 |         2.8 |      True |    camera |                vehicle |           | 
- 19.0 |  follower |       0.00 |    0 |       2.8 |       2.8 |       2.8 |         2.8 |      True |    camera |                vehicle |           | 
- 19.1 |  follower |       0.00 |    0 |       2.8 |       2.8 |       2.8 |         2.8 |      True |    camera |                vehicle |           | 
- 19.2 |  follower |       0.00 |    0 |       2.8 |       2.8 |       2.8 |         2.8 |      True |    camera |                vehicle |           | 
- 19.3 |  follower |       0.00 |    0 |       2.8 |       2.8 |       2.8 |         2.8 |      True |    camera |                vehicle |           | 
- 19.4 |  follower |       0.00 |    0 |       2.8 |       2.8 |       2.8 |         2.8 |      True |    camera |                vehicle |           | 
- 19.5 |  follower |       0.00 |    0 |       2.8 |       2.8 |       2.8 |         2.8 |      True |    camera |                vehicle |           | 
- 19.6 |  follower |       0.00 |    0 |       2.8 |       2.8 |       2.8 |         2.8 |      True |    camera |                vehicle |           | 
- 19.7 |  follower |       0.00 |    0 |       2.8 |       2.8 |       2.8 |         2.8 |      True |    camera |                vehicle |           | 
- 19.8 |  follower |       0.00 |    0 |       2.8 |       2.8 |       2.8 |         2.8 |      True |    camera |                vehicle |           | 
- 19.9 |  follower |       0.00 |    0 |       2.8 |       2.8 |       2.8 |         2.8 |      True |    camera |                vehicle |           | 
+  3.2 |  follower |      42.74 |    0 |      62.9 |         - |      62.9 |           - |     False |      none |                vehicle |           | 
+  3.3 |  follower |      43.19 |    0 |      63.0 |         - |      63.0 |           - |     False |      none |                vehicle |           | 
+  3.4 |  follower |      43.63 |    0 |      63.1 |         - |      63.1 |           - |     False |      none |                vehicle |           | 
+  3.5 |  follower |      44.08 |    0 |      63.1 |         - |      63.1 |           - |     False |      none |                vehicle |           | 
+  3.6 |  follower |      44.53 |    0 |      63.1 |         - |      63.1 |           - |     False |      none |                vehicle |           | 
+  3.7 |  follower |      44.74 |    0 |      63.1 |         - |      63.1 |           - |     False |      none |                vehicle |           | 
+  3.8 |  follower |      44.74 |    0 |      63.1 |         - |      63.1 |           - |     False |      none |                vehicle |           | 
+  3.9 |  follower |      44.74 |    0 |      63.1 |         - |      63.1 |           - |     False |      none |                vehicle |           | 
+  4.0 |  follower |      44.74 |    0 |      63.1 |         - |      63.1 |           - |     False |      none |                vehicle |           | 
+  4.1 |  follower |      44.74 |    0 |      63.1 |         - |      63.1 |           - |     False |      none |                vehicle |           | 
+  4.2 |  follower |      44.74 |    0 |      63.1 |         - |      63.1 |           - |     False |      none |                vehicle |           | 
+  4.3 |  follower |      44.74 |    0 |      63.1 |         - |      63.1 |           - |     False |      none |                vehicle |           | 
+  4.4 |  follower |      44.74 |    0 |      61.1 |         - |      61.1 |           - |     False |      none |                vehicle |           | 
+  4.5 |  follower |      44.74 |    0 |      59.1 |         - |      59.1 |           - |     False |      none |                vehicle |           | 
+  4.6 |  follower |      44.74 |    0 |      57.1 |         - |      57.1 |           - |     False |      none |                vehicle |           | 
+  4.7 |  follower |      44.74 |    0 |      55.1 |         - |      55.1 |           - |     False |      none |                vehicle |           | 
+  4.8 |  follower |      44.74 |    0 |      53.1 |         - |      53.1 |           - |     False |      none |                vehicle |           | 
+  4.9 |  follower |      44.74 |    0 |      51.1 |         - |      51.1 |           - |     False |      none |                vehicle |           | 
+  5.0 |  follower |      44.74 |    0 |      49.1 |         - |      49.1 |           - |     False |      none |                vehicle |           | 
+  5.1 |  follower |      44.74 |    0 |      47.1 |         - |      47.1 |           - |     False |      none |                vehicle |           | 
+  5.2 |  follower |      44.74 |    0 |      45.1 |         - |      45.1 |           - |     False |      none |                vehicle |           | 
+  5.3 |  follower |      44.74 |    0 |      43.1 |         - |      43.1 |           - |     False |      none |                vehicle |           | 
+  5.4 |  follower |      44.74 |    0 |      41.1 |         - |      41.1 |           - |     False |      none |                vehicle |           | 
+  5.5 |  follower |      44.74 |    0 |      39.1 |         - |      39.1 |           - |     False |      none |                vehicle |           | 
+  5.6 |  follower |      44.74 |    0 |      37.1 |         - |      37.1 |           - |     False |      none |                vehicle |           | 
+  5.7 |  follower |      44.74 |    0 |      35.1 |         - |      35.1 |           - |     False |      none |                vehicle |           | 
+  5.8 |  follower |      44.74 |    0 |      33.1 |         - |      33.1 |           - |     False |      none |                vehicle |           | 
+  5.9 |  follower |      44.74 |    0 |      31.1 |         - |      31.1 |           - |     False |      none |                vehicle |           | 
+  6.0 |  follower |      44.74 |    0 |      29.1 |         - |      29.1 |           - |     False |      none |                vehicle |           | 
+  6.1 |  follower |      44.74 |    0 |      27.1 |         - |      27.1 |           - |     False |      none |                vehicle |           | 
+  6.2 |  follower |      44.74 |    0 |      25.1 |         - |      25.1 |           - |     False |      none |                vehicle |           | 
+  6.3 |  follower |      44.74 |    0 |      23.1 |         - |      23.1 |           - |     False |      none |                vehicle |           | 
+  6.4 |  follower |      44.74 |    0 |      21.1 |         - |      21.1 |           - |     False |      none |                vehicle |           | 
+  6.5 |  follower |      44.74 |    0 |      19.1 |         - |      19.1 |           - |     False |      none |                vehicle |           | 
+  6.6 |  follower |      44.74 |    0 |      17.1 |         - |      17.1 |           - |     False |      none |                vehicle |           | 
+  6.7 |  follower |      44.74 |    0 |      15.1 |         - |      15.1 |           - |     False |      none |                vehicle |           | 
+  6.8 |  follower |      44.74 |    0 |      13.1 |         - |      13.1 |           - |     False |      none |                vehicle |           | 
+  6.9 |  follower |      44.74 |    0 |      11.1 |         - |      11.1 |           - |     False |      none |                vehicle |           | 
+  7.0 |  follower |      44.74 |    0 |       9.1 |         - |       9.1 |           - |     False |      none |                vehicle |           | 
+  7.1 |  follower |      44.74 |    0 |       7.1 |         - |       7.1 |           - |     False |      none |                vehicle |           | 
+  7.2 |  follower |      44.74 |    0 |       5.1 |         - |       5.1 |           - |     False |      none |                vehicle |           | 
+  7.3 |  follower |      44.74 |    0 |       3.1 |         - |       3.1 |           - |     False |      none |                vehicle |           | 
+  7.4 |  follower |      44.74 |    0 |       1.1 |         - |       1.1 |           - |     False |      none |                vehicle |           | 
+  7.5 |  follower |      44.74 |    0 |       0.0 |         - |       0.0 |           - |     False |      none |                vehicle |           | 
+  7.6 |  follower |      44.74 |    0 |       0.0 |         - |       0.0 |           - |     False |      none |                vehicle |           | 
+  7.7 |  follower |      44.74 |    0 |         - |         - |         - |           - |     False |      none |                      - | COLLISION(serious) | 
+  7.8 |  follower |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+  7.9 |  follower |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+  8.0 |  follower |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+  8.1 |  follower |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+  8.2 |  follower |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+  8.3 |  follower |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+  8.4 |  follower |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+  8.5 |  follower |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+  8.6 |  follower |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+  8.7 |  follower |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+  8.8 |  follower |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+  8.9 |  follower |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+  9.0 |  follower |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+  9.1 |  follower |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+  9.2 |  follower |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+  9.3 |  follower |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+  9.4 |  follower |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+  9.5 |  follower |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+  9.6 |  follower |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+  9.7 |  follower |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+  9.8 |  follower |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+  9.9 |  follower |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+ 10.0 |  follower |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+ 10.1 |  follower |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+ 10.2 |  follower |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+ 10.3 |  follower |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+ 10.4 |  follower |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+ 10.5 |  follower |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+ 10.6 |  follower |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+ 10.7 |  follower |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+ 10.8 |  follower |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+ 10.9 |  follower |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+ 11.0 |  follower |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+ 11.1 |  follower |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+ 11.2 |  follower |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+ 11.3 |  follower |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+ 11.4 |  follower |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+ 11.5 |  follower |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+ 11.6 |  follower |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+ 11.7 |  follower |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+ 11.8 |  follower |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+ 11.9 |  follower |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+ 12.0 |  follower |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+ 12.1 |  follower |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+ 12.2 |  follower |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+ 12.3 |  follower |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+ 12.4 |  follower |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+ 12.5 |  follower |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+ 12.6 |  follower |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+ 12.7 |  follower |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+ 12.8 |  follower |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+ 12.9 |  follower |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+ 13.0 |  follower |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+ 13.1 |  follower |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+ 13.2 |  follower |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+ 13.3 |  follower |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+ 13.4 |  follower |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+ 13.5 |  follower |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+ 13.6 |  follower |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+ 13.7 |  follower |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+ 13.8 |  follower |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+ 13.9 |  follower |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+ 14.0 |  follower |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+ 14.1 |  follower |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+ 14.2 |  follower |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+ 14.3 |  follower |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+ 14.4 |  follower |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+ 14.5 |  follower |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+ 14.6 |  follower |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+ 14.7 |  follower |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+ 14.8 |  follower |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+ 14.9 |  follower |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+ 15.0 |  follower |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+ 15.1 |  follower |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+ 15.2 |  follower |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+ 15.3 |  follower |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+ 15.4 |  follower |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+ 15.5 |  follower |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+ 15.6 |  follower |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+ 15.7 |  follower |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+ 15.8 |  follower |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+ 15.9 |  follower |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+ 16.0 |  follower |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+ 16.1 |  follower |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+ 16.2 |  follower |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+ 16.3 |  follower |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+ 16.4 |  follower |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+ 16.5 |  follower |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+ 16.6 |  follower |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+ 16.7 |  follower |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+ 16.8 |  follower |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+ 16.9 |  follower |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+ 17.0 |  follower |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+ 17.1 |  follower |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+ 17.2 |  follower |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+ 17.3 |  follower |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+ 17.4 |  follower |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+ 17.5 |  follower |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+ 17.6 |  follower |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+ 17.7 |  follower |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+ 17.8 |  follower |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+ 17.9 |  follower |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+ 18.0 |  follower |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+ 18.1 |  follower |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+ 18.2 |  follower |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+ 18.3 |  follower |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+ 18.4 |  follower |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+ 18.5 |  follower |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+ 18.6 |  follower |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+ 18.7 |  follower |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+ 18.8 |  follower |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+ 18.9 |  follower |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+ 19.0 |  follower |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+ 19.1 |  follower |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+ 19.2 |  follower |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+ 19.3 |  follower |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+ 19.4 |  follower |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+ 19.5 |  follower |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+ 19.6 |  follower |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+ 19.7 |  follower |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+ 19.8 |  follower |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 
+ 19.9 |  follower |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(serious) | 

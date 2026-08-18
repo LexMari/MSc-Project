@@ -1,5 +1,5 @@
 Scenario: Phantom camera brake near the junction, two vehicles, camera-priority fusion
-Showing all vehicles, one after another (not interleaved tick-by-tick)
+Showing all vehicles, one after another
     t |   vehicle | speed(mph) | lane |     radar |    camera |     lidar | belief_dist | obstacle? |    source |            reacting_to | collision | roundabout
 --- follower ---
   0.0 |  follower |      45.00 |    0 |      95.5 |      95.5 |         - |        95.5 |      True |    camera |                vehicle |           | 

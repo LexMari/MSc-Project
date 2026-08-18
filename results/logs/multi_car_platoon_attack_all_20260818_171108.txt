@@ -1,5 +1,5 @@
 Scenario: Multi-car platoon: four attacks across four fusion policies
-Showing all vehicles, one after another (not interleaved tick-by-tick)
+Showing all vehicles, one after another
     t |   vehicle | speed(mph) | lane |     radar |    camera |     lidar | belief_dist | obstacle? |    source |            reacting_to | collision | roundabout
 --- v1_camera ---
   0.0 | v1_camera |      28.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
