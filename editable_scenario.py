@@ -1,8 +1,13 @@
-"""Editable scenario representation for the GUI
-editor - mirrors the YAML schema load_scenario()/ScenarioConfig
+"""Editable scenario model for the GUI editor.
 
-Only converted to the real schema at save time or read from an existing
-file at load time
+Mirrors the YAML schema rather than ScenarioConfig itself: fields stay as raw
+dicts and strings so a half-finished scenario is representable, which a
+dataclass with typed fields and required arguments could not hold. Conversion
+to the real schema happens only at save time, via YAML and load_scenario().
+
+The constant lists below duplicate the options in fusion.py, navigation.py,
+attacks.py and hazards.py. They exist so the editor can populate dropdowns
+without importing sim_core.
 """
 import yaml
 
@@ -13,8 +18,10 @@ HAZARD_TYPES = ["pedestrian_crossing", "obstacle_in_road"]
 PEDESTRIAN_TYPES = ["adult", "child", "elderly"]
 FEATURE_TYPES = ["junction", "roundabout"]
 
-
 class EditableScenario:
+    """Defaults mirror ScenarioConfig's, so a new scenario saves to the same
+    behaviour an empty YAML would produce.
+    """
     def __init__(self):
         self.name = "New scenario"
         self.duration = 20.0
@@ -30,11 +37,17 @@ class EditableScenario:
         self.spawner = None
 
     def available_feature_ids(self) -> list[str]:
+        """Feature IDs a scenario can use - for dropdowns and validation.
+
+        With no custom features, returns the names Track.__post_init__ creates by
+        default - an empty features list means "use defaults", not "no features".
+        """
         if self.track_features:
             return [f.get("feature_id") for f in self.track_features if f.get("feature_id")]
         return ["junction_1", "roundabout_1"]
 
     def feature_position(self, feature_id: str) -> float | None:
+        """Position of a feature"""
         import math
         if self.track_features:
             for f in self.track_features:

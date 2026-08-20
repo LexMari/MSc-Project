@@ -12,7 +12,7 @@ Batch config format:
   sweep:
     random_seed: {count: 30}
     solo.fusion_policy: [...]             # dotted "vehicle_id.field" targets a specific vehicle
-    visibility: [1.0, 0.5, 0.2]           # no dot targets a top-level ScenarioConfig field
+    visibility: [1.0, 0.5, 0.2]           # no dot targets a ScenarioConfig field
 
 Every combination of the swept values is run once. A field with a dot
 in its name is applied to the named vehicle's VehicleConfig, everything
@@ -29,19 +29,33 @@ from .engine import Simulation
 from .units import ms_to_mph
 
 def _resolve_sweep_values(spec):
+    """Expand a sweep spec into the list of values to run."""
     if isinstance(spec, dict) and "count" in spec:
         return list(range(spec["count"]))
     return spec
 
 def _apply_override(config, field, value):
+    """apply one swept value to a loaded ScenarioConfig
+
+    a dotted vehicle_id.field targets that vehicle's VehicleConfig
+    anything else is applied to ScenarioConfig."""
     if "." in field:
         vehicle_id, attr = field.split(".", 1)
-        vehicle_cfg = next((v for v in config.vehicles if v.vehicle_id == vehicle_id), None)
-        if vehicle_cfg is None:
-            raise ValueError(f"no vehicle {vehicle_id!r} in base scenario to apply sweep field {field!r} to")
-        setattr(vehicle_cfg, attr, value)
+        target = next((v for v in config.vehicles if v.vehicle_id == vehicle_id), None)
+        if target is None:
+            raise ValueError(
+                f"no vehicle {vehicle_id!r} in base scenario to apply sweep field {field!r} to"
+            )
     else:
-        setattr(config, field, value)
+        target, attr = config, field
+
+    if not hasattr(target, attr):
+        raise ValueError(
+            f"{attr!r} is not a field of {type(target).__name__} "
+            f"(sweep field {field!r})"
+        )
+
+    setattr(target, attr, value)
 
 def run_batch(batch_config_path: str, quiet: bool = False) -> list[dict]:
     """Runs every combination in a batch config, writes the results to its output_csv"""

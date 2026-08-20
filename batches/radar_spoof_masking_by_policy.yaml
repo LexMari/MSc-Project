@@ -1,7 +1,6 @@
 # Replicates across 30 seeds instead of one, the comparison already established
 # for this scenario: camera_priority and plausibility_filtered
-# should resist, majority_vote should resist
-# (once LiDAR gives it a tie-break), 
+# should resist, majority_vote should resist (once LiDAR gives it a tie-break)
 # confidence_weighted should not.
 name: "radar_spoof_masking.yaml across every fusion policy and 30 seeds"
 base_scenario: "scenarios/radar_spoof_masking.yaml"

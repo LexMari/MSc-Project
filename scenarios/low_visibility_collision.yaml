@@ -1,15 +1,10 @@
-# Demonstrates that reduced sensor range alone (fog, heavy rain) can
-# still cause a collision, even with a genuine, correctly-perceived
-# pedestrian crossing and no attack at all. 'visibility' scales
+# Demonstrates that reduced sensor range alone can
+# cause a collision, even with a correctly-perceived
+# pedestrian crossing and no attack. 'visibility' scales
 # MAX_SENSOR_RANGE and LIDAR_MAX_SENSOR_RANGE (engine.py) - at 0.15,
 # effective range drops to ~22.5m, too late to brake safely from cruise
-# speed. An oncoming vehicle blocks the swerve lane, since detecting a
-# hazard too late to brake for doesn't mean too late to steer around it
-# - swerving needs far less distance than a full stop, so without
-# something blocking that escape route, solo would swerve around the
-# pedestrian instead of colliding (see _maybe_swerve in engine.py,
-# switched from ground truth to belief-based detection)
-name: "Reduced visibility alone causes a collision - no attack required"
+# speed.
+name: "Reduced visibility causes a collision"
 duration: 20
 timestep: 0.1
 visibility: 0.15

@@ -2,11 +2,8 @@
 # together, defeating majority_vote and confidence_weighted) but with
 # plausibility_filtered instead. Both spoofed sensors jump implausibly
 # (58m -> 200m in one tick) and are filtered out. Camera survives with a
-# corroboration history from before the attack, so it's trusted
-# directly. See fusion.py's PlausibilityFilteredFusion for the full
-# design rationale, including the camera_phantom regression an earlier
-# version of this policy didn't resist.
-name: "Plausibility-filtered fusion resists the coordinated multi-sensor spoof"
+# corroboration history from before the attack, so it is trusted completely.
+name: "Plausibility-filtered fusion resists multi-sensored spoof attack"
 duration: 20
 timestep: 0.1
 

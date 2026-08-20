@@ -1,9 +1,8 @@
 # Lead is attacked (radar spoof masking a pedestrian crossing under
 # confidence_weighted fusion, the one policy radar_spoof_masking.yaml
 # reliably defeats) and crashes. Follower, 65m behind at the same
-# cruise speed the whole approach (so the gap never closes until Lead
-# suddenly stops), is not attacked at all and only has to react.
-name: "Unattacked Follower avoids Lead's attack-induced collision"
+# cruise speed the whole approach is not attacked and only has to react
+name: "Unattacked Follower avoids Lead's collision"
 duration: 20
 timestep: 0.1
 random_seed: 0

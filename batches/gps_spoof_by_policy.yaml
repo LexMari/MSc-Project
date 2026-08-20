@@ -1,5 +1,5 @@
 # Puts the existing naive-vs-plausibility_checked GPS comparison
-# into a single sweep on one base scenario.
+# into a single sweep on one base scenario
 name: "gps_roundabout_naive.yaml swept across GPS policy"
 base_scenario: "scenarios/gps_roundabout_naive.yaml"
 output_csv: "results/gps_spoof_by_policy.csv"

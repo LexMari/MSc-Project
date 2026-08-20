@@ -1,10 +1,11 @@
-"""Runs a scenario with no visual layer and prints what happened, tick by
-tick, for one vehicle. This exists so the core engine can be tested
-before any pygame code exists.
+"""Runs a scenario with no visual layer and prints what happened tick
+by tick.
 
-By default, prints the FIRST vehicle listed in the scenario's YAML (which
-happens to be the attacked one in every current example scenario). Pass a
-second argument to print a different vehicle by name.
+Usage - python main_headless.py scenarios/some_scenario.yaml
+
+By default, prints the FIRST vehicle listed in the scenario's YAML
+add a second argument of another vehicle's name to get the output for
+its perspective - or instead use "all"
 """
 import csv
 import os
@@ -16,10 +17,6 @@ from sim_core.engine import Simulation
 from sim_core.units import ms_to_mph
 
 class Tee:
-    """Writes everything to both the real stdout and a file at once, so
-    existing print() calls don't need to change at all to also produce a
-    saved record"""
-
     def __init__(self, *streams):
         self.streams = streams
 
@@ -87,9 +84,9 @@ def main(scenario_path: str, vehicle_id: str | None = None, csv_path: str | None
         def sensor_str(reading):
             # a raw sensor reading, shown as its distance with a trailing
             # '*' if this reading was attacker-controlled - so an
-            # attack that a fusion policy successfully ignores (e.g.
-            # radar_spoof against camera_priority) is still visible here,
-            # even though belief_dist never reflects it
+            # attack that a fusion policy successfully ignores
+            # is still visible here, even though belief_dist may
+            # never reflect that
             if reading is None or reading.detected_distance is None:
                 return "-"
             marker = "*" if reading.is_attacked else ""
@@ -131,7 +128,7 @@ def main(scenario_path: str, vehicle_id: str | None = None, csv_path: str | None
 
     if not printed_any:
         available = sorted({entry.vehicle_id for entry in log})
-        print(f"\nNo data for {vehicle_id!r}. Vehicles actually present in this run: {available}")
+        print(f"\nNo data for {vehicle_id!r}. Vehicles present in this run: {available}")
 
 if __name__ == "__main__":
     path = sys.argv[1] if len(sys.argv) > 1 else "scenarios/phantom_brake.yaml"
@@ -152,5 +149,5 @@ if __name__ == "__main__":
             main(path, vehicle, csv_path)
         finally:
             sys.stdout = real_stdout
-    print(f"\n(full output also saved to {log_path})")
+    print(f"\n(output saved to {log_path})")
     print(f"(per-tick CSV also saved to {csv_path})")

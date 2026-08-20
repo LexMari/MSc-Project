@@ -1,9 +1,7 @@
-# A large, sudden GPS spoof (offset ~141m) triggers as Solo approaches
-# the roundabout. Under the naive GPS policy, which trusts every reading
-# unconditionally, the corrupted belief (see GPS_CONFUSION_MAGNITUDE in
-# engine.py) is judged a navigation mistake - Solo takes an extra,
-# unplanned lap. Contrast with gps_roundabout_protected.yaml, the same
-# attack against a plausibility-checked policy.
+# A large GPS spoof (offset ~141m) triggers as Solo approaches
+# the roundabout. Solo uses the naive GPS policy, which trusts every reading
+# so consequently misses the roundabout exit and has to do
+# another loop
 name: "GPS spoof causes a missed roundabout exit (naive policy)"
 duration: 35
 timestep: 0.1

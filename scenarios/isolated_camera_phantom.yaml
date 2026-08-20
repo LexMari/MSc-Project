@@ -1,10 +1,5 @@
-# Minimal, deliberately isolated scenario - no track features, no
-# second vehicle, no traffic light - so nothing but the phantom object
-# is present. Tests whether a fusion policy is fooled by camera_phantom
-# itself, without a real hazard elsewhere confounding the result (see
-# phantom_brake.yaml, which has a second vehicle and a real junction
-# light and can't answer this question in isolation).
-name: "Isolated camera phantom - nothing else in the scenario to react to"
+# Tests whether a fusion policy is fooled by camera_phantom itself
+name: "Isolated camera phantom"
 duration: 5
 timestep: 0.1
 

@@ -1,6 +1,6 @@
 # Second pass, narrowing the visibility_threshold_sweep.yaml result
 # (crash at 0.30, safe at 0.35) down further.
-name: "low_visibility_collision.yaml - fine threshold pass"
+name: "low_visibility_collision.yaml - narrowing threshold"
 base_scenario: "scenarios/low_visibility_collision.yaml"
 output_csv: "results/visibility_threshold_sweep_fine.csv"
 

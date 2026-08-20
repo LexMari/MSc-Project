@@ -18,6 +18,6 @@ run_id,oncoming.start_speed,vehicle_id,collided,severity,collision_time,min_spee
 8,14.752,oncoming,False,,,33.0,33.0
 8,14.752,solo,True,slight,7.899999999999988,0.0,0.0
 9,14.976,oncoming,False,,,33.5,33.5
-9,14.976,solo,True,fatal,7.899999999999988,0.0,0.0
+9,14.976,solo,True,slight,7.899999999999988,0.0,0.0
 10,15.199,oncoming,False,,,34.0,34.0
 10,15.199,solo,True,slight,7.899999999999988,0.0,0.0

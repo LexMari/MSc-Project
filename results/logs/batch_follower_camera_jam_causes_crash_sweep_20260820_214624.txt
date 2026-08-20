@@ -1,0 +1,18 @@
+run 1/16: {'follower.fusion_policy': 'camera_priority', 'lead.start_distance': 60}
+run 2/16: {'follower.fusion_policy': 'camera_priority', 'lead.start_distance': 65}
+run 3/16: {'follower.fusion_policy': 'camera_priority', 'lead.start_distance': 70}
+run 4/16: {'follower.fusion_policy': 'camera_priority', 'lead.start_distance': 75}
+run 5/16: {'follower.fusion_policy': 'majority_vote', 'lead.start_distance': 60}
+run 6/16: {'follower.fusion_policy': 'majority_vote', 'lead.start_distance': 65}
+run 7/16: {'follower.fusion_policy': 'majority_vote', 'lead.start_distance': 70}
+run 8/16: {'follower.fusion_policy': 'majority_vote', 'lead.start_distance': 75}
+run 9/16: {'follower.fusion_policy': 'confidence_weighted', 'lead.start_distance': 60}
+run 10/16: {'follower.fusion_policy': 'confidence_weighted', 'lead.start_distance': 65}
+run 11/16: {'follower.fusion_policy': 'confidence_weighted', 'lead.start_distance': 70}
+run 12/16: {'follower.fusion_policy': 'confidence_weighted', 'lead.start_distance': 75}
+run 13/16: {'follower.fusion_policy': 'plausibility_filtered', 'lead.start_distance': 60}
+run 14/16: {'follower.fusion_policy': 'plausibility_filtered', 'lead.start_distance': 65}
+run 15/16: {'follower.fusion_policy': 'plausibility_filtered', 'lead.start_distance': 70}
+run 16/16: {'follower.fusion_policy': 'plausibility_filtered', 'lead.start_distance': 75}
+
+32 rows written

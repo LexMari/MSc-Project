@@ -1,21 +1,18 @@
-# First is already on the roundabout, moving slowly (5mph, so it takes
-# ~13s to cross the 30m occupancy zone - see ROUNDABOUT_OCCUPANCY_RADIUS
-# in engine.py). Second, approaching at cruise speed, would need to
-# yield and come to a full stop in the unattacked baseline (verified in
-# the logbook - no attacks, no collision, Second stops and then follows
-# First at its slower pace).
-name: "Two independently-attacked vehicles at the roundabout"
+# First is already on the roundabout, moving slowly
+# Second, approaching at cruise speed, would need to
+# brake and come to a full stop in the unattacked baseline
+name: "Two attacked vehicles at the roundabout"
 duration: 25
 timestep: 0.1
 
 vehicles:
   - vehicle_id: "first"
     start_distance: 140
-    start_speed_mph: 5
+    start_speed_mph: 20
     fusion_policy: "camera_priority"
     gps_policy: "naive"
   - vehicle_id: "second"
-    start_distance: 0
+    start_distance: 50
     start_speed_mph: 44.74
     fusion_policy: "camera_priority"
 

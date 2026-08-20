@@ -1,4 +1,4 @@
-Scenario: Radar spoof masks a genuine pedestrian crossing
+Scenario: Radar spoof masks a pedestrian crossing
 Showing all vehicles, one after another
     t |   vehicle | speed(mph) | lane |     radar |    camera |     lidar | belief_dist | obstacle? |    source |            reacting_to | collision | roundabout
 --- solo ---

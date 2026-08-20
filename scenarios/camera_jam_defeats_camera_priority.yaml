@@ -1,11 +1,6 @@
-# Unlike radar_spoof_masking.yaml (which fabricates a radar reading), a
-# jamming attack forces its target sensor to report nothing detected at
-# all - easier to detect in principle, but still harmful if the fusion
-# policy has no fallback. camera_priority has no fallback: jamming
-# camera removes its only source of truth, so it drives straight
-# through the pedestrian crossing. majority_vote and confidence_weighted
-# fall back to radar/LiDAR and are unaffected.
-name: "Camera jam defeats camera_priority's single point of failure"
+# Jamming a camera removes its ground truth that it trusts
+# This leads to a collision with the pedestrian
+name: "Camera jam defeats camera_priority"
 duration: 20
 timestep: 0.1
 

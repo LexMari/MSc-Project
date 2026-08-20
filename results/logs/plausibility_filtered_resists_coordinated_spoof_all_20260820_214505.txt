@@ -1,4 +1,4 @@
-Scenario: Plausibility-filtered fusion resists the coordinated multi-sensor spoof
+Scenario: Plausibility-filtered fusion resists multi-sensored spoof attack
 Showing all vehicles, one after another
     t |   vehicle | speed(mph) | lane |     radar |    camera |     lidar | belief_dist | obstacle? |    source |            reacting_to | collision | roundabout
 --- solo ---

@@ -1,13 +1,12 @@
-# A genuine pedestrian crossing sits ahead of Solo, walking across the
+# A pedestrian crossing sits ahead of Solo, walking across the
 # road (PedestrianCrossing.lane_at() in hazards.py) - in Solo's lane for
 # the first half of the crossing, then the opposite lane. A radar spoof
 # masks it rather than fabricating a false object: radar reports 200m
 # ("nothing there") while camera and LiDAR keep reporting the real
 # distance. With three sensors, camera_priority and majority_vote both
-# correctly brake and resume; confidence_weighted still gets pulled
+# correctly brake and resume - confidence_weighted still gets pulled
 # toward the spoofed value since it has no concept of being outvoted.
-# See test_engine.py for the full per-policy comparison.
-name: "Radar spoof masks a genuine pedestrian crossing"
+name: "Radar spoof masks a pedestrian crossing"
 duration: 20
 timestep: 0.1
 

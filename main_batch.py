@@ -1,11 +1,9 @@
-"""CLI entry point for running a batch experiment
+"""Entry point for running a batch experiment
 
 Usage: python main_batch.py batches/some_batch.yaml
 
 The per-row results already go to output_csv. This also saves the console's own
-progress log to results/logs/, the same way main_headless.py does -
-the CSV alone doesn't capture which combination ran in which order, or
-the total run count.
+progress log to results/logs/, the same way main_headless.py does
 """
 import os
 import sys

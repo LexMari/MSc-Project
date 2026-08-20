@@ -1,11 +1,6 @@
-# Five vehicles in a tight platoon (80m gaps, calibrated to exceed
-# the safe following distance so none brake for each other before any
-# attack fires), each on a different fusion policy, approach a
-# pedestrian crossing together. Four are simultaneously targeted by a
-# different attack type matched to that policy's known weakness.
-# Oncoming traffic blocks any swerve, so avoidance has to be braking
-# alone. See multi_car_platoon_attack_randomised.yaml for the
-# background-traffic variant of this same setup.
+# Five vehicles in a platoon each on a different fusion policy, approach a
+# pedestrian crossing together. Four are targeted by an
+# attack type matched to that policy's known weakness
 name: "Multi-car platoon: four attacks across four fusion policies"
 duration: 40
 timestep: 0.1

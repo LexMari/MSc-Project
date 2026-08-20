@@ -1,4 +1,4 @@
-Scenario: GPS spoof correctly rejected at a roundabout (plausibility-checked policy)
+Scenario: GPS spoof rejected at a roundabout (plausibility-checked policy)
 Showing all vehicles, one after another
     t |   vehicle | speed(mph) | lane |     radar |    camera |     lidar | belief_dist | obstacle? |    source |            reacting_to | collision | roundabout
 --- solo ---

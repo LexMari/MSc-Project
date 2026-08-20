@@ -1,12 +1,12 @@
-# Finds the actual oncoming-speed threshold at which obstacle_swerve.yaml's
-# swerve stops being safe, rather than checking only one arbitrary speed.
+# Finds the oncoming-speed threshold at which obstacle_swerve.yaml's
+# swerve stops being safe, rather than checking only one speed.
 #
 # Values are in m/s, not mph - load_scenario() converts start_speed_mph
 # to start_speed (m/s) at load time, and the batch sweep applies to the
 # already-loaded VehicleConfig, so the sweep field is start_speed and
 # needs m/s values here, not the mph the scenario file itself uses.
 #
-# m/s with their mph equivalents:
+# m/s with their mph equivalents for reference:
 # 8.941=20mph, 9.835=22, 10.729=24, 11.623=26, 12.517=28, 13.411=30,
 # 13.858=31, 14.305=32, 14.752=33, 14.976=33.5, 15.199=34
 name: "obstacle_swerve.yaml swept across oncoming speed"

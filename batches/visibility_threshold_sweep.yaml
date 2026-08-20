@@ -1,11 +1,6 @@
 # Finds the visibility threshold below which low_visibility_collision.yaml's
 # collision starts happening, rather than relying on the single fixed
 # value (0.15).
-#
-# No seed sweep here - this scenario is deterministic (the
-# pedestrian's start_time is fixed at 0.0, not left to the random
-# default, and no vehicle has braking_variation set), so repeating
-# seeds would just re-run identical results.
 name: "low_visibility_collision.yaml swept across visibility levels"
 base_scenario: "scenarios/low_visibility_collision.yaml"
 output_csv: "results/visibility_threshold_sweep.csv"

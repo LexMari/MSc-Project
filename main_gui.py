@@ -1,18 +1,17 @@
-"""Real-time playback GUI for a scenario
+"""Pygame front-end, the scenario editor with live preview and real-time playback
 
-Usage: python main_gui.py <scenario.yaml>
+Usage: python main_gui.py [scenario.yaml] (or just running this file without yaml for no scenario)
 
-This is a rendering layer on top of the existing simulation engine
-- it calls Simulation.step() in a loop exactly like main_headless.py
-does, and draws from the TickResult objects (and the Simulation object
-itself, for track/hazard/traffic-light state not carried in
-TickResult) that already exist. No simulation logic lives here
+This is a rendering layer only. Playback drives Simulation.step() in a loop
+that is the same as main_headless.py and draws from the returned TickResults, plus
+the Simulation object itself for track, hazard and light state that TickResult
+doesn't carry. No simulation logic lives in this file.
 
-Controls:
+Playback controls:
   SPACE       pause / resume
   UP / DOWN   double / halve playback speed
-  R           restart the scenario from the beginning
-  ESC         quit
+  R           restart from the beginning
+  ESC         back to the editor
 """
 import math
 import os
@@ -32,7 +31,7 @@ TRACK_MARGIN = 70
 SIDEBAR_WIDTH = 300
 FPS = 60
 VEHICLE_RADIUS = 7
-ROAD_HALF_WIDTH = LANE_WIDTH + 2.0   # covers both lanes plus a wider verge either side of the true centreline
+ROAD_HALF_WIDTH = LANE_WIDTH + 2.0
 
 COLOR_BG = (58, 102, 56)
 COLOR_SIDEBAR_BG = (18, 19, 24)
@@ -54,22 +53,14 @@ COLOR_BUILDING = (26, 26, 30)
 COLOR_BUILDING_ROOF_EDGE = (55, 55, 62)
 COLOR_FEATURE_PREVIEW = (255, 235, 80)
 
-
 class Camera:
-    """Maps world (x, y) metres to screen pixels, fitted to the track's
-    own bounding box - see Track.position_at in track.py for why the
-    box is [-radius, straight_length+radius] x [0, 2*radius]. World Y
-    increases "up" (matching the track's own math), screen Y increases
-    down, so the vertical axis is flipped here.
+    """Maps world (x, y) metres to pixels, fitted to the track's
+    own box in the application
 
     When the track's own aspect ratio doesn't match the available
-    drawing area (usually true - the track is wide and short), the
-    scale is constrained by whichever dimension runs out first, leaving
-    slack in the other. That slack is split evenly as extra margin on
-    both sides, so the track is centred in the available space rather
-    than anchored to one corner with all the dead space left on one
-    side"""
-
+    drawing area, the scale is constrained by whichever dimension runs
+    out first. The track is always centered in the available space.
+    """
     def __init__(self, track, width, height, margin):
         self.min_x = -track.radius
         self.max_x = track.straight_length + track.radius
@@ -91,13 +82,12 @@ class Camera:
         sy = self.height - self.margin_y - (y - self.min_y) * self.scale
         return int(sx), int(sy)
 
-
 def offset_track_points(track, offset, step=1.0):
-    """Points along the track, offset perpendicular to the true
-    centreline by a fixed distance - generalises Track.lane_position_at
-    so the same maths can produce the road's outer edge, inner edge, or
-    the true centreline (offset=0). Matches lane_position_at's own sign convention
-    positive offset is the lane-0 side"""
+    """Points along the track offset perpendicular to the centreline.
+
+    Generalises Track.lane_position_at so the same maths yields the road's outer
+    edge, inner edge, or the centreline itself (offset=0)
+    """
     points = []
     s = 0.0
     while s < track.total_length:
@@ -110,7 +100,6 @@ def offset_track_points(track, offset, step=1.0):
     points.append((x + offset * math.sin(heading), y - offset * math.cos(heading)))
     return points
 
-
 def build_static_geometry(track):
     """Returns a dict of screen-space-ready world point lists"""
     return {
@@ -118,7 +107,6 @@ def build_static_geometry(track):
         "inner_edge": offset_track_points(track, -ROAD_HALF_WIDTH),
         "centreline": offset_track_points(track, 0.0, step=1.5),
     }
-
 
 def draw_track(screen, camera, geometry):
     outer = [camera.to_screen(x, y) for x, y in geometry["outer_edge"]]
@@ -131,7 +119,6 @@ def draw_track(screen, camera, geometry):
         if i + 2 < len(centre):
             pygame.draw.line(screen, COLOR_LANE_DIVIDER, centre[i], centre[i + 2], 2)
 
-
 def _nearest_feature_gap(track, s):
     return min(
         min(track.distance_ahead(s, f.position), track.distance_ahead(f.position, s))
@@ -139,16 +126,13 @@ def _nearest_feature_gap(track, s):
     ) if track.features else float("inf")
 
 
-MAX_BUILDING_HALF_DIAGONAL = ((34.0 ** 2 + 26.0 ** 2) ** 0.5) / 2   # ~21.4m - half the worst-case diagonal across the building size range in generate_buildings, used as a fixed safety margin for both along-road spacing and road-perpendicular setback. An axis-aligned rectangle's true extent along an arbitrary direction can be as large as its diagonal, not just its width or height - the road's local heading varies continuously around the curves, so a size-dependent estimate like max(w, h) genuinely under-measured on angled sections, which is what caused real overlaps rather than just an overly cautious margin.
-
+MAX_BUILDING_HALF_DIAGONAL = ((34.0 ** 2 + 26.0 ** 2) ** 0.5) / 2
 
 def generate_buildings(track, seed=1234, feature_clearance=50.0, gap_from_road=(4.0, 10.0), gap_between=(20.0, 45.0)):
-    """Generates a fixed, reproducible set of building footprints along
-    both sides of the road, following its own curve (including around
-    the semicircular ends) for WHERE each building sits, while every
-    building stays axis-aligned to the world - not rotated to match the
-    road's local heading (see draw_buildings). Each building is a
-    single plain rectangle with randomised width and height"""
+    """Generates a fixed set of building footprints along
+    both sides of the road, following its curve for where each building sits
+
+    Each building is a single plain rectangle with randomised width and height"""
     rng = random.Random(seed)
     buildings = []
 
@@ -163,7 +147,8 @@ def generate_buildings(track, seed=1234, feature_clearance=50.0, gap_from_road=(
             w = rng.uniform(14.0, 34.0)
             h = rng.uniform(11.0, 26.0)
             setback = ROAD_HALF_WIDTH + MAX_BUILDING_HALF_DIAGONAL + rng.uniform(*gap_from_road)
-            setback = min(setback, track.radius * 0.45)   # on a tight custom track, an inward setback this large could otherwise push a building far enough toward the loop's interior to collide with one on the opposite side of the curve
+            # Capped so buildings do not interfere with a track depending on its size
+            setback = min(setback, track.radius * 0.45)
             bx = x + side * setback * math.sin(heading)
             by = y - side * setback * math.cos(heading)
             buildings.append((bx, by, heading, [(0.0, 0.0, w, h)]))
@@ -171,7 +156,6 @@ def generate_buildings(track, seed=1234, feature_clearance=50.0, gap_from_road=(
             s += 2 * MAX_BUILDING_HALF_DIAGONAL + rng.uniform(*gap_between)
 
     return buildings
-
 
 def draw_buildings(screen, camera, buildings):
     for bx, by, _heading, rects in buildings:
@@ -182,7 +166,6 @@ def draw_buildings(screen, camera, buildings):
             screen_corners = [camera.to_screen(wx, wy) for wx, wy in corners]
             pygame.draw.polygon(screen, COLOR_BUILDING, screen_corners)
             pygame.draw.polygon(screen, COLOR_BUILDING_ROOF_EDGE, screen_corners, 1)
-
 
 def draw_features(screen, camera, sim, font):
     for feature in sim.track.features:
@@ -257,9 +240,7 @@ def draw_features(screen, camera, sim, font):
             sx, sy = camera.to_screen(x, y)
             pygame.draw.rect(screen, COLOR_HAZARD_OBSTACLE, (sx - 6, sy - 6, 12, 12))
 
-
-ROUNDABOUT_OCCUPANCY_RADIUS = 15.0   # metres either side of a roundabout's marked position that counts as "on" it - must match engine.py's own constant of the same name, duplicated here rather than imported since it's a private module-level constant, not part of the engine's public interface
-
+ROUNDABOUT_OCCUPANCY_RADIUS = 15.0   # metres either side of a roundabout's marked position that counts as something being on it
 
 def roundabout_swept_position(sim, vehicle_id, real_x, real_y):
     vehicle = sim.vehicles.get(vehicle_id)
@@ -280,7 +261,7 @@ def roundabout_swept_position(sim, vehicle_id, real_x, real_y):
             entry_angle = math.atan2(entry_y - cy, entry_x - cx)
             exit_angle = math.atan2(exit_y - cy, exit_x - cx)
 
-            side = 1 if vehicle.lane == 0 else -1
+            side = -1 if vehicle.lane == 0 else 1
             preferred_angle = math.atan2(-side * math.cos(road_heading), side * math.sin(road_heading))
 
             def _angular_distance(a, b):
@@ -300,9 +281,9 @@ def roundabout_swept_position(sim, vehicle_id, real_x, real_y):
             total_excursion = sim.track.feature_circumference(feature.feature_id)
             progress = 1.0 - (vehicle.roundabout_excursion_remaining / total_excursion)
             progress = max(0.0, min(1.0, progress))
-            turn_sign = 1 if vehicle.direction >= 0 else -1
+            turn_sign = -1 if vehicle.direction >= 0 else 1
             angle = base_angle + turn_sign * progress * 2 * math.pi
-            ring_radius = feature.radius * 0.775   # midpoint of the drivable ring (island sits at 0.55x, outer kerb at 1.0x - see the matching 0.55 factor in draw_features), so the marker stays on the circulating carriageway itself rather than outside the outer kerb
+            ring_radius = feature.radius * 0.775   # midpoint of the drivable ring so that vehicles go around the roundabout properly
             return cx + ring_radius * math.cos(angle), cy + ring_radius * math.sin(angle)
         return real_x, real_y
 
@@ -320,12 +301,10 @@ def roundabout_swept_position(sim, vehicle_id, real_x, real_y):
         entry_angle = math.atan2(entry_y - cy, entry_x - cx)
         exit_angle = math.atan2(exit_y - cy, exit_x - cx)
 
-        # There are two possible arcs between entry and exit (going
-        # clockwise or counter-clockwise) - which one is correct
-        # depends on the lane, since lane 0 and lane 1 sit on opposite
-        # sides of the road and should use opposite halves of the ring.
-        side = 1 if vehicle.lane == 0 else -1
-        preferred_angle = math.atan2(-side * math.cos(road_heading), side * math.sin(road_heading))
+        # Sets up the direction that a vehicle should go around
+        # the roundabout depending on its lane
+        lane_x, lane_y, _h = sim.track.lane_position_at(feature.position, vehicle.lane)
+        preferred_angle = math.atan2(lane_y - cy, lane_x - cx)
 
         def _angular_distance(a, b):
             d = (a - b) % (2 * math.pi)
@@ -337,27 +316,19 @@ def roundabout_swept_position(sim, vehicle_id, real_x, real_y):
         mid_cw = entry_angle + sweep_cw / 2
         sweep = sweep_ccw if _angular_distance(mid_ccw, preferred_angle) <= _angular_distance(mid_cw, preferred_angle) else sweep_cw
 
-        # t=0 at entry (gap=+RADIUS, vehicle just entering the zone),
-        # t=1 at exit (gap=-RADIUS, about to leave it) - previously
-        # inverted (1.0 at entry, 0.0 at exit), so the marker started
-        # at the exit point and swept backwards as the vehicle actually
-        # moved forwards, which combined with the over-rotated sweep
-        # above produced the reported teleport-and-spin appearance.
         t = (ROUNDABOUT_OCCUPANCY_RADIUS - gap) / (2 * ROUNDABOUT_OCCUPANCY_RADIUS)
         t = max(0.0, min(1.0, t))
         angle = entry_angle + sweep * t
-        ring_radius = feature.radius * 0.775   # midpoint of the drivable ring - see the matching comment in the excursion branch above
+        ring_radius = feature.radius * 0.775   # midpoint of the lane on a roundabout
         return cx + ring_radius * math.cos(angle), cy + ring_radius * math.sin(angle)
 
     return real_x, real_y
-
 
 def vehicle_is_attacked(result) -> bool:
     for reading in (result.radar_reading, result.camera_reading, result.lidar_reading):
         if reading is not None and reading.is_attacked:
             return True
     return False
-
 
 def draw_vehicles(screen, camera, font, latest_by_id, sim):
     screen_positions = {}
@@ -376,12 +347,9 @@ def draw_vehicles(screen, camera, font, latest_by_id, sim):
         pygame.draw.circle(screen, colour, (sx, sy), VEHICLE_RADIUS)
         pygame.draw.circle(screen, COLOR_TEXT, (sx, sy), VEHICLE_RADIUS, 1)
 
-    # labels drawn in a second pass, staggered vertically for any
-    # vehicles whose markers are close enough on screen to make
-    # overlapping labels illegible (e.g. two vehicles at the same
-    # collision point) - a real crash puts vehicles on top of
-    # each other, so the markers themselves are left overlapping,
-    # only the text labels are offset
+    # If vehicle labels are too close they should
+    # be stacked vertically - given we are working
+    # with crashes this is frequent
     close_threshold_px = VEHICLE_RADIUS * 3
     placed_label_ids = list(latest_by_id.keys())
     for i, vehicle_id in enumerate(placed_label_ids):
@@ -393,7 +361,6 @@ def draw_vehicles(screen, camera, font, latest_by_id, sim):
                 stack_index += 1
         label = font.render(vehicle_id, True, COLOR_TEXT_DIM)
         screen.blit(label, (sx + VEHICLE_RADIUS + 2, sy - 8 + stack_index * 14))
-
 
 def draw_sidebar(screen, font, font_bold, sim, latest_by_id, config, paused, speed_multiplier):
     x0 = WINDOW_WIDTH - SIDEBAR_WIDTH
@@ -449,76 +416,15 @@ def draw_sidebar(screen, font, font_bold, sim, latest_by_id, config, paused, spe
         screen.blit(font.render(line, True, COLOR_TEXT_DIM), (x0 + 16, y))
         y += 18
 
-
 def list_scenarios() -> list[str]:
-    """Every .yaml file in scenarios/ sorted for the picker
-    menu"""
+    """Every .yaml file in scenarios/ sorted for the drop-down menu"""
     import glob
     return sorted(glob.glob(os.path.join("scenarios", "*.yaml")))
-
-
-def run_menu(screen, clock, font, font_bold) -> str | None:
-    from editor_widgets import ScrollPanel, COLOR_WIDGET_BG_HOVER
-
-    paths = list_scenarios()
-    row_height = 34
-    panel_rect = (40, 90, WINDOW_WIDTH - 80, WINDOW_HEIGHT - 130)
-    panel = ScrollPanel(panel_rect, max(len(paths) * row_height, panel_rect[3]))
-    selected_index = 0 if paths else None
-
-    running = True
-    chosen_path = None
-    while running:
-        clock.tick(FPS)
-        for event in pygame.event.get():
-            if event.type == pygame.QUIT:
-                return None
-            elif event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_ESCAPE:
-                    return None
-                elif event.key == pygame.K_DOWN and paths:
-                    selected_index = min((selected_index or 0) + 1, len(paths) - 1)
-                elif event.key == pygame.K_UP and paths:
-                    selected_index = max((selected_index or 0) - 1, 0)
-                elif event.key == pygame.K_RETURN and selected_index is not None:
-                    chosen_path = paths[selected_index]
-                    running = False
-            elif event.type == pygame.MOUSEWHEEL:
-                panel.handle_scroll(event)
-            elif event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
-                translated = panel.translate_event(event)
-                if translated is not None:
-                    row = translated.pos[1] // row_height
-                    if 0 <= row < len(paths):
-                        selected_index = row
-                        chosen_path = paths[row]
-                        running = False
-
-        screen.fill(COLOR_BG)
-        title = font_bold.render("Select a scenario", True, COLOR_TEXT)
-        screen.blit(title, (40, 30))
-        hint = font.render("UP/DOWN + ENTER, or click - ESC to quit", True, COLOR_TEXT_DIM)
-        screen.blit(hint, (40, 60))
-
-        panel.surface.fill(COLOR_SIDEBAR_BG)
-        for i, path in enumerate(paths):
-            row_rect = pygame.Rect(0, i * row_height, panel.rect.width, row_height)
-            if i == selected_index:
-                pygame.draw.rect(panel.surface, COLOR_WIDGET_BG_HOVER, row_rect)
-            name = os.path.splitext(os.path.basename(path))[0]
-            text_surf = font.render(name, True, COLOR_TEXT)
-            panel.surface.blit(text_surf, (12, row_rect.y + (row_height - text_surf.get_height()) // 2))
-        panel.blit_to(screen)
-
-        pygame.display.flip()
-
-    return chosen_path
-
 
 def run_playback(screen, clock, font, font_bold, scenario_path: str) -> None:
     config = load_scenario(scenario_path)
     sim = Simulation(config)
-    pygame.display.set_caption(f"AV Cyber-Attack Simulator - {config.name}")
+    pygame.display.set_caption(f"AV Sensor/Fusion Attack Simulator - {config.name}")
 
     camera = Camera(sim.track, WINDOW_WIDTH - SIDEBAR_WIDTH, WINDOW_HEIGHT, TRACK_MARGIN)
     geometry = build_static_geometry(sim.track)
@@ -526,6 +432,8 @@ def run_playback(screen, clock, font, font_bold, scenario_path: str) -> None:
 
     paused = False
     speed_multiplier = 1.0
+    # Accumulator so that scenarios can be played out in real-time
+    # or scaled to the speed multiplier if you're bored
     accumulator = 0.0
     latest_by_id: dict = {}
 
@@ -572,15 +480,14 @@ def run_playback(screen, clock, font, font_bold, scenario_path: str) -> None:
         draw_sidebar(screen, font, font_bold, sim, latest_by_id, config, paused, speed_multiplier)
         pygame.display.flip()
 
-
 def _draw_feature_preview_markers(screen, camera, track, font, in_progress=None):
-    """Draws a placeholder circle for each track feature, purely
-    so an added junction or roundabout is actually visible in the
-    editor's live preview
+    """Draws a placeholder circle for each track feature
+    so that a junction/roundabout can be viewable while
+    creating a new scenario.
 
     a junction gets a dot sitting right on the road at its position
     a roundabout gets a hollow circle outline sized to
-    its own actual radius"""
+    its own radius"""
     def _draw_one(feature_type, position, radius, confirmed):
         x, y, _heading = track.position_at(position)
         sx, sy = camera.to_screen(x, y)
@@ -606,7 +513,6 @@ def _draw_feature_preview_markers(screen, camera, track, font, in_progress=None)
         radius = in_progress.get("radius") if in_progress.get("feature_type") == "roundabout" else None
         _draw_one(in_progress.get("feature_type", "junction"), in_progress.get("position", 0.0), radius, confirmed=False)
 
-
 def _draw_vehicle_preview_markers(screen, camera, track, vehicles, font, in_progress=None):
     for v in vehicles:
         try:
@@ -631,7 +537,6 @@ def _draw_vehicle_preview_markers(screen, camera, track, vehicles, font, in_prog
             screen.blit(label, (sx + 10, sy - 7))
         except Exception:
             pass
-
 
 def run_editor(screen, clock, font, font_bold, initial_path: str | None = None) -> None:
     from editor_widgets import TextField, Button, Dropdown, ScrollPanel, Slider, COLOR_WIDGET_BG_HOVER
@@ -920,7 +825,7 @@ def run_editor(screen, clock, font, font_bold, initial_path: str | None = None) 
     def _toggle_spawner():
         if editable.spawner is None:
             if sf_feature.value is None:
-                state["message"] = "no track feature available for a spawner yet"
+                state["message"] = "no track feature available for a spawner"
                 return
             editable.spawner = {"feature_id": sf_feature.value, "max_concurrent": 5, "speed_mph": 30.0, "fusion_policy": FUSION_POLICIES[0]}
             state["message"] = "spawner enabled"
@@ -946,7 +851,6 @@ def run_editor(screen, clock, font, font_bold, initial_path: str | None = None) 
 
     editor_panel_rect = pygame.Rect(16, 218, LEFT_WIDTH - 32, WINDOW_HEIGHT - 236)
     editor_panel = ScrollPanel(editor_panel_rect, editor_panel_rect.height)
-
 
     running = True
     while running:
@@ -981,6 +885,12 @@ def run_editor(screen, clock, font, font_bold, initial_path: str | None = None) 
         _sync_slider_and_text(vf_position, vf_position_text)
         _sync_slider_and_text(ff_position, ff_position_text)
 
+        # layout updater - update every section top to bottom accumulating y, assigning
+        # each widget its position for this frame. Sections appear/disappear based
+        # on current dropdown values (a roundabout shows a radius field, an
+        # obstacle shows a lane), so positions can't be computed once up front.
+        # Runs before event handling, so a dropdown changed this frame lays out
+        # next frame.
         y = 4
         add_vehicle_button.rect.y = y + 26
         y = add_vehicle_button.rect.y + 26 + 20   # + button height + gap before next label
@@ -1054,7 +964,7 @@ def run_editor(screen, clock, font, font_bold, initial_path: str | None = None) 
         y += 16
 
         track_header_y = y
-        y += 26 + 16   # "Track shape" header - +16 extra since this goes straight to a labeled field, unlike other sections which have a button first
+        y += 26 + 16   # "Track shape" header - +16 extra since this goes straight to a labeled field, other sections have a button first
         tf_straight_length.rect.y = y
         tf_radius.rect.y = y
         y += 26 + 28
@@ -1117,7 +1027,7 @@ def run_editor(screen, clock, font, font_bold, initial_path: str | None = None) 
             try:
                 editable.duration = float(duration_field.value)
             except ValueError:
-                pass   # leave editable.duration unchanged while mid-edit (e.g. field temporarily empty or just "-")
+                pass   # leave editable.duration unchanged while mid-edit
 
             if event.type == pygame.MOUSEWHEEL and not scenario_dropdown.open:
                 editor_panel.handle_scroll(event)
@@ -1128,6 +1038,7 @@ def run_editor(screen, clock, font, font_bold, initial_path: str | None = None) 
                     active_dropdowns.append(hf_lane)
                 elif hf_type.value == "pedestrian_crossing":
                     active_dropdowns.append(hf_pedestrian_type)
+                # Open dropdown lists drawn last on top of everything else on the panel
                 for dd in active_dropdowns:
                     consumed = dd.handle_event(translated)
                     if consumed:
@@ -1200,6 +1111,7 @@ def run_editor(screen, clock, font, font_bold, initial_path: str | None = None) 
         from sim_core.track import TrackFeature
         custom_features = [TrackFeature(f.get("feature_id"), f.get("feature_type"), f.get("position", 0.0), f.get("radius"))
                             for f in editable.track_features if f.get("feature_id")]
+        # Rebuilt every frame, since track dimensions and features can change
         preview_track = Track(straight_length=editable.track_straight_length, radius=editable.track_radius, features=custom_features)
         preview_camera = Camera(preview_track, WINDOW_WIDTH - LEFT_WIDTH - RIGHT_WIDTH, WINDOW_HEIGHT, TRACK_MARGIN)
         # offset the preview camera's own coordinate space into the middle third of the window
@@ -1354,6 +1266,7 @@ def run_editor(screen, clock, font, font_bold, initial_path: str | None = None) 
 
         # middle: live preview track
         old_to_screen = preview_camera.to_screen
+        # Shifts the preview camera's output into the middle third of the window
         preview_camera.to_screen = lambda x, y, _f=old_to_screen, _o=preview_camera_offset_x: (lambda sx, sy: (sx + _o, sy))(*_f(x, y))
         geometry = build_static_geometry(preview_track)
         draw_track(screen, preview_camera, geometry)
@@ -1367,7 +1280,7 @@ def run_editor(screen, clock, font, font_bold, initial_path: str | None = None) 
         title_surf = font_bold.render(editable.name, True, COLOR_TEXT)
         screen.blit(title_surf, (LEFT_WIDTH + 16, 16))
 
-        # right panel: simple info
+        # right panel - scenario info
         pygame.draw.rect(screen, COLOR_SIDEBAR_BG, (WINDOW_WIDTH - RIGHT_WIDTH, 0, RIGHT_WIDTH, WINDOW_HEIGHT))
         rx = WINDOW_WIDTH - RIGHT_WIDTH + 16
         screen.blit(font_bold.render("Editing", True, COLOR_TEXT), (rx, 16))
@@ -1383,7 +1296,6 @@ def run_editor(screen, clock, font, font_bold, initial_path: str | None = None) 
         scenario_dropdown.draw_open_overlay(screen, font)
 
         pygame.display.flip()
-
 
 def run(scenario_path: str | None = None) -> None:
     """Entry point. With a scenario_path given, loads straight into the
@@ -1402,7 +1314,6 @@ def run(scenario_path: str | None = None) -> None:
         pass
 
     pygame.quit()
-
 
 if __name__ == "__main__":
     path = sys.argv[1] if len(sys.argv) > 1 else None

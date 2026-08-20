@@ -1,13 +1,10 @@
 # Combines the phantom-induced-swerve mechanism from
 # phantom_induced_swerve_collision.yaml with the background traffic
-# spawner from background_traffic.yaml, instead of a manually placed
-# oncoming vehicle at a chosen position. Unlike every other scenario in
-# this project, the danger here is meant to be emergent, not scripted:
-# solo's swerve response is deterministic given the attack, but whether
-# a spawned vehicle happens to be occupying lane 1 at the exact position
-# and moment solo swerves into it depends on the spawner's random
-# lane/direction choices.
-name: "Attacked vehicle amid organic background traffic"
+# spawner from background_traffic.yaml
+
+# The danger in this scenario is supposed to be emergent rather than
+# deterministic like in other scenarios - depending on the seeded traffic
+name: "Attacked vehicle amid background traffic"
 duration: 120
 timestep: 0.1
 random_seed: 0
@@ -20,13 +17,13 @@ vehicles:
 
 spawner:
   feature_id: "junction_1"
-  max_concurrent: 5
+  max_concurrent: 20
   speed_mph: 20.0
   fusion_policy: "camera_priority"
 
 attacks:
   - type: "camera_phantom"
     target_vehicle: "solo"
-    start_time: 60.0
+    start_time: 90.0
     duration: 3.0
     phantom_distance: 15.0

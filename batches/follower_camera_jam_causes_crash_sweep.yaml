@@ -1,6 +1,5 @@
-# Sweeps follower's fusion policy across the range of following gaps
-
-name: "Follower policy x following gap sweep for follower_camera_jam_causes_crash.yaml"
+# Sweeps follower's fusion policy across a range of different gaps
+name: "Follower policy and following gap sweep for follower_camera_jam_causes_crash.yaml"
 base_scenario: "scenarios/follower_camera_jam_causes_crash.yaml"
 output_csv: "results/follower_camera_jam_causes_crash_sweep.csv"
 

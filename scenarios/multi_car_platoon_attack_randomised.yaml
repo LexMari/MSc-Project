@@ -1,17 +1,12 @@
-# Randomised companion to multi_car_platoon_attack.yaml, built to test
-# whether that scenario's cascade finding (a vehicle running a fully
-# resilient fusion policy still crashes because a DIFFERENT vehicle's
-# DIFFERENT attack causes it to be rear-ended) is a robust vulnerability
-# or an artifact of one precisely hand-arranged scene.
+# Randomised companion to multi_car_platoon_attack.yaml
 #
 # Everything from the original scenario is unchanged - this only adds a
 # junction with a background traffic spawner, so unpredictable extra
 # vehicles can enter the platoon's own lane or oncoming traffic and
-# potentially disrupt the established chain of events.
-# Run as a random_seed batch rather than a single
-# run, since the whole point is asking "does this hold up across many
-# random arrangements"
-name: 'Multi-car platoon: four simultaneous attacks across four fusion policies (randomised with background traffic)'
+# potentially disrupt the chain of events.
+#
+# Run as a random_seed batch rather than a single run
+name: 'Multi-car platoon: four attacks across four fusion policies + background traffic'
 duration: 40
 timestep: 0.1
 track:

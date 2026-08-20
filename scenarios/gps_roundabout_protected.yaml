@@ -1,9 +1,8 @@
 # Identical attack to gps_roundabout_naive.yaml, run against the
-# plausibility_checked GPS policy instead. The ~141m offset is far
+# plausibility_checked GPS policy instead. The ~141m offset is
 # larger than Solo could plausibly have travelled between GPS readings
-# at this speed, so the policy rejects it and holds its last known good
-# position - Solo passes through the roundabout without confusion.
-name: "GPS spoof correctly rejected at a roundabout (plausibility-checked policy)"
+# at this speed, so the policy rejects it and holds its last known good position
+name: "GPS spoof rejected at a roundabout (plausibility-checked policy)"
 duration: 35
 timestep: 0.1
 

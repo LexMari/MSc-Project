@@ -1,4 +1,4 @@
-Scenario: Unattacked Follower avoids Lead's attack-induced collision
+Scenario: Unattacked Follower avoids Lead's collision
 Showing all vehicles, one after another
     t |   vehicle | speed(mph) | lane |     radar |    camera |     lidar | belief_dist | obstacle? |    source |            reacting_to | collision | roundabout
 --- lead ---

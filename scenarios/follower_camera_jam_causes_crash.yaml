@@ -1,11 +1,7 @@
 # Same setup as follower_avoids_lead_crash.yaml (same 65m gap, Follower
-# avoids there), but Follower's own camera is independently jammed for
-# 6s, timed to cover the moment Lead crashes. This is not a coordinated
-# attack in the sense of one attacker controlling both - it models two
-# separate compromises whose timing happens to coincide, which is
-# enough on its own to test whether Follower can still avoid Lead once
-# its own sensing is also degraded.
-name: "Follower's own camera jam, timed with Lead's crash, causes Follower to also collide"
+# avoids there), but Follower's own camera is jammed for
+# 6s, timed to cover the moment Lead crashes.
+name: "Follower's own camera jam, timed with Lead's crash, causes Follower to collide"
 duration: 20
 timestep: 0.1
 random_seed: 0

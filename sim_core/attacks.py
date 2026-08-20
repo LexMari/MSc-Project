@@ -1,33 +1,16 @@
-"""Attack models.
+"""Attack models: corrupt what a sensor reports
 
-Each attack takes a clean SensorReading (ground truth, as the sensor would
-report with no interference) and returns a manipulated SensorReading -
-what the victim vehicle's sensor actually reports once attacked.
+Each attack takes a clean SensorReading - ground truth, as the sensor would
+report with no interference - and returns the manipulated one the victim
+sees.
 
-An attack needs a trigger - Three kinds are supported:
-  - start_time: fires at a fixed point on the simulation clock.
-  - trigger_before_feature + trigger_distance: fires once the target
-    vehicle comes within trigger_distance metres of the named track
-    feature (e.g. "junction_1" - see Track in track.py).
-  - trigger_after_feature + trigger_distance: fires once the target
-    vehicle has travelled trigger_distance metres *past* the named
-    feature - e.g. "attack the lead car 50m after it clears the
-    junction," to catch a vehicle just as it's pulling away.
+Every attack needs one trigger:
+  start_time                                  fires at a fixed simulation time
+  trigger_before_feature + trigger_distance   fires within N metres of a feature
+  trigger_after_feature  + trigger_distance   fires N metres past a feature
 
-trigger_after_feature does NOT use Track.distance_ahead
-(the same helper trigger_before_feature uses), even
-though it looks like the natural choice. distance_ahead wraps around
-the whole loop, which means a vehicle that *hasn't reached the feature yet*
-would appear to be some large distance "past" it (the remainder of the lap),
-incorrectly arming the attack before the vehicle ever gets there.
-Since VehicleState.s accumulates monotonically and is never itself wrapped
-(only Track wraps it, for geometry purposes), subtraction is both simpler and
-correct for a single-lap scenario: negative before the feature, growing
-positive only after it's been passed.
-
-Once a trigger condition is met, the attack "arms" (records the time it
-fired) and then runs for 'duration' seconds from that point. It only
-arms once per attack instance.
+Once triggered, an attack arms and runs for 'duration' seconds. It arms once
+per instance and never re-fires
 """
 from dataclasses import replace
 from .sensors import SensorReading, SensorType
@@ -41,6 +24,8 @@ class Attack:
                  trigger_before_feature: str | None = None,
                  trigger_after_feature: str | None = None,
                  trigger_distance: float | None = None):
+        # Only one trigger: several would make the arming time ambiguous, none
+        # would mean the attack never happens
         trigger_count = sum(x is not None for x in (start_time, trigger_before_feature, trigger_after_feature))
         if trigger_count == 0:
             raise ValueError(
@@ -59,9 +44,7 @@ class Attack:
         self._armed_time: float | None = None
 
     def check_trigger(self, t: float, vehicle_s: float | None, track) -> None:
-        """called once per tick by engine, before apply(). arms the
-        attack (records trigger time) the first time its condition is
-        met. a no-op after that - an attack only fires once"""
+        """Arm the attack if its condition is met. Called once per tick before apply()"""
         if self._armed_time is not None:
             return
 
@@ -93,7 +76,11 @@ class Attack:
         raise NotImplementedError
 
 class RadarSpoof(Attack):
-    """radar spoof: fabricates a phantom distance/velocity pair"""
+    """Fabricates a false distance/velocity pair on radar.
+
+    RF-domain spoofing per Komissarov & Wool. Overwrites confidence to 1.0 - a
+    successful spoof presents as a perfectly healthy reading, which is what makes
+    confidence_weighted fusion vulnerable to it"""
 
     target_sensor = SensorType.RADAR
 
@@ -114,14 +101,11 @@ class RadarSpoof(Attack):
         )
 
 class LidarSpoof(Attack):
-    """LiDAR laser relay/spoofing attack: fabricates a phantom
-    distance/velocity pair, structurally identical to RadarSpoof, but
-    grounded in the LiDAR-specific relay/spoofing literature discussed in
-    the literature review rather than the RF-domain radar spoofing of
-    Komissarov & Wool. Kept as a separate class (rather than reusing
-    RadarSpoof against a different target_sensor) so the attack's
-    identity in logs/scenarios reflects which sensor and which real-world
-    attack technique it represents."""
+    """Fabricates a false distance/velocity pair on LiDAR.
+
+    Identical to RadarSpoof but kept separate so that they can be
+    identified separately
+    """
 
     target_sensor = SensorType.LIDAR
 
@@ -184,15 +168,14 @@ class GPSSpoof(Attack):
         )
 
 class Jam(Attack):
-    """Base class for sensor jamming attacks: forces the target sensor to
-    report nothing detected for the attack's duration, rather than
-    fabricating a plausible-but-wrong value (see RadarSpoof/CameraPhantom/
-    LidarSpoof/GPSSpoof for that). This models the distinction drawn in
-    the literature review (Li et al.): jamming is a dropout - easy to
-    detect, since a sensor visibly stops responding - unlike spoofing,
-    whose entire danger is looking plausible. Concrete subclasses below
-    just set target_sensor. The jamming behaviour itself is identical
-    regardless of which sensor is jammed."""
+    """Forces the target sensor to report nothing for the attack's duration.
+
+    Models the jamming/spoofing distinction from Li et al.: a dropout is easy to
+    detect because the sensor stops responding.
+
+    Confidence drops to 0.0 accordingly. Subclasses
+    only set target_sensor as behaviour is identical across sensors.
+    """
 
     def apply(self, reading: SensorReading, t: float) -> SensorReading:
         if not self.is_active(t):

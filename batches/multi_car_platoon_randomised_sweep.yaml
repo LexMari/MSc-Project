@@ -1,7 +1,6 @@
 # Sweep of 30 seeds to test whether multi_car_platoon_attack.yaml's outcome
 # holds up across random background traffic (spawned from a junction placed
-# behind the platoon), or if the outcome is specific to
-# a manually arranged scene.
+# behind the platoon)
 name: "multi_car_platoon_attack_randomised.yaml across 30 seeds"
 base_scenario: "scenarios/multi_car_platoon_attack_randomised.yaml"
 output_csv: "results/multi_car_platoon_randomised_sweep.csv"

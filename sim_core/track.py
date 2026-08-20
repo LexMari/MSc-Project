@@ -2,37 +2,31 @@
 by two semicircular ends.
 
 Vehicles are positioned and move using a single scalar distance-along-
-track value, 's', rather than raw (x, y). Named track features (junctions,
-roundabouts, and in future other hazards such as pedestrian crossings)
-are placed on the track as a configurable list, 'features', rather than
-fixed fields - this allows a scenario to define its own track
-layout (multiple junctions, a differently-placed roundabout, etc.)
-instead of being stuck with one hardcoded arrangement. If no features are
-configured, a default single junction and roundabout are used,
-matching the concept art.
+track value, 's', rather than raw (x, y).
 
-Lanes: the centreline from position_at() is a single line, but the track
-supports two-way traffic via lane_position_at(), which offsets sideways
-from the centreline by half a lane width. Lane 0 is the near/correct-side
-lane (the direction of increasing s, i.e. normal traffic), lane 1 is the
-opposite lane, used for oncoming traffic and for vehicles that have
-swerved to avoid an obstacle in lane 0.
+Track features like junctions/roundabouts are a configurable list
+so a scenario can define its own layout. An empty list falls back to
+one junction and roundabout.
+
+Lanes: the centreline is a single line, offset sideways by half a lane width.
+Lane 0 is the correct-side lane for traffic with increasing s; lane 1 is the
+opposite lane, used by oncoming traffic and by swerving vehicles.
 """
 from dataclasses import dataclass, field
 import math
 
-LANE_WIDTH = 3.5   # metres, approx UK carriageway lane width
+LANE_WIDTH = 3.5   # metres
 
 @dataclass
 class TrackFeature:
     """A named point of interest on the track - a junction, roundabout,
     or something like a pedestrian crossing"""
     feature_id: str
-    feature_type: str   # "junction" | "roundabout" | ...
+    feature_type: str   # "junction" | "roundabout" |
     position: float      # distance along the track
-    radius: float | None = None  # for roundabout-type features: the physical radius of the roundabout island, used to compute the extra distance a confused vehicle travels taking an extra lap (see Track.feature_circumference)
+    radius: float | None = None  # the radius of the roundabout island, used to compute the extra distance a confused vehicle travels taking an extra lap
 
-DEFAULT_ROUNDABOUT_RADIUS = 25.0  # metres - a plausible real-world mini-roundabout size
+DEFAULT_ROUNDABOUT_RADIUS = 25.0  # metres
 
 @dataclass
 class Track:
@@ -42,9 +36,8 @@ class Track:
 
     def __post_init__(self):
         if not self.features:
-            # Default layout, matching the original concept art: one
-            # junction on the top straight, one roundabout near the end
-            # of the bottom straight.
+            # Default layout, one junction on the top straight,
+            # one roundabout near the end of the bottom straight.
             self.features = [
                 TrackFeature("junction_1", "junction", 1.5 * self.straight_length + math.pi * self.radius),
                 TrackFeature("roundabout_1", "roundabout", 0.75 * self.straight_length, radius=DEFAULT_ROUNDABOUT_RADIUS),
@@ -65,11 +58,11 @@ class Track:
         roundabout-type feature, used to model a missed exit - a
         confused vehicle's true position advances by this much
         extra before it continues on the main loop. Raises if the
-        feature has no radius set (e.g. it isn't a roundabout)."""
+        feature has no radius set."""
         f = self.feature(feature_id)
         if f.radius is None:
             raise ValueError(f"feature {feature_id!r} has no radius set - feature_circumference "
-                              f"only applies to roundabout-type features")
+                              f"only applies to roundabout features")
         return 2 * math.pi * f.radius
 
     @property
@@ -97,7 +90,7 @@ class Track:
             return s, 0.0, 0.0
         s -= sl
 
-        if s < math.pi * r:  # right-hand semicircle
+        if s < math.pi * r:  # right semicircle
             angle = s / r
             x = sl + r * math.sin(angle)
             y = r - r * math.cos(angle)
@@ -130,7 +123,7 @@ class Track:
         Heading is unchanged by the lane offset - only (x, y) shifts.
         """
         x, y, heading = self.position_at(s)
-        side = 1 if lane == 0 else -1
+        side = -1 if lane == 0 else 1
         offset = side * (LANE_WIDTH / 2)
         lane_x = x + offset * math.sin(heading)
         lane_y = y - offset * math.cos(heading)
@@ -138,18 +131,17 @@ class Track:
 
     def distance_ahead(self, s_from: float, s_to: float) -> float:
         """Forward distance travelling from s_from to reach s_to, wrapping
-        around the loop if needed (always >= 0)."""
+        around the loop if needed (always >= 0)"""
         return self.normalise(s_to - s_from)
 
     def signed_gap(self, s_from: float, s_to: float) -> float:
         """Shortest signed distance from s_from to s_to around the loop,
-        in (-total_length/2, total_length/2]. Positive means s_to is the
-        shorter way round in the direction of increasing s, negative
-        means it's the shorter way round in the direction of decreasing
-        s. Unlike distance_ahead (always a forward-only, one-directional
-        wrap), this is the right tool for judging ahead/behind between
-        two vehicles travelling in *opposite* directions on the same
-        lane - see engine.py's _ahead_distance_to_vehicle for why."""
+        in (-total_length/2, total_length/2]
+
+        Positive means s_to is nearer going forward, negative means nearer
+        going backward. distance_ahead() only wraps forward so this is used
+        when the two vehicle's travel in opposite directions - see
+        engine.py's _ahead_distance_to_vehicle"""
         raw = self.normalise(s_to - s_from)
         if raw > self.total_length / 2:
             raw -= self.total_length

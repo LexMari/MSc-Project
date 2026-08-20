@@ -1,0 +1,505 @@
+Scenario: Two attacked vehicles at the roundabout
+Showing all vehicles, one after another
+    t |   vehicle | speed(mph) | lane |     radar |    camera |     lidar | belief_dist | obstacle? |    source |            reacting_to | collision | roundabout
+--- first ---
+  0.0 |     first |      20.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+  0.1 |     first |      20.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+  0.2 |     first |      20.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+  0.3 |     first |      20.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+  0.4 |     first |      20.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+  0.5 |     first |      20.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+  0.6 |     first |      20.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+  0.7 |     first |      20.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+  0.8 |     first |      20.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | 
+  0.9 |     first |      20.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | MISSED EXIT
+  1.0 |     first |      20.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | (looping, 156m left)
+  1.1 |     first |      20.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | (looping, 155m left)
+  1.2 |     first |      20.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | (looping, 154m left)
+  1.3 |     first |      20.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | (looping, 154m left)
+  1.4 |     first |      20.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | (looping, 153m left)
+  1.5 |     first |      20.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | (looping, 152m left)
+  1.6 |     first |      20.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | (looping, 151m left)
+  1.7 |     first |      20.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | (looping, 150m left)
+  1.8 |     first |      20.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | (looping, 149m left)
+  1.9 |     first |      20.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | (looping, 148m left)
+  2.0 |     first |      20.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | (looping, 147m left)
+  2.1 |     first |      20.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | (looping, 146m left)
+  2.2 |     first |      20.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | (looping, 145m left)
+  2.3 |     first |      20.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | (looping, 145m left)
+  2.4 |     first |      20.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | (looping, 144m left)
+  2.5 |     first |      20.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | (looping, 143m left)
+  2.6 |     first |      20.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | (looping, 142m left)
+  2.7 |     first |      20.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | (looping, 141m left)
+  2.8 |     first |      20.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | (looping, 140m left)
+  2.9 |     first |      20.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | (looping, 139m left)
+  3.0 |     first |      20.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | (looping, 138m left)
+  3.1 |     first |      20.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | (looping, 137m left)
+  3.2 |     first |      20.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | (looping, 137m left)
+  3.3 |     first |      20.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | (looping, 136m left)
+  3.4 |     first |      20.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | (looping, 135m left)
+  3.5 |     first |      20.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | (looping, 134m left)
+  3.6 |     first |      20.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | (looping, 133m left)
+  3.7 |     first |      20.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | (looping, 132m left)
+  3.8 |     first |      20.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | (looping, 131m left)
+  3.9 |     first |      20.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | (looping, 130m left)
+  4.0 |     first |      20.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | (looping, 129m left)
+  4.1 |     first |      20.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | (looping, 128m left)
+  4.2 |     first |      20.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | (looping, 128m left)
+  4.3 |     first |      20.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | (looping, 127m left)
+  4.4 |     first |      20.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | (looping, 126m left)
+  4.5 |     first |      20.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | (looping, 125m left)
+  4.6 |     first |      20.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | (looping, 124m left)
+  4.7 |     first |      20.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | (looping, 123m left)
+  4.8 |     first |      20.00 |    0 |         - |         - |         - |           - |     False |      none |                      - |           | (looping, 122m left)
+  4.9 |     first |      20.00 |    0 |         - |         - |         - |           - |     False |      none |                      - | COLLISION(slight) | (looping, 121m left)
+  5.0 |     first |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+  5.1 |     first |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+  5.2 |     first |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+  5.3 |     first |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+  5.4 |     first |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+  5.5 |     first |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+  5.6 |     first |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+  5.7 |     first |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+  5.8 |     first |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+  5.9 |     first |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+  6.0 |     first |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+  6.1 |     first |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+  6.2 |     first |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+  6.3 |     first |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+  6.4 |     first |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+  6.5 |     first |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+  6.6 |     first |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+  6.7 |     first |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+  6.8 |     first |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+  6.9 |     first |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+  7.0 |     first |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+  7.1 |     first |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+  7.2 |     first |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+  7.3 |     first |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+  7.4 |     first |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+  7.5 |     first |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+  7.6 |     first |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+  7.7 |     first |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+  7.8 |     first |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+  7.9 |     first |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+  8.0 |     first |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+  8.1 |     first |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+  8.2 |     first |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+  8.3 |     first |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+  8.4 |     first |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+  8.5 |     first |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+  8.6 |     first |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+  8.7 |     first |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+  8.8 |     first |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+  8.9 |     first |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+  9.0 |     first |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+  9.1 |     first |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+  9.2 |     first |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+  9.3 |     first |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+  9.4 |     first |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+  9.5 |     first |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+  9.6 |     first |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+  9.7 |     first |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+  9.8 |     first |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+  9.9 |     first |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+ 10.0 |     first |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+ 10.1 |     first |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+ 10.2 |     first |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+ 10.3 |     first |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+ 10.4 |     first |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+ 10.5 |     first |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+ 10.6 |     first |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+ 10.7 |     first |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+ 10.8 |     first |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+ 10.9 |     first |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+ 11.0 |     first |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+ 11.1 |     first |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+ 11.2 |     first |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+ 11.3 |     first |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+ 11.4 |     first |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+ 11.5 |     first |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+ 11.6 |     first |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+ 11.7 |     first |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+ 11.8 |     first |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+ 11.9 |     first |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+ 12.0 |     first |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+ 12.1 |     first |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+ 12.2 |     first |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+ 12.3 |     first |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+ 12.4 |     first |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+ 12.5 |     first |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+ 12.6 |     first |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+ 12.7 |     first |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+ 12.8 |     first |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+ 12.9 |     first |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+ 13.0 |     first |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+ 13.1 |     first |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+ 13.2 |     first |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+ 13.3 |     first |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+ 13.4 |     first |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+ 13.5 |     first |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+ 13.6 |     first |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+ 13.7 |     first |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+ 13.8 |     first |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+ 13.9 |     first |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+ 14.0 |     first |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+ 14.1 |     first |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+ 14.2 |     first |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+ 14.3 |     first |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+ 14.4 |     first |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+ 14.5 |     first |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+ 14.6 |     first |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+ 14.7 |     first |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+ 14.8 |     first |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+ 14.9 |     first |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+ 15.0 |     first |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+ 15.1 |     first |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+ 15.2 |     first |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+ 15.3 |     first |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+ 15.4 |     first |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+ 15.5 |     first |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+ 15.6 |     first |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+ 15.7 |     first |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+ 15.8 |     first |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+ 15.9 |     first |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+ 16.0 |     first |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+ 16.1 |     first |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+ 16.2 |     first |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+ 16.3 |     first |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+ 16.4 |     first |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+ 16.5 |     first |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+ 16.6 |     first |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+ 16.7 |     first |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+ 16.8 |     first |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+ 16.9 |     first |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+ 17.0 |     first |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+ 17.1 |     first |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+ 17.2 |     first |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+ 17.3 |     first |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+ 17.4 |     first |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+ 17.5 |     first |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+ 17.6 |     first |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+ 17.7 |     first |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+ 17.8 |     first |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+ 17.9 |     first |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+ 18.0 |     first |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+ 18.1 |     first |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+ 18.2 |     first |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+ 18.3 |     first |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+ 18.4 |     first |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+ 18.5 |     first |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+ 18.6 |     first |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+ 18.7 |     first |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+ 18.8 |     first |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+ 18.9 |     first |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+ 19.0 |     first |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+ 19.1 |     first |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+ 19.2 |     first |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+ 19.3 |     first |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+ 19.4 |     first |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+ 19.5 |     first |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+ 19.6 |     first |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+ 19.7 |     first |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+ 19.8 |     first |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+ 19.9 |     first |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+ 20.0 |     first |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+ 20.1 |     first |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+ 20.2 |     first |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+ 20.3 |     first |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+ 20.4 |     first |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+ 20.5 |     first |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+ 20.6 |     first |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+ 20.7 |     first |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+ 20.8 |     first |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+ 20.9 |     first |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+ 21.0 |     first |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+ 21.1 |     first |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+ 21.2 |     first |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+ 21.3 |     first |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+ 21.4 |     first |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+ 21.5 |     first |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+ 21.6 |     first |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+ 21.7 |     first |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+ 21.8 |     first |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+ 21.9 |     first |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+ 22.0 |     first |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+ 22.1 |     first |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+ 22.2 |     first |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+ 22.3 |     first |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+ 22.4 |     first |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+ 22.5 |     first |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+ 22.6 |     first |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+ 22.7 |     first |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+ 22.8 |     first |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+ 22.9 |     first |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+ 23.0 |     first |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+ 23.1 |     first |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+ 23.2 |     first |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+ 23.3 |     first |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+ 23.4 |     first |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+ 23.5 |     first |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+ 23.6 |     first |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+ 23.7 |     first |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+ 23.8 |     first |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+ 23.9 |     first |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+ 24.0 |     first |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+ 24.1 |     first |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+ 24.2 |     first |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+ 24.3 |     first |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+ 24.4 |     first |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+ 24.5 |     first |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+ 24.6 |     first |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+ 24.7 |     first |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+ 24.8 |     first |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+ 24.9 |     first |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+--- second ---
+  0.0 |    second |      44.74 |    0 |      85.0 |         - |         - |           - |     False |      none |     roundabout_giveway |           | 
+  0.1 |    second |      44.74 |    0 |      83.0 |         - |         - |           - |     False |      none |     roundabout_giveway |           | 
+  0.2 |    second |      44.74 |    0 |      81.0 |         - |         - |           - |     False |      none |     roundabout_giveway |           | 
+  0.3 |    second |      44.74 |    0 |      79.0 |         - |      79.0 |           - |     False |      none |     roundabout_giveway |           | 
+  0.4 |    second |      44.74 |    0 |      77.0 |         - |      77.0 |           - |     False |      none |     roundabout_giveway |           | 
+  0.5 |    second |      44.74 |    0 |      75.0 |         - |      75.0 |           - |     False |      none |     roundabout_giveway |           | 
+  0.6 |    second |      44.74 |    0 |      73.0 |         - |      73.0 |           - |     False |      none |     roundabout_giveway |           | 
+  0.7 |    second |      44.74 |    0 |      71.0 |         - |      71.0 |           - |     False |      none |     roundabout_giveway |           | 
+  0.8 |    second |      44.74 |    0 |      69.0 |         - |      69.0 |           - |     False |      none |     roundabout_giveway |           | 
+  0.9 |    second |      44.74 |    0 |      67.0 |         - |      67.0 |           - |     False |      none |     roundabout_giveway |           | 
+  1.0 |    second |      44.74 |    0 |      65.0 |         - |      65.0 |           - |     False |      none |     roundabout_giveway |           | 
+  1.1 |    second |      44.74 |    0 |      63.0 |         - |      63.0 |           - |     False |      none |     roundabout_giveway |           | 
+  1.2 |    second |      44.74 |    0 |      61.0 |         - |      61.0 |           - |     False |      none |     roundabout_giveway |           | 
+  1.3 |    second |      44.74 |    0 |      59.0 |         - |      59.0 |           - |     False |      none |     roundabout_giveway |           | 
+  1.4 |    second |      44.74 |    0 |      57.0 |         - |      57.0 |           - |     False |      none |     roundabout_giveway |           | 
+  1.5 |    second |      44.74 |    0 |      55.0 |         - |      55.0 |           - |     False |      none |     roundabout_giveway |           | 
+  1.6 |    second |      44.74 |    0 |      53.0 |         - |      53.0 |           - |     False |      none |     roundabout_giveway |           | 
+  1.7 |    second |      44.74 |    0 |      51.0 |         - |      51.0 |           - |     False |      none |     roundabout_giveway |           | 
+  1.8 |    second |      44.74 |    0 |      49.0 |         - |      49.0 |           - |     False |      none |     roundabout_giveway |           | 
+  1.9 |    second |      44.74 |    0 |      47.0 |         - |      47.0 |           - |     False |      none |     roundabout_giveway |           | 
+  2.0 |    second |      44.74 |    0 |      45.0 |         - |      45.0 |           - |     False |      none |     roundabout_giveway |           | 
+  2.1 |    second |      44.74 |    0 |      43.0 |         - |      43.0 |           - |     False |      none |     roundabout_giveway |           | 
+  2.2 |    second |      44.74 |    0 |      41.0 |         - |      41.0 |           - |     False |      none |     roundabout_giveway |           | 
+  2.3 |    second |      44.74 |    0 |      39.0 |         - |      39.0 |           - |     False |      none |     roundabout_giveway |           | 
+  2.4 |    second |      44.74 |    0 |      37.0 |         - |      37.0 |           - |     False |      none |     roundabout_giveway |           | 
+  2.5 |    second |      44.74 |    0 |      35.0 |         - |      35.0 |           - |     False |      none |     roundabout_giveway |           | 
+  2.6 |    second |      44.74 |    0 |      33.0 |         - |      33.0 |           - |     False |      none |     roundabout_giveway |           | 
+  2.7 |    second |      44.74 |    0 |      31.0 |         - |      31.0 |           - |     False |      none |     roundabout_giveway |           | 
+  2.8 |    second |      44.74 |    0 |      29.0 |         - |      29.0 |           - |     False |      none |     roundabout_giveway |           | 
+  2.9 |    second |      44.74 |    0 |      27.0 |         - |      27.0 |           - |     False |      none |     roundabout_giveway |           | 
+  3.0 |    second |      44.74 |    0 |      25.0 |         - |      25.0 |           - |     False |      none |     roundabout_giveway |           | 
+  3.1 |    second |      44.74 |    0 |      23.0 |         - |      23.0 |           - |     False |      none |     roundabout_giveway |           | 
+  3.2 |    second |      44.74 |    0 |      21.0 |         - |      21.0 |           - |     False |      none |     roundabout_giveway |           | 
+  3.3 |    second |      44.74 |    0 |      19.0 |         - |      19.0 |           - |     False |      none |     roundabout_giveway |           | 
+  3.4 |    second |      44.74 |    0 |      17.0 |         - |      17.0 |           - |     False |      none |     roundabout_giveway |           | 
+  3.5 |    second |      44.74 |    0 |      15.0 |         - |      15.0 |           - |     False |      none |     roundabout_giveway |           | 
+  3.6 |    second |      44.74 |    0 |      13.0 |         - |      13.0 |           - |     False |      none |     roundabout_giveway |           | 
+  3.7 |    second |      44.74 |    0 |      11.0 |         - |      11.0 |           - |     False |      none |     roundabout_giveway |           | 
+  3.8 |    second |      44.74 |    0 |       9.0 |         - |       9.0 |           - |     False |      none |     roundabout_giveway |           | 
+  3.9 |    second |      44.74 |    0 |       7.0 |         - |       7.0 |           - |     False |      none |     roundabout_giveway |           | 
+  4.0 |    second |      44.74 |    0 |       5.0 |         - |       5.0 |           - |     False |      none |     roundabout_giveway |           | 
+  4.1 |    second |      44.74 |    0 |       3.0 |         - |       3.0 |           - |     False |      none |     roundabout_giveway |           | 
+  4.2 |    second |      44.74 |    0 |       1.0 |         - |       1.0 |           - |     False |      none |     roundabout_giveway |           | 
+  4.3 |    second |      44.74 |    0 |       7.5 |         - |       7.5 |           - |     False |      none |                vehicle |           | 
+  4.4 |    second |      44.74 |    0 |       5.5 |         - |       5.5 |           - |     False |      none |                vehicle |           | 
+  4.5 |    second |      44.74 |    0 |       3.5 |         - |       3.5 |           - |     False |      none |                vehicle |           | 
+  4.6 |    second |      44.74 |    0 |       1.5 |         - |       1.5 |           - |     False |      none |                vehicle |           | 
+  4.7 |    second |      44.74 |    0 |       0.0 |         - |       0.0 |           - |     False |      none |                vehicle |           | 
+  4.8 |    second |      44.74 |    0 |       0.0 |         - |       0.0 |           - |     False |      none |                vehicle |           | 
+  4.9 |    second |      44.74 |    0 |       0.0 |         - |       0.0 |           - |     False |      none |                vehicle | COLLISION(slight) | 
+  5.0 |    second |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+  5.1 |    second |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+  5.2 |    second |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+  5.3 |    second |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+  5.4 |    second |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+  5.5 |    second |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+  5.6 |    second |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+  5.7 |    second |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+  5.8 |    second |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+  5.9 |    second |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+  6.0 |    second |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+  6.1 |    second |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+  6.2 |    second |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+  6.3 |    second |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+  6.4 |    second |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+  6.5 |    second |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+  6.6 |    second |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+  6.7 |    second |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+  6.8 |    second |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+  6.9 |    second |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+  7.0 |    second |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+  7.1 |    second |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+  7.2 |    second |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+  7.3 |    second |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+  7.4 |    second |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+  7.5 |    second |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+  7.6 |    second |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+  7.7 |    second |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+  7.8 |    second |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+  7.9 |    second |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+  8.0 |    second |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+  8.1 |    second |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+  8.2 |    second |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+  8.3 |    second |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+  8.4 |    second |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+  8.5 |    second |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+  8.6 |    second |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+  8.7 |    second |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+  8.8 |    second |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+  8.9 |    second |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+  9.0 |    second |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+  9.1 |    second |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+  9.2 |    second |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+  9.3 |    second |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+  9.4 |    second |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+  9.5 |    second |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+  9.6 |    second |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+  9.7 |    second |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+  9.8 |    second |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+  9.9 |    second |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+ 10.0 |    second |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+ 10.1 |    second |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+ 10.2 |    second |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+ 10.3 |    second |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+ 10.4 |    second |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+ 10.5 |    second |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+ 10.6 |    second |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+ 10.7 |    second |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+ 10.8 |    second |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+ 10.9 |    second |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+ 11.0 |    second |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+ 11.1 |    second |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+ 11.2 |    second |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+ 11.3 |    second |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+ 11.4 |    second |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+ 11.5 |    second |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+ 11.6 |    second |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+ 11.7 |    second |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+ 11.8 |    second |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+ 11.9 |    second |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+ 12.0 |    second |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+ 12.1 |    second |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+ 12.2 |    second |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+ 12.3 |    second |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+ 12.4 |    second |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+ 12.5 |    second |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+ 12.6 |    second |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+ 12.7 |    second |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+ 12.8 |    second |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+ 12.9 |    second |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+ 13.0 |    second |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+ 13.1 |    second |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+ 13.2 |    second |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+ 13.3 |    second |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+ 13.4 |    second |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+ 13.5 |    second |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+ 13.6 |    second |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+ 13.7 |    second |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+ 13.8 |    second |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+ 13.9 |    second |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+ 14.0 |    second |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+ 14.1 |    second |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+ 14.2 |    second |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+ 14.3 |    second |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+ 14.4 |    second |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+ 14.5 |    second |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+ 14.6 |    second |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+ 14.7 |    second |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+ 14.8 |    second |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+ 14.9 |    second |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+ 15.0 |    second |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+ 15.1 |    second |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+ 15.2 |    second |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+ 15.3 |    second |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+ 15.4 |    second |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+ 15.5 |    second |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+ 15.6 |    second |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+ 15.7 |    second |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+ 15.8 |    second |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+ 15.9 |    second |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+ 16.0 |    second |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+ 16.1 |    second |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+ 16.2 |    second |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+ 16.3 |    second |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+ 16.4 |    second |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+ 16.5 |    second |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+ 16.6 |    second |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+ 16.7 |    second |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+ 16.8 |    second |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+ 16.9 |    second |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+ 17.0 |    second |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+ 17.1 |    second |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+ 17.2 |    second |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+ 17.3 |    second |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+ 17.4 |    second |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+ 17.5 |    second |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+ 17.6 |    second |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+ 17.7 |    second |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+ 17.8 |    second |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+ 17.9 |    second |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+ 18.0 |    second |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+ 18.1 |    second |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+ 18.2 |    second |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+ 18.3 |    second |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+ 18.4 |    second |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+ 18.5 |    second |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+ 18.6 |    second |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+ 18.7 |    second |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+ 18.8 |    second |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+ 18.9 |    second |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+ 19.0 |    second |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+ 19.1 |    second |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+ 19.2 |    second |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+ 19.3 |    second |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+ 19.4 |    second |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+ 19.5 |    second |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+ 19.6 |    second |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+ 19.7 |    second |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+ 19.8 |    second |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+ 19.9 |    second |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+ 20.0 |    second |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+ 20.1 |    second |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+ 20.2 |    second |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+ 20.3 |    second |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+ 20.4 |    second |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+ 20.5 |    second |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+ 20.6 |    second |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+ 20.7 |    second |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+ 20.8 |    second |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+ 20.9 |    second |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+ 21.0 |    second |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+ 21.1 |    second |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+ 21.2 |    second |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+ 21.3 |    second |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+ 21.4 |    second |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+ 21.5 |    second |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+ 21.6 |    second |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+ 21.7 |    second |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+ 21.8 |    second |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+ 21.9 |    second |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+ 22.0 |    second |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+ 22.1 |    second |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+ 22.2 |    second |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+ 22.3 |    second |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+ 22.4 |    second |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+ 22.5 |    second |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+ 22.6 |    second |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+ 22.7 |    second |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+ 22.8 |    second |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+ 22.9 |    second |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+ 23.0 |    second |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+ 23.1 |    second |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+ 23.2 |    second |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+ 23.3 |    second |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+ 23.4 |    second |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+ 23.5 |    second |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+ 23.6 |    second |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+ 23.7 |    second |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+ 23.8 |    second |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+ 23.9 |    second |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+ 24.0 |    second |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+ 24.1 |    second |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+ 24.2 |    second |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+ 24.3 |    second |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+ 24.4 |    second |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+ 24.5 |    second |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+ 24.6 |    second |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+ 24.7 |    second |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+ 24.8 |    second |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 
+ 24.9 |    second |       0.00 |    0 |         - |         - |         - |           - |     False |   crashed |                      - | COLLISION(slight) | 

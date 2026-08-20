@@ -3,8 +3,7 @@
 # there" distance. Two sensors agreeing on a lie is itself a majority,
 # outvoting camera's single correct reading, so majority_vote is
 # defeated here despite having three sensors to work with. Shows the
-# limit of majority-vote fusion: it assumes an attacker can only
-# compromise one sensor at a time.
+# limitations of majority-vote fusion
 name: "Coordinated radar + LiDAR spoof defeats majority_vote"
 duration: 20
 timestep: 0.1

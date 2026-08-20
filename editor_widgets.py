@@ -1,4 +1,15 @@
-"""UI Widgets for the simulation - pygame has no native capabilities"""
+"""UI Widgets for the simulation - pygame has no native capabilities
+
+Shared conventions across every widget:
+
+  handle_event(event) -> bool   True means the widget consumed the event, so the
+                                caller should stop dispatching it.
+  draw(screen, font)            Draws at self.rect.
+
+Widgets hold their own state and are positioned by mutating .rect directly (see
+the layout passes in main_gui.py), which is why nothing here is a dataclass.
+"""
+
 import pygame
 
 COLOR_WIDGET_BG = (40, 42, 50)
@@ -13,13 +24,11 @@ COLOR_BUTTON_TEXT = (240, 242, 245)
 COLOR_BUTTON_DANGER_BG = (140, 55, 55)
 COLOR_BUTTON_DANGER_BG_HOVER = (165, 70, 70)
 
-
 class TextField:
-
     def __init__(self, rect, value="", numeric=False):
         self.rect = pygame.Rect(rect)
         self.value = str(value)
-        self.numeric = numeric   # restricts accepted characters, doesn't force a valid final number
+        self.numeric = numeric
         self.focused = False
 
     def handle_event(self, event):
@@ -49,7 +58,6 @@ class TextField:
         if self.focused and (pygame.time.get_ticks() // 500) % 2 == 0:
             cursor_x = self.rect.x + 6 + font.size(self.value)[0] + 1
             pygame.draw.line(screen, COLOR_WIDGET_TEXT, (cursor_x, self.rect.y + 4), (cursor_x, self.rect.bottom - 4), 1)
-
 
 class Button:
 
@@ -84,7 +92,6 @@ class Button:
         text_surf = font.render(self.label, True, COLOR_BUTTON_TEXT)
         screen.blit(text_surf, (self.rect.centerx - text_surf.get_width() // 2, self.rect.centery - text_surf.get_height() // 2))
 
-
 class Dropdown:
 
     def __init__(self, rect, options, value=None, max_visible=8, labels=None, allow_empty=False):
@@ -106,6 +113,7 @@ class Dropdown:
 
     @staticmethod
     def _truncate(text, max_width, font):
+        """Trim text with an ellipsis until it fits max_width pixels"""
         if font.size(text)[0] <= max_width:
             return text
         truncated = text
@@ -181,7 +189,6 @@ class Dropdown:
 
         self.draw_open_list(screen, font, mouse_pos)
 
-
 class ScrollPanel:
 
     def __init__(self, rect, content_height):
@@ -219,7 +226,6 @@ class ScrollPanel:
             thumb_h = max(20, int(self.rect.height * self.rect.height / self.content_height))
             thumb_y = self.rect.y + int((self.rect.height - thumb_h) * (self.scroll_y / (self.content_height - self.rect.height)))
             pygame.draw.rect(screen, COLOR_WIDGET_BORDER_FOCUS, (track_x, thumb_y, 4, thumb_h))
-
 
 class Slider:
 

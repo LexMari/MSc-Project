@@ -1,4 +1,4 @@
-# Sweeps random_seed to see how often the phantom-induced swerve in
+# Sweeps random_seed to see how often (if at all) the phantom-induced swerve in
 # attacked_vehicle_amid_traffic.yaml happens to coincide with a spawned
 # vehicle occupying lane 1
 name: "Seed sweep for the attacked-vehicle-amid-traffic scenario"
@@ -6,4 +6,4 @@ base_scenario: "scenarios/attacked_vehicle_amid_traffic.yaml"
 output_csv: "results/attacked_vehicle_amid_traffic_sweep.csv"
 
 sweep:
-  random_seed: {count: 40}
+  random_seed: {count: 200}

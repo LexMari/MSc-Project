@@ -1,4 +1,4 @@
-Scenario: Isolated camera phantom - nothing else in the scenario to react to
+Scenario: Isolated camera phantom
 Showing all vehicles, one after another
     t |   vehicle | speed(mph) | lane |     radar |    camera |     lidar | belief_dist | obstacle? |    source |            reacting_to | collision | roundabout
 --- solo ---

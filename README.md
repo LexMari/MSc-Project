@@ -59,7 +59,7 @@ mechanism.
 ## Project structure
 
 ```
-sim_core/           the simulation engine - no dependencies
+sim_core/               the simulation engine - no dependencies
  - attacks.py           radar_spoof, lidar_spoof, camera_phantom, gps_spoof, jam
  - batch.py             runs a scenario across a swept parameter, used by main_batch.py
  - braking.py           reaction time and stopping-distance model

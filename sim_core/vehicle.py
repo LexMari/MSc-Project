@@ -1,6 +1,6 @@
 """Vehicle ground-truth state
 
-Vehicles move along a single scalar coordinate, 's' (distance travelled
+Vehicles move along a scalar coordinate, 's' (distance travelled
 along the Track - see track.py), rather than raw (x, y). This is what
 makes placing a vehicle "150m before the junction" a one-line config
 value, and makes "distance to the vehicle ahead" a subtraction
@@ -14,9 +14,7 @@ direction distinguishes normal traffic (direction=1, s increases over
 time) from oncoming traffic (direction=-1, s decreases over time) on the
 same shared loop - see VehicleState.step(). lane distinguishes which
 side of the centreline a vehicle currently occupies (0 = its own,
-correct-side lane, 1 = the opposite lane) - see engine.py for how a
-vehicle ends up in lane 1 (either as oncoming traffic's normal lane, or
-as a swerve response to an obstacle in lane 0).
+correct-side lane, 1 = the opposite lane).
 """
 from dataclasses import dataclass
 from .braking import REACTION_TIME, MAX_DECELERATION
@@ -33,24 +31,19 @@ class VehicleState:
     lane: int = 0                # 0 = own/correct-side lane, 1 = opposite lane
     direction: int = 1           # 1 = normal traffic (s increases), -1 = oncoming traffic (s decreases)
 
-    # per-vehicle braking parameters, defaulting to the Highway
-    # Code-derived constants in braking.py, but overridable per vehicle
-    # (see scenario.py's VehicleConfig) to model driver diversity - a
-    # more attentive or more aggressive driver braking differently from
-    # the 'typical' figures every other vehicle uses by default.
+    # Per-vehicle braking parameters, defaulting to the Highway Code figures.
+    # Overridable via scenario.py's VehicleConfig to model driver diversity.
     reaction_time: float = REACTION_TIME
     max_deceleration: float = MAX_DECELERATION
 
-    # scratch state for an in-progress swerve manoeuvre (see engine.py),
-    # not meaningful unless swerve_active is True
     swerve_active: bool = False
-    swerve_progress: float = 0.0          # metres travelled since the swerve began
+    swerve_progress: float = 0.0          # metres travelled since swerve began
     swerve_return_progress: float = 0.0   # metres of travel needed before swerving back
     swerve_evaluated: bool = False   # whether swerve-worthiness has already been assessed for the CURRENT, continuous stretch of obstacle perception - see _maybe_swerve in engine.py
-    last_seen_obstacle_distance: float | None = None   # the belief distance seen on the PREVIOUS tick (updated every tick, not just at evaluation time) - used to detect a single-tick discontinuous jump
+    last_seen_obstacle_distance: float | None = None   # the belief distance seen on the PREVIOUS tick (updated every tick) - used to detect a single-tick discontinuous jump
 
     crashed: bool = False   # set once this vehicle has been involved in a collision - see engine.py step()
-    severity: str | None = None   # "slight" | "serious" | "fatal" - set once, at the moment crashed becomes True, see severity.py
+    severity: str | None = None   # "slight" | "serious" | "fatal" - set at the moment crashed becomes True, see severity.py
 
     gps_last_believed: tuple[float, float] | None = None   # last position this vehicle's GPS policy accepted - see navigation.py
     roundabouts_resolved: set = None   # feature_ids of roundabouts already checked for this approach (confused or not), so the check only fires once per approach - see engine.py

@@ -1,9 +1,9 @@
-# A stationary obstacle "appears" in Solo's lane (start_time simulates
-# cargo falling off a lorry rather than something visible from far
-# away) at a distance too close to brake to a safe stop. Solo swerves
-# into the oncoming lane, where Oncoming is travelling the other way.
+# A stationary obstacle "appears" in Solo's lane at a distance too close to
+# brake to a safe stop. Solo swerves into the oncoming lane, where
+# Oncoming is travelling the other way.
+#
 # Whether this produces a collision depends on the exact timing and
-# speeds involved - see the logbook for the speed-sweep results.
+# speeds involved.
 name: "Obstacle-avoidance swerve into oncoming traffic"
 duration: 20
 timestep: 0.1

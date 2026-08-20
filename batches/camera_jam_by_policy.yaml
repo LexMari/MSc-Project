@@ -1,9 +1,7 @@
 # Policy comparison for camera_jam_defeats_camera_priority.yaml -
 # the scenario comment only discusses camera_priority (defeated),
 # majority_vote and confidence_weighted (both unaffected), and doesn't
-# mention plausibility_filtered (it didn't exist yet). No seed sweep - this scenario
-# is deterministic (fixed hazard start_time, no driver-diversity
-# variation), so a single run per policy is enough.
+# mention plausibility_filtered (it didn't exist at this point)
 name: "camera_jam_defeats_camera_priority.yaml across every fusion policy"
 base_scenario: "scenarios/camera_jam_defeats_camera_priority.yaml"
 output_csv: "results/camera_jam_by_policy.csv"
