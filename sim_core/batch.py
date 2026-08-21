@@ -29,7 +29,7 @@ from .engine import Simulation
 from .units import ms_to_mph
 
 def _resolve_sweep_values(spec):
-    """Expand a sweep spec into the list of values to run."""
+    """Expand a sweep spec into the list of values to run"""
     if isinstance(spec, dict) and "count" in spec:
         return list(range(spec["count"]))
     return spec
@@ -38,7 +38,7 @@ def _apply_override(config, field, value):
     """apply one swept value to a loaded ScenarioConfig
 
     a dotted vehicle_id.field targets that vehicle's VehicleConfig
-    anything else is applied to ScenarioConfig."""
+    anything else is applied to ScenarioConfig"""
     if "." in field:
         vehicle_id, attr = field.split(".", 1)
         target = next((v for v in config.vehicles if v.vehicle_id == vehicle_id), None)

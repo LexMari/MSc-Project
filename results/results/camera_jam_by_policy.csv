@@ -1,5 +1,0 @@
-run_id,solo.fusion_policy,vehicle_id,collided,severity,collision_time,min_speed_mph,final_speed_mph
-0,camera_priority,solo,True,serious,7.499999999999989,0.0,0.0
-1,majority_vote,solo,False,,,0.0,43.84
-2,confidence_weighted,solo,False,,,0.0,43.84
-3,plausibility_filtered,solo,False,,,0.0,43.84

@@ -1,6 +1,0 @@
-run 1/4: {'solo.fusion_policy': 'camera_priority'}
-run 2/4: {'solo.fusion_policy': 'majority_vote'}
-run 3/4: {'solo.fusion_policy': 'confidence_weighted'}
-run 4/4: {'solo.fusion_policy': 'plausibility_filtered'}
-
-4 rows written

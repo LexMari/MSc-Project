@@ -11,8 +11,7 @@ Two policies are implemented:
     since the last reading, falling back to holding its last known good
     position rather than trusting the implausible jump
 
-A small GPS spoof (a few metres) is plausible under both policies -
-indistinguishable from ordinary GPS receiver noise. A large, sudden spoof
+A small GPS spoof is plausible under both policies, but a large spoof
 gets caught by the plausibility check, but still fools the naive policy -
 this is what lets a large-enough spoof cause a vehicle to be confused
 about its position at a roundabout (see engine.py), rather than

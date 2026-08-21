@@ -1,3 +1,0 @@
-run_id,solo.gps_policy,vehicle_id,collided,severity,collision_time,min_speed_mph,final_speed_mph
-0,naive,solo,False,,,24.71,37.68
-1,plausibility_checked,solo,False,,,0.0,12.97

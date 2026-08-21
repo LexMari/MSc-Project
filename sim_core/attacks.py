@@ -63,7 +63,7 @@ class Attack:
                 self._armed_time = t
         elif self.trigger_after_feature is not None:
             feature = track.feature(self.trigger_after_feature)
-            distance_since_feature = vehicle_s - feature.position  # deliberately unwrapped - see module docstring
+            distance_since_feature = vehicle_s - feature.position
             if distance_since_feature >= self.trigger_distance:
                 self._armed_time = t
 
@@ -126,8 +126,8 @@ class LidarSpoof(Attack):
         )
 
 class CameraPhantom(Attack):
-    """split-second phantom object attack injects a
-    depthless false obstacle for a short duration"""
+    """A split-second camera phantom attack injects
+    an obstacle in range of a sensor for a short duration"""
 
     target_sensor = SensorType.CAMERA
 
@@ -171,10 +171,10 @@ class Jam(Attack):
     """Forces the target sensor to report nothing for the attack's duration.
 
     Models the jamming/spoofing distinction from Li et al.: a dropout is easy to
-    detect because the sensor stops responding.
+    detect because the sensor stops responding
 
-    Confidence drops to 0.0 accordingly. Subclasses
-    only set target_sensor as behaviour is identical across sensors.
+    Confidence drops to 0.0 accordingly
+    Subclasses only set target_sensor as behaviour is identical across sensors
     """
 
     def apply(self, reading: SensorReading, t: float) -> SensorReading:

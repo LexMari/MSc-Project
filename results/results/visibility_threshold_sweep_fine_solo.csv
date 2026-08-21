@@ -1,7 +1,0 @@
-run_id,visibility,vehicle_id,collided,severity,collision_time,min_speed_mph,final_speed_mph
-0,0.3,solo,True,slight,7.799999999999988,0.0,0.0
-1,0.31,solo,True,slight,7.799999999999988,0.0,0.0
-2,0.32,solo,False,,,0.0,43.84
-3,0.33,solo,False,,,0.0,43.84
-4,0.34,solo,False,,,0.0,43.84
-5,0.35,solo,False,,,0.0,43.84
